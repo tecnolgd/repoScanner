@@ -1,5 +1,5 @@
 
-def laodTask(file_path):
+def loadTask(file_path):
     tasks=[]
 
     try:
@@ -11,6 +11,13 @@ def laodTask(file_path):
     except FileNotFoundError:
         print(f"Error!. File {file_path} not found")
     
-    return task
+    return tasks
+
+tasker=loadTask("data/testData.txt")
+print("Loaded tasks: ")
+for t in tasker:
+     print(t)
+
+
 
 
