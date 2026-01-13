@@ -10,7 +10,6 @@ def loadTask(file_path):
                     tasks.append(task)
     except FileNotFoundError:
         print(f"Error!. File {file_path} not found")
-    
     return tasks
 
 tasker=loadTask("data/testData.txt")
