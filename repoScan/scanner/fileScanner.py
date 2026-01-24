@@ -10,4 +10,6 @@ def dirScanner(root_path):
     
     return scanned_files
 
-dirScanner(".")
+print("file data:")
+for f in dirScanner("."):
+    print(f)
