@@ -1,3 +1,4 @@
+#module for directory scanning- returns a list of files inside the directory with the complete path
 import os
 
 def dirScanner(root_path):
@@ -11,5 +12,5 @@ def dirScanner(root_path):
     return scanned_files
 
 print("file data:")
-for f in dirScanner("."):
+for f in dirScanner("/home/chief/projects/repoScanner/repoScan"): #absolute path of the directory
     print(f)
