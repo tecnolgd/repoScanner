@@ -1,6 +1,8 @@
 #module for directory scanning- returns a list of files inside the directory with the complete path
 import os
 from ..analyzer.structureAnalyzer import structure_analyzer
+from ..analyzer.sizeAnalyzer import size_analyzer
+
 def dir_scanner(root_path):
     scanned_files=[]
 
@@ -15,9 +17,13 @@ print("file data:")
 for f in dir_scanner("/home/chief/projects/repoScanner/repoScan"): #absolute path of the directory
     count+=1
     print(count,"-->",f)
-    
+
 files= dir_scanner("/home/chief/projects/repoScanner/repoScan")
 report = structure_analyzer(files)
 print("Repo structure analysis:")
 print(report)
+
+print("Repo size anaysis:")
+size_report=size_analyzer(files)
+print(size_report)
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.scanner.dirScanner 2>&1
