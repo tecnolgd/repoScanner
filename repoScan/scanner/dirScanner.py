@@ -15,7 +15,7 @@ print("file data:")
 for f in dir_scanner("/home/chief/projects/repoScanner/repoScan"): #absolute path of the directory
     print(f)
 files= dir_scanner(".")
-report =structure_analyzer("/home/chief/projects/repoScanner")
+report = structure_analyzer(files)
 print("Repo structure analysis:")
 print(report)
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.scanner.dirScanner 2>&1
