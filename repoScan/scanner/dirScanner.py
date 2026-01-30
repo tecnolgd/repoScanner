@@ -10,11 +10,13 @@ def dir_scanner(root_path):
             scanned_files.append(full_path)
     
     return scanned_files
-
+count=0
 print("file data:")
 for f in dir_scanner("/home/chief/projects/repoScanner/repoScan"): #absolute path of the directory
-    print(f)
-files= dir_scanner(".")
+    count+=1
+    print(count,"-->",f)
+    
+files= dir_scanner("/home/chief/projects/repoScanner/repoScan")
 report = structure_analyzer(files)
 print("Repo structure analysis:")
 print(report)
