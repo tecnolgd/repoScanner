@@ -33,7 +33,6 @@ def size_analyzer(file_path):
 
     file_sizes.sort(key=lambda x: x[1], reverse=True)
     size_data["largest_files"] = file_sizes[:5]
-
     size_data["size_by_extension"] = dict(size_data["size_by_extension"])
 
     return size_data
