@@ -1,3 +1,4 @@
+import os
 
 def read_file_safely(file_path):
     try:
@@ -67,7 +68,7 @@ def total_dependencies(dep_report):
     return sum(len(deps) for deps in dep_report.values())
 
 def file_with_most_dependencies(dep_report):
-    if not dependencies:
+    if not dep_report:
         return None
     return max(dep_report, key=lambda f: len(dep_report[f]))
 
@@ -76,4 +77,20 @@ def average_dependencies_per_file(dep_report):
     if count == 0:
         return 0
     return total_dependencies(dep_report) / count
+
+#language metrics function
+import os
+
+def language_breakdown(file_path):
+    language_metrics = {}
+
+    for file in file_path:
+        ext = os.path.splitext(file)[1]
+        if not ext:
+            continue
+        language_metrics[ext] = language_metrics.get(ext, 0) + 1
+
+    return language_metrics
+
+
 
