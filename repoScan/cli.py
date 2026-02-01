@@ -30,6 +30,7 @@ print(" ")
 
 print("Metrics for nerds:")
 metrics = generate_metrics(files, size_report, dep_report)
+print(metrics)
 
 
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (cmd to run the script) or 
