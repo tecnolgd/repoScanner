@@ -70,3 +70,10 @@ def file_with_most_dependencies(dep_report):
     if not dependencies:
         return None
     return max(dep_report, key=lambda f: len(dep_report[f]))
+
+def average_dependencies_per_file(dep_report):
+    count = len(dep_report)
+    if count == 0:
+        return 0
+    return total_dependencies(dep_report) / count
+
