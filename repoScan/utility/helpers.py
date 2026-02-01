@@ -56,3 +56,8 @@ def average_lines_per_file(size_report):
     if count == 0:
         return 0
     return total_lines(sizes) / count
+
+def largest_file_by_lines(sizes):
+    if not sizes:
+        return None
+    return max(sizes, key=lambda f: sizes[f].get("lines", 0))
