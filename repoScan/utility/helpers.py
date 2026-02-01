@@ -50,18 +50,24 @@ def total_files(file_path):
     return len(file_path)
 
 def total_lines(size_report):
-    return sum(info.get("lines", 0) for info in sizes.values())
+    # size_report is already a dict with totals from sizeAnalyzer
+    if isinstance(size_report, dict) and "total_lines" in size_report:
+        return size_report.get("total_lines", 0)
+    return 0
 
 def average_lines_per_file(size_report):
-    count = len(sizes)
-    if count == 0:
-        return 0
-    return total_lines(sizes) / count
+    # For size_report from sizeAnalyzer, use average_file_size
+    if isinstance(size_report, dict) and "average_file_size" in size_report:
+        return size_report.get("average_file_size", 0)
+    return 0
 
-def largest_file_by_lines(sizes):
-    if not sizes:
-        return None
-    return max(sizes, key=lambda f: sizes[f].get("lines", 0))
+def largest_file_by_lines(size_report):
+    # For size_report from sizeAnalyzer, return largest files
+    if isinstance(size_report, dict) and "largest_files" in size_report:
+        files = size_report.get("largest_files", [])
+        if files:
+            return files[0]  # Returns (path, size) tuple
+    return None
 
 #dependency metrics functions
 def total_dependencies(dep_report):
@@ -79,9 +85,7 @@ def average_dependencies_per_file(dep_report):
     return total_dependencies(dep_report) / count
 
 #language metrics function
-import os
-
-def language_breakdown(file_path):
+def language_metrics(file_path):
     language_metrics = {}
 
     for file in file_path:
