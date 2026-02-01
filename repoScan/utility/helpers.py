@@ -71,14 +71,29 @@ def largest_file_by_lines(size_report):
 
 #dependency metrics functions
 def total_dependencies(dep_report):
-    return sum(len(deps) for deps in dep_report.values())
+    # dep_report is a list of dependencies
+    if isinstance(dep_report, list):
+        return len(dep_report)
+    return sum(len(deps) for deps in dep_report.values()) if isinstance(dep_report, dict) else 0
 
 def file_with_most_dependencies(dep_report):
+    # dep_report is a list of dependencies
+    if isinstance(dep_report, list):
+        if not dep_report:
+            return None
+        # Return the most common dependency
+        from collections import Counter
+        return Counter(dep_report).most_common(1)[0][0]
+    # Handle dict format if needed
     if not dep_report:
         return None
     return max(dep_report, key=lambda f: len(dep_report[f]))
 
 def average_dependencies_per_file(dep_report):
+    # dep_report is a list of dependencies
+    if isinstance(dep_report, list):
+        return len(dep_report) if dep_report else 0
+    # Handle dict format if needed
     count = len(dep_report)
     if count == 0:
         return 0
