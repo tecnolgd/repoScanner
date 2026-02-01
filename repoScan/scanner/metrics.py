@@ -1,5 +1,14 @@
 #metrics.py
 
+from ..utility.helpers import file_with_most_dependencies
+from ..utility.helpers import total_files
+from ..utility.helpers import total_lines
+from ..utility.helpers import language_metrics
+from ..utility.helpers import average_lines_per_file
+from ..utility.helpers import average_lines_per_file
+from ..utility.helpers import average_dependencies_per_file
+from ..utility.helpers import largest_file_by_lines
+
 def generate_metrics(file_path, size_report, dep_report):
     return {
         "files": {
