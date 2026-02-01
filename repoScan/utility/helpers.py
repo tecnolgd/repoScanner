@@ -48,7 +48,11 @@ def extract_c_includes(lines):
 def total_files(file_path):
     return len(file_path)
 
-def dependency_metrics(dep_report):
-    total_lines = size(read_file_safely(file_path))
+def total_lines(size_report):
+    return sum(info.get("lines", 0) for info in sizes.values())
 
-    include_based_files = size()
+def average_lines_per_file(size_report):
+    count = len(sizes)
+    if count == 0:
+        return 0
+    return total_lines(sizes) / count
