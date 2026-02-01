@@ -51,7 +51,6 @@ def file_metrics(file_path, size_report):
     max_file_size = max(size_report)
 
 def dependency_metrics(dep_report):
-    
+    total_lines = size(read_file_safely(file_path))
 
-
-
+    include_based_files = size()
