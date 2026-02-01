@@ -44,11 +44,9 @@ def extract_c_includes(lines):
 
 #helper functions for metrics generation
 
-def file_metrics(file_path, size_report):
-    total_files = len(size_report)
-    total_bytes = size(size_report)
-    avg_file_size = total_bytes//total_files
-    max_file_size = max(size_report)
+#file metrics functions
+def total_files(file_path):
+    return len(file_path)
 
 def dependency_metrics(dep_report):
     total_lines = size(read_file_safely(file_path))
