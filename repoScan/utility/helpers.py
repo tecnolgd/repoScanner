@@ -61,3 +61,7 @@ def largest_file_by_lines(sizes):
     if not sizes:
         return None
     return max(sizes, key=lambda f: sizes[f].get("lines", 0))
+
+#dependency metrics functions
+def total_dependencies(dependencies):
+    return sum(len(deps) for deps in dependencies.values())
