@@ -5,7 +5,6 @@ from .scanner.dirScanner import dir_scanner
 from .analyzer.structureAnalyzer import structure_analyzer
 from .analyzer.sizeAnalyzer import size_analyzer
 from .scanner.metrics import generate_metrics
-from .reports.terminalReports import generate_metrics
 from .reports.terminalReports import print_summary
 
 count=0
@@ -16,6 +15,8 @@ for f in dir_scanner("/home/chief/projects/repoScanner/repoScan"): #absolute pat
 
 files= dir_scanner("/home/chief/projects/repoScanner/repoScan")
 report = structure_analyzer(files)
+print(" ")
+
 print("Repo structure analysis:")
 print(report)
 print(" ")
@@ -33,8 +34,6 @@ print(" ")
 metrics = generate_metrics(files, size_report, dep_report)
 print("Metrics for nerds:")
 print_summary(metrics)
-
-
 
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (cmd to run the script) or 
 # python3 -m repoScan.cli
