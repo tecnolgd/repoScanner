@@ -5,6 +5,8 @@ from .scanner.dirScanner import dir_scanner
 from .analyzer.structureAnalyzer import structure_analyzer
 from .analyzer.sizeAnalyzer import size_analyzer
 from .scanner.metrics import generate_metrics
+from .reports.terminalReports import generate_metrics
+from .reports.terminalReports import print_summary
 
 count=0
 print("file data:")
@@ -28,9 +30,10 @@ dep_report=dependency_analyzer(files)
 print(dep_report)
 print(" ")
 
-print("Metrics for nerds:")
 metrics = generate_metrics(files, size_report, dep_report)
-print(metrics)
+print("Metrics for nerds:")
+print_summary(metrics)
+
 
 
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (cmd to run the script) or 
