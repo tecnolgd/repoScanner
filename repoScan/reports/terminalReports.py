@@ -22,3 +22,9 @@ def print_dependency_metrics(dependency_metrics):
     print_kv("Total dependencies", dependency_metrics["total"])
     print_kv("File with most deps", dependency_metrics["max_file"])
     print_kv("Avg deps/file", round(dependency_metrics["average"], 2))
+
+def print_language_metrics(language_metrics):
+    print_section("Language Breakdown")
+    for lang, count in language_metrics.items():
+        print_kv(lang, count)
+
