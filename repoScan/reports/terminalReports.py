@@ -16,3 +16,9 @@ def print_file_metrics(file_metrics):
     print_kv("Total lines", file_metrics["total_lines"])
     print_kv("Average lines/file", round(file_metrics["average_lines"], 2))
     print_kv("Largest file", file_metrics["largest_file"])
+
+def print_dependency_metrics(dependency_metrics):
+    print_section("Dependency Metrics")
+    print_kv("Total dependencies", dependency_metrics["total"])
+    print_kv("File with most deps", dependency_metrics["max_file"])
+    print_kv("Avg deps/file", round(dependency_metrics["average"], 2))
