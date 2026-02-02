@@ -33,7 +33,7 @@ def print_summary(metrics):
     print("\nRepository Summary")
     print("=" * 18)
 
-    print_file_metrics(metrics["files"])
-    print_dependency_metrics(metrics["dependencies"])
-    print_language_metrics(metrics["languages"])
+    print_file_metrics(metrics["file_metrics"])
+    print_dependency_metrics(metrics["dependency_metrics"])
+    print_language_metrics(metrics["language_metrics"])
 
