@@ -28,3 +28,12 @@ def print_language_metrics(language_metrics):
     for lang, count in language_metrics.items():
         print_kv(lang, count)
 
+#summmary printer
+def print_summary(metrics):
+    print("\nRepository Summary")
+    print("=" * 18)
+
+    print_file_metrics(metrics["files"])
+    print_dependency_metrics(metrics["dependencies"])
+    print_language_metrics(metrics["languages"])
+
