@@ -16,7 +16,7 @@ def main():
     mode = "stats"  # Default mode
     
     for arg in sys.argv[1:]:
-        if arg in ["--raw", "--dev", "--developer"]:
+        if arg in ["--raw", "--dev",]:
             mode = "raw"
         elif arg in ["--stats", "--nerd"]:
             mode = "stats"
@@ -40,7 +40,7 @@ def main():
     # Always generate JSON report
     print("\nGenerating JSON report...")
     json_path = write_json_report(metrics)
-    print(f"✓ Report generated: {json_path}")
+    print(f"✓ Report generated. Check: {json_path}")
 
 
 if __name__ == "__main__":
