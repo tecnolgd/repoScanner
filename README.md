@@ -23,4 +23,46 @@ Quickly understand your codebase structure, dependencies, and metrics with a sin
 - Per-file dependency counts
 - Language distribution
 - Largest files and most-dependent files
+- File mapping with dependencies(for --dev/raw mode)
 
+## Usage
+
+### Quick Summary (Recommended)
+```bash
+python3 -m repoScan.cli /path/to/repo
+```
+or
+```bash
+python3 -m repoScan.cli /path/to/repo --stats #or nerd
+```
+
+### Detailed Analysis (Developer Mode)
+```bash
+python3 -m repoScan.cli /path/to/repo --raw #or --dev
+```
+
+### Output
+Reports are automatically saved to `output/report.json`
+
+## Supported Languages
+
+- **Python** (.py) - import detection
+- **C/C++** (.c, .cpp, .h, .hpp) - #include detection
+
+More languages coming in v0.1.1.
+
+
+## Beta Status ⚠️
+
+This is a **beta release**. Expect occasional improvements and refinements. Report issues and suggest features as you use it!
+
+## Coming Soon
+
+- HTML report generation
+- More language support (JavaScript, Go, Rust)
+- Gitignore integration
+- Circular dependency detection
+
+---
+
+**Built for developers with the intent of saving time and peace-of-mind**
