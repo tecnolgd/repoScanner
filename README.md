@@ -29,6 +29,12 @@ Quickly understand your codebase structure, dependencies, and metrics with a sin
 - Largest files and most-dependent files
 - File mapping with dependencies(for --dev/raw mode)
 
+## Requirements
+- Python 3.12 (tested on Ubuntu 24.04 LTS)
+
+> The code uses only Python standard libraries and should be compatible with Python 3.10+,
+> but has been officially tested on Python 3.12.
+
 ## Usage
 
 ### Clone the Repository
@@ -39,16 +45,16 @@ cd repoScanner
 
 ### Quick Summary (Recommended)
 ```bash
-python3 -m repoScan.cli /path/to/repo
+python3.12 -m repoScan.cli /path/to/repo
 ```
 or
 ```bash
-python3 -m repoScan.cli /path/to/repo --stats #or nerd
+python3.12 -m repoScan.cli /path/to/repo --stats #or nerd
 ```
 
 ### Detailed Analysis (Developer Mode)
 ```bash
-python3 -m repoScan.cli /path/to/repo --raw #or --dev
+python3.12 -m repoScan.cli /path/to/repo --raw #or --dev
 ```
 
 ### Output
