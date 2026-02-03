@@ -6,6 +6,7 @@ from .analyzer.structureAnalyzer import structure_analyzer
 from .analyzer.sizeAnalyzer import size_analyzer
 from .scanner.metrics import generate_metrics
 from .reports.terminalReports import print_summary
+from .reports.jsonReports import write_json_report
 
 count=0
 print("file data:")
@@ -34,6 +35,10 @@ print(" ")
 metrics = generate_metrics(files, size_report, dep_report)
 print("Metrics for nerds:")
 print_summary(metrics)
+
+print("Json report:")
+json_path=write_json_report(metrics)
+print("Report generated : ",json_path)
 
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (cmd to run the script) or 
 # python3 -m repoScan.cli
