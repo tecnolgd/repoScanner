@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime
 
-def write_json_report(metrics, output_dir="reports"):
+def write_json_report(metrics, output_dir="output"):
     os.makedirs(output_dir, exist_ok=True)
 
     report = {
