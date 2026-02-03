@@ -1,5 +1,7 @@
 #cli.py --> command line interface for automation tool
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (exection command)
+
+import sys
 from .scanner.dependency import dependency_analyzer
 from .scanner.dirScanner import dir_scanner
 from .analyzer.structureAnalyzer import structure_analyzer
@@ -8,37 +10,41 @@ from .scanner.metrics import generate_metrics
 from .reports.terminalReports import print_summary
 from .reports.jsonReports import write_json_report
 
-count=0
-print("file data:")
-for f in dir_scanner("/home/chief/projects/repoScanner/repoScan"): #absolute path of the directory
-    count+=1
-    print(count,"-->",f)
+def main():
+    root =sys.argv[1] if len(sys.argv) > 1 else "."
+    count=0
+    print("file data:")
+    for f in dir_scanner(root): #absolute path of the directory
+        count+=1
+        print(count,"-->",f)
 
-files= dir_scanner("/home/chief/projects/repoScanner/repoScan")
-report = structure_analyzer(files)
-print(" ")
+    files= dir_scanner(root)
+    report = structure_analyzer(files)
+    print(" ")
 
-print("Repo structure analysis:")
-print(report)
-print(" ")
+    print("Repo structure analysis:")
+    print(report)
+    print(" ")
 
-print("Repo size anaysis:")
-size_report=size_analyzer(files)
-print(size_report)
-print(" ")
+    print("Repo size anaysis:")
+    size_report=size_analyzer(files)
+    print(size_report)
+    print(" ")
 
-print("Dependency analysis:")
-dep_report=dependency_analyzer(files)
-print(dep_report)
-print(" ")
+    print("Dependency analysis:")
+    dep_report=dependency_analyzer(files)
+    print(dep_report)
+    print(" ")
 
-metrics = generate_metrics(files, size_report, dep_report)
-print("Metrics for nerds:")
-print_summary(metrics)
+    metrics = generate_metrics(files, size_report, dep_report)
+    print("Metrics for nerds:")
+    print_summary(metrics)
 
-print("Json report:")
-json_path=write_json_report(metrics)
-print("Report generated : ",json_path)
+    print("Json report:")
+    json_path=write_json_report(metrics)
+    print("Report generated : ",json_path)
 
+if __name__ == "__main__":
+    main()
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (cmd to run the script) or 
 # python3 -m repoScan.cli
