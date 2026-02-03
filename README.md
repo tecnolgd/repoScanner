@@ -1,5 +1,9 @@
 # repoScanner
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+![Static Badge](https://img.shields.io/badge/interface-CLI-white)
+[![Status: Beta](https://img.shields.io/badge/Status-Beta-orange)](https://github.com/tecnolgd/repoScanner)
+
 **A lightweight repository analysis tool for developers.**
 
 Quickly understand your codebase structure, dependencies, and metrics with a single command.
@@ -69,9 +73,15 @@ This is a **beta release**. Expect occasional improvements and refinements. Repo
 
 ## Contributing
 
-Want to contribute? We'd love that! 
+Contributions are welcome! Help make repoScanner better.
 
+### Fork & Clone
+```bash
+# Fork on GitHub, then clone your fork
+git clone https://github.com/tecnolgd/repoScanner.git
 
+cd repoScanner
+```
 
 ### Make Changes & Submit PR
 1. Create a feature branch: `git checkout -b feature/your-feature`
@@ -93,4 +103,3 @@ Want to contribute? We'd love that!
 - **Author:** tecnolgd
 - **Version:** v0.1.0-beta
 - **License:** [MIT](LICENSE.md)
-
