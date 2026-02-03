@@ -30,7 +30,7 @@ Quickly understand your codebase structure, dependencies, and metrics with a sin
 - File mapping with dependencies(for --dev/raw mode)
 
 ## Requirements
-- Python 3.12 (tested on Ubuntu 24.04 LTS)
+- Python 3.12+ (tested on Ubuntu 24.04 LTS)
 
 > The code uses only Python standard libraries and should be compatible with Python 3.10+,
 > but has been officially tested on Python 3.12.
