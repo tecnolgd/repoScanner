@@ -27,6 +27,12 @@ Quickly understand your codebase structure, dependencies, and metrics with a sin
 
 ## Usage
 
+### Clone the Repository
+```bash
+git clone https://github.com/yourusername/repoScanner.git
+cd repoScanner
+```
+
 ### Quick Summary (Recommended)
 ```bash
 python3 -m repoScan.cli /path/to/repo
@@ -56,13 +62,35 @@ More languages coming in v0.1.1.
 
 This is a **beta release**. Expect occasional improvements and refinements. Report issues and suggest features as you use it!
 
-## Coming Soon
+## More Info
+* [Architecture](docs/architecture.md)
+* [Roadmap](docs/roadmap.md)
 
-- HTML report generation
-- More language support (JavaScript, Go, Rust)
-- Gitignore integration
-- Circular dependency detection
 
----
+## Contributing
+
+Want to contribute? We'd love that! 
+
+
+
+### Make Changes & Submit PR
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Commit your changes: `git commit -m "feat: description"`
+3. Push to your fork: `git push origin feature/your-feature`
+4. Open a Pull Request
+
+### Ideas for Contribution
+- Add language support (JavaScript, Go, Rust, etc.)
+- Add HTML report generation
+- Add circular dependency detection
+- Write tests
+- Improve documentation
+- Optimise the scan time and memory
 
 **Built for developers with the intent of saving time and peace-of-mind**
+
+## Author & Version
+- **Author:** tecnolgd
+- **Version:** v0.1.0-beta
+- **License:** [MIT](LICENSE.md)
+
