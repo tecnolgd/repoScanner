@@ -1,6 +1,7 @@
 # repoScanner
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.7+](https://img.shields.io/badge/Python-3.12%2B-blue)](https://www.python.org/downloads/)
 ![Static Badge](https://img.shields.io/badge/interface-CLI-white)
 [![Status: Beta](https://img.shields.io/badge/Status-Beta-orange)](https://github.com/tecnolgd/repoScanner)
 
