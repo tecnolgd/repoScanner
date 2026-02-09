@@ -71,7 +71,6 @@ Reports are automatically saved to `output/report.json`
 
 More languages coming in v0.1.1.
 
-
 ## Beta Status ⚠️
 
 This is a **beta release**. Expect occasional improvements and refinements. Report issues and suggest features as you use it!
@@ -79,7 +78,6 @@ This is a **beta release**. Expect occasional improvements and refinements. Repo
 ## More Info
 * [Architecture](assets/docs/architecture.md)
 * [Roadmap](assets/docs/roadmap.md)
-
 
 ## Contributing
 
