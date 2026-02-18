@@ -51,7 +51,7 @@ python3.12 -m repoScan.cli /path/to/repo
 ```
 or
 ```bash
-python3.12 -m repoScan.cli /path/to/repo --stats #or nerd
+python3.12 -m repoScan.cli /path/to/repo --stats #or --nerd
 ```
 
 ### Detailed Analysis (Developer Mode)
@@ -101,7 +101,7 @@ cd repoScanner
 - Add circular dependency detection
 - Write tests
 - Improve documentation
-- Optimise the scan time and memory
+- Optimize the scan time and memory
 
 **Built for developers with the intent of saving time and peace-of-mind**
 
