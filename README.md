@@ -6,7 +6,7 @@
 ![Static Badge](https://img.shields.io/badge/interface-CLI-white)
 [![Status: Beta](https://img.shields.io/badge/Status-Beta-orange)](https://github.com/tecnolgd/repoScanner)
 
-**A lightweight repository analysis tool for developers.**
+**repoScanner is a lightweight repository analysis tool for developers.**
 
 Quickly understand your codebase structure, dependencies, and metrics with a single command.
 
