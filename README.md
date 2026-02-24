@@ -46,8 +46,8 @@ cd repoScanner
 ```
 
 ### Quick Summary (Recommended)
-```bash
-python3.12 -m repoScan.cli /path/to/repo
+```bash 
+python3.12 -m repoScan.cli /path/to/repo #default mode(stats / nerd)
 ```
 or
 ```bash
