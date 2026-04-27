@@ -1,10 +1,14 @@
 
-![repoScanner logo](assets/repoScanner_logo.png)
+<div align = "center">
+<img src = "assets/repoScanner_logo.png" alt = "repoScanner logo">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.7+](https://img.shields.io/badge/Python-3.12%2B-blue)](https://www.python.org/downloads/)
-![Static Badge](https://img.shields.io/badge/interface-CLI-white)
-[![Status: Beta](https://img.shields.io/badge/Status-Beta-orange)](https://github.com/tecnolgd/repoScanner)
+<a href = "https://opensource.org/licenses/MIT"><img src = "https://img.shields.io/badge/License-MIT-green.svg" alt = "License: MIT"></a>
+<a href = "https://www.python.org/downloads/"><img src = "https://img.shields.io/badge/Python-3.12%2B-blue" alt = "Python 3.7+"></a>
+<img src = "https://img.shields.io/badge/interface-CLI-white">
+<a href = "https://github.com/tecnolgd/repoScanner/releases"><img src = "https://img.shields.io/badge/Status-Beta-orange" alt = "Status: Beta"></a>
+<a href = "#documentation"><img src = "https://img.shields.io/badge/docs-minimal-red" alt = "Docs: Minimal"></a>
+
+</div>
 
 **repoScanner is a lightweight repository analysis tool for developers.**
 
@@ -73,7 +77,7 @@ More languages coming in v0.1.1.
 
 This is a **beta release**. Expect occasional improvements and refinements. Report issues and suggest features as you use it!
 
-## More Info
+## Documentation
 * [Architecture](assets/docs/architecture.md)
 * [Roadmap](assets/docs/roadmap.md)
 
