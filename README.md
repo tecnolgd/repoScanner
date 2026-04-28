@@ -10,9 +10,8 @@
 
 </div>
 
-**repoScanner is a lightweight repository analysis tool for developers.**
-
-Quickly understand your codebase structure, dependencies, and metrics with a single command.
+>**repoScanner** is a lightweight repository analysis tool for developers.          
+>Quickly understand your codebase structure, dependencies, and metrics with a single command.
 
 ## What It Does
 
@@ -41,15 +40,19 @@ Quickly understand your codebase structure, dependencies, and metrics with a sin
 > The code uses only Python standard libraries and should be compatible with Python 3.10+,
 > but has been officially tested on Python 3.12.
 
-## Usage
+## Build Instructions
 
-### Clone the Repository
 ```bash
-git clone https://github.com/yourusername/repoScanner.git
+git clone https://github.com/tecnolgd/repoScanner.git
+```
+```bash
+# 
 cd repoScanner
 ```
 
-### Quick Summary (Recommended)
+### Tool Execution/Run
+
+- **For Quick Summary** (Recommended)
 ```bash 
 python3.12 -m repoScan.cli /path/to/repo #default mode(stats / nerd)
 ```
@@ -58,7 +61,7 @@ or
 python3.12 -m repoScan.cli /path/to/repo --stats #or --nerd
 ```
 
-### Detailed Analysis (Developer Mode)
+- **For Detailed Analysis** (Developer Mode)
 ```bash
 python3.12 -m repoScan.cli /path/to/repo --raw #or --dev
 ```
@@ -81,33 +84,8 @@ This is a **beta release**. Expect occasional improvements and refinements. Repo
 * [Architecture](assets/docs/architecture.md)
 * [Roadmap](assets/docs/roadmap.md)
 
-## Contributing
+## [Contributing](CONTRIBUTING.md)
 
-- Contributions are welcome! Help make repoScanner better.      
-- See [**Issues**](https://github.com/tecnolgd/repoScanner/issues) to begin with.
-
-### Fork & Clone
-```bash
-# Fork on GitHub, then clone your fork
-git clone https://github.com/tecnolgd/repoScanner.git
-
-cd repoScanner
-```
-
-### Make Changes & Submit PR
-1. Create a feature branch: `git checkout -b feature/your-feature`
-2. Commit your changes: `git commit -m "feat: description"`
-3. Push to your fork: `git push origin feature/your-feature`
-4. Open a Pull Request
-
-### Ideas for Contribution
-
-- Add language support (JavaScript, Go, Rust, etc.)
-- Add HTML report generation
-- Add circular dependency detection
-- Write tests
-- Improve documentation
-- Optimize the scan time and memory
 
 **Built for developers with the intent of saving time and peace-of-mind**
 
