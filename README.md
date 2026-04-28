@@ -83,7 +83,8 @@ This is a **beta release**. Expect occasional improvements and refinements. Repo
 
 ## Contributing
 
-Contributions are welcome! Help make repoScanner better.
+- Contributions are welcome! Help make repoScanner better.      
+- See [**Issues**](https://github.com/tecnolgd/repoScanner/issues) to begin with.
 
 ### Fork & Clone
 ```bash
@@ -100,6 +101,7 @@ cd repoScanner
 4. Open a Pull Request
 
 ### Ideas for Contribution
+
 - Add language support (JavaScript, Go, Rust, etc.)
 - Add HTML report generation
 - Add circular dependency detection
