@@ -5,15 +5,7 @@
 
 - See [**Issues**](https://github.com/tecnolgd/repoScanner/issues) to begin with.
 
->**Note**: Check [Requirements and Usage](README.md#requirements)  for build details.
-
-### Fork & Clone
-```bash
-# Fork on GitHub, then clone your fork
-git clone https://github.com/tecnolgd/repoScanner.git
-
-cd repoScanner
-```
+>**Note**: Check [Build Instructions](README.md#build-instructions)  for build details.
 
 ### Make Changes & Submit PR
 
