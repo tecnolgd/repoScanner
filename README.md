@@ -6,12 +6,16 @@
 <a href = "https://www.python.org/downloads/"><img src = "https://img.shields.io/badge/Python-3.12%2B-blue" alt = "Python 3.7+"></a>
 <img src = "https://img.shields.io/badge/interface-CLI-white">
 <a href = "https://github.com/tecnolgd/repoScanner/releases"><img src = "https://img.shields.io/badge/Status-Beta-orange" alt = "Status: Beta"></a>
-<a href = "#documentation"><img src = "https://img.shields.io/badge/docs-minimal-red" alt = "Docs: Minimal"></a>
+<a href="https://github.com/tecnolgd/repoScanner/graphs/contributors">
+  <img src="https://img.shields.io/github/contributors/tecnolgd/repoScanner?style=flat&color=orange" alt="Contributors Badge">
+</a>
+<a href = "#documentation"><img src = "https://img.shields.io/badge/docs-minimal-pink" alt = "Docs: Minimal"></a>
 
 </div>
 
 >**repoScanner** is a lightweight repository analysis tool for developers.          
->Quickly understand your codebase structure, dependencies, and metrics with a single command.
+>- Quickly understand your codebase structure, dependencies, and metrics with a single command.
+>- Built for developers with the intent of saving time and peace-of-mind
 
 ## What It Does
 
@@ -69,12 +73,9 @@ python3.12 -m repoScan.cli /path/to/repo --raw #or --dev
 ### Output
 Reports are automatically saved to `output/report.json`
 
-## Supported Languages
+### Supported Languages
 
-- **Python** (.py) - import detection
-- **C/C++** (.c, .cpp, .h, .hpp) - #include detection
 
-More languages coming in v0.1.1.
 
 ## Beta Status ⚠️
 
@@ -86,8 +87,11 @@ This is a **beta release**. Expect occasional improvements and refinements. Repo
 
 ## [Contributing](CONTRIBUTING.md)
 
+## Contributors
 
-**Built for developers with the intent of saving time and peace-of-mind**
+A huge thanks to the developers contributing to repoScanner.
+- [@Ghraven](https://github.com/Ghraven)
+
 
 ## Author & Version
 - **Author:** tecnolgd
