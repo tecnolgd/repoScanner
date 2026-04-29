@@ -7,10 +7,9 @@
 <img src = "https://img.shields.io/badge/interface-CLI-white">
 <a href = "https://github.com/tecnolgd/repoScanner/releases"><img src = "https://img.shields.io/badge/Status-Beta-orange" alt = "Status: Beta"></a>
 <a href="https://github.com/tecnolgd/repoScanner/graphs/contributors">
-  <img src="https://img.shields.io/github/contributors/tecnolgd/repoScanner?style=flat&color=orange" alt="Contributors Badge">
+<img src="https://img.shields.io/github/contributors/tecnolgd/repoScanner?style=flat&color=orange" alt="Contributors Badge">
 </a>
 <a href = "#documentation"><img src = "https://img.shields.io/badge/docs-minimal-pink" alt = "Docs: Minimal"></a>
-
 </div>
 
 >**repoScanner** is a lightweight repository analysis tool for developers.          
@@ -50,7 +49,6 @@
 git clone https://github.com/tecnolgd/repoScanner.git
 ```
 ```bash
-# 
 cd repoScanner
 ```
 
@@ -73,7 +71,7 @@ python3.12 -m repoScan.cli /path/to/repo --raw #or --dev
 ### Output
 Reports are automatically saved to `output/report.json`
 
-### Supported Languages
+## Supported Languages
 
 Detects and maps **40+ extensions** to human-readable names, including:
 * **Systems:** C, C++, Rust, Go, Zig, Swift
