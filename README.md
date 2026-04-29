@@ -75,7 +75,13 @@ Reports are automatically saved to `output/report.json`
 
 ### Supported Languages
 
-
+Detects and maps **40+ extensions** to human-readable names, including:
+* **Systems:** C, C++, Rust, Go, Zig, Swift
+* **Web:** HTML, CSS, JavaScript, TypeScript, PHP
+* **Data:** JSON, YAML, TOML, SQL, XML
+* **Scripting:** Python, Ruby, Lua, Shell, PowerShell
+* ...and many more. 
+*(Unrecognized extensions fall back to their raw string format).*
 
 ## Beta Status ⚠️
 
