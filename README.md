@@ -54,18 +54,43 @@ cd repoScanner
 
 ### Tool Execution/Run
 
-- **For Quick Summary** (Recommended)
-```bash 
-python3.12 -m repoScan.cli /path/to/repo #default mode(stats / nerd)
-```
-or
+The easiest way to use repoScanner is with the provided shell script wrapper:
+
 ```bash
-python3.12 -m repoScan.cli /path/to/repo --stats #or --nerd
+./reposcan <path> [--stats|--raw|--dev]
 ```
 
-- **For Detailed Analysis** (Developer Mode)
+**Examples:**
+
+- **Quick Summary** (Recommended)
+```bash 
+./reposcan .                      # Scan current directory (stats mode)
+./reposcan /path/to/repo          # Scan a specific path (default: stats mode)
+./reposcan /path/to/repo --stats  # Explicitly use stats mode
+```
+
+- **Detailed Analysis** (Developer Mode - Tree with File Mapping)
 ```bash
-python3.12 -m repoScan.cli /path/to/repo --raw #or --dev
+./reposcan /path/to/repo --raw    # File-by-file with dependency tree
+./reposcan /path/to/repo --dev    # Same as --raw (alias)
+```
+
+The `--raw` / `--dev` mode displays all files in a tree structure with their dependencies mapped, perfect for detailed codebase analysis.
+
+- **Get Help**
+```bash
+./reposcan --help                 # Show all available options
+./reposcan -h    #Same as --help(alias)
+```
+
+#### Alternative: Direct Python Execution
+
+You can also run the scanner directly:
+
+```bash
+python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
+python3 -m repoScan.cli /path/to/repo --raw    # Detailed analysis with dependency tree
+python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
 ```
 
 ### Output

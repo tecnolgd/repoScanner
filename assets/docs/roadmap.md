@@ -5,6 +5,7 @@
 - ✓ JSON export with machine-readable reports
 - ✓ Terminal reporting (stats & raw modes)
 - ✓ Extended language support (40+ languages including JavaScript, Go, Rust, and more)
+- ✓ Added wrapper script for fast scanning
 
 ## Coming Soon
 
