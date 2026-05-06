@@ -1,0 +1,54 @@
+
+# reposcan - Simple wrapper script for quick scanning
+
+# Function to display help
+show_help() {
+    cat << EOF
+repoScanner - Repository Analysis Tool
+
+USAGE:
+    ./reposcan <path> [--raw|--dev|--stats|--help]
+
+ARGUMENTS:
+    <path>          Directory path to scan (required)
+    --stats         Show summary statistics (default)
+    --raw, --dev    Show detailed file-by-file analysis with dependency tree
+    --help, -h      Show this help message
+
+EXAMPLES:
+    # Scan current directory in stats mode
+    ./reposcan .
+
+    # Scan a specific path
+    ./reposcan /path/to/repo
+
+    # Show detailed analysis (tree with file dependencies)
+    ./reposcan /path/to/repo --raw
+    ./reposcan /path/to/repo --dev    # Same as --raw
+
+    # Scan in explicit stats mode
+    ./reposcan /path/to/repo --stats
+
+OUTPUT:
+    Results are displayed in the terminal and saved to output/report.json
+
+EOF
+}
+
+# Check if no arguments or help flag provided
+if [ $# -eq 0 ] || [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+# Extract path (first argument) and mode (optional second argument)
+REPO_PATH="$1"
+MODE="${2:---stats}"  # Default to --stats if not specified
+
+# Convert --dev to --raw for consistency
+if [ "$MODE" == "--dev" ]; then
+    MODE="--raw"
+fi
+
+# Run the scanner
+python3 -m repoScan.cli "$REPO_PATH" "$MODE"
