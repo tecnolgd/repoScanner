@@ -5,7 +5,8 @@
 <a href = "https://opensource.org/licenses/MIT"><img src = "https://img.shields.io/badge/License-MIT-green.svg" alt = "License: MIT"></a>
 <a href = "https://www.python.org/downloads/"><img src = "https://img.shields.io/badge/Python-3.12%2B-blue" alt = "Python 3.7+"></a>
 <img src = "https://img.shields.io/badge/interface-CLI-white">
-<a href = "https://github.com/tecnolgd/repoScanner/releases"><img src = "https://img.shields.io/badge/Status-Beta-orange" alt = "Status: Beta"></a>
+<a href="https://github.com/tecnolgd/repoScanner/releases"><img src="https://img.shields.io/github/v/release/tecnolgd/repoScanner?include_prereleases" alt="Release">
+</a>
 <a href="https://github.com/tecnolgd/repoScanner/graphs/contributors">
 <img src="https://img.shields.io/github/contributors/tecnolgd/repoScanner?style=flat&color=orange" alt="Contributors Badge">
 </a>
@@ -105,10 +106,6 @@ Detects and maps **40+ extensions** to human-readable names, including:
 * **Scripting:** Python, Ruby, Lua, Shell, PowerShell
 * ...and many more. 
 *(Unrecognized extensions fall back to their raw string format).*
-
-## Beta Status ⚠️
-
-This is a **beta release**. Expect occasional improvements and refinements. Report issues and suggest features as you use it!
 
 ## Documentation
 * [Architecture](assets/docs/architecture.md)
