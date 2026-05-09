@@ -5,7 +5,7 @@
 <a href = "https://opensource.org/licenses/MIT"><img src = "https://img.shields.io/badge/License-MIT-green.svg" alt = "License: MIT"></a>
 <a href = "https://www.python.org/downloads/"><img src = "https://img.shields.io/badge/Python-3.12%2B-blue" alt = "Python 3.7+"></a>
 <img src = "https://img.shields.io/badge/interface-CLI-white">
-<a href="https://github.com/tecnolgd/repoScanner/releases"><img src="https://img.shields.io/github/v/release/tecnolgd/repoScanner?include_prereleases" alt="Release">
+<a href="https://github.com/tecnolgd/repoScanner/releases"><img src="https://img.shields.io/github/v/release/tecnolgd/repoScanner?include_prereleases&t=TIMESTAMP" alt="Release">
 </a>
 <a href="https://github.com/tecnolgd/repoScanner/graphs/contributors">
 <img src="https://img.shields.io/github/contributors/tecnolgd/repoScanner?style=flat&color=orange" alt="Contributors Badge">
