@@ -121,5 +121,5 @@ A huge thanks to the developers contributing to repoScanner.
 
 ## Author & Version
 - **Author:** tecnolgd
-- **Version:** v0.1.0-beta
+- **Version:** v0.2.0
 - **License:** [MIT](LICENSE.md)
