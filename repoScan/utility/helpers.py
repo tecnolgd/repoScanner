@@ -183,3 +183,39 @@ def language_metrics(file_path):
         lang_counts[language] = lang_counts.get(language, 0) + 1
 
     return lang_counts
+
+#helper/guide function
+def help_guide():
+    helper_data = """repoScanner - Repository Analysis Tool
+
+USAGE:
+   python3 -m repoScan.cli <path> [--raw|--dev|--stats|--help]
+
+ARGUMENTS:
+    <path>          Directory path to scan (required)
+    --stats         Show summary statistics (default)
+    --raw, --dev    Show detailed file-by-file analysis with dependency tree
+    --help, -h      Show this help message
+
+EXAMPLES:
+    # Scan current directory in stats mode
+    python3 -m repoScan.cli .
+
+    # Scan a specific path
+    python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
+
+
+    # Show detailed analysis (tree with file dependencies)
+    python3 -m repoScan.cli /path/to/repo --raw
+    python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw
+
+    # Scan in explicit stats mode
+    python3 -m repoScan.cli /path/to/repo --stats
+
+    # Show tool usage
+    python3 -m repoScan.cli /path/to/repo --help    # Same as -h
+
+OUTPUT:
+    Results are displayed in the terminal and saved to output/report.json
+"""
+    print(helper_data)

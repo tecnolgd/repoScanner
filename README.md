@@ -86,12 +86,17 @@ The `--raw` / `--dev` mode displays all files in a tree structure with their dep
 
 #### Alternative: Direct Python Execution
 
-You can also run the scanner directly:
+- You can also run the scanner directly:
 
 ```bash
 python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
 python3 -m repoScan.cli /path/to/repo --raw    # Detailed analysis with dependency tree
 python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
+```
+
+- Help command
+```bash
+    python3 -m repoScan.cli /path/to/repo --help    # Same as -h
 ```
 
 ### Output
