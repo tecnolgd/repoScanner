@@ -9,6 +9,7 @@ from .analyzer.sizeAnalyzer import size_analyzer
 from .scanner.metrics import generate_metrics
 from .reports.terminalReports import print_summary, print_raw_analysis
 from .reports.jsonReports import write_json_report
+from .utility.helpers import help_guide
 
 def main():
     # Parse arguments
@@ -20,6 +21,8 @@ def main():
             mode = "raw"
         elif arg in ["--stats", "--nerd"]:
             mode = "stats"
+        elif arg in ["--help", "-h"]:
+            mode = "help"
         else:
             root = arg
     
@@ -33,10 +36,16 @@ def main():
     if mode == "raw":
         print("\nMODE: RAW/DEVELOPER")
         print_raw_analysis(files, report, size_report, dep_report)
-    else:  # stats mode (default)
+    elif mode == "stats":  # stats mode (default)
         print("\n MODE: STATS/SUMMARY")
         print_summary(metrics)
-    
+    elif mode == "help":
+        help_guide()
+        sys.exit(0)
+    else:
+        print("Invalid Mode!")
+
+
     # Always generate JSON report
     print("\nGenerating JSON report...")
     json_path = write_json_report(metrics)
@@ -45,7 +54,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-#cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (cmd to run the script) or 
-# python3 -m repoScan.cli
-# Options: python3 -m repoScan.cli /path --raw     (developer mode with full details)
-#          python3 -m repoScan.cli /path --stats   (summary/stats mode, default)
