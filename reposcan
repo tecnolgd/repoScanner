@@ -13,6 +13,7 @@ ARGUMENTS:
     <path>          Directory path to scan (required)
     --stats         Show summary statistics (default)
     --raw, --dev    Show detailed file-by-file analysis with dependency tree
+    --bench         Show tool performance details
     --help, -h      Show this help message
 
 EXAMPLES:
@@ -29,8 +30,11 @@ EXAMPLES:
     # Scan in explicit stats mode
     ./reposcan /path/to/repo --stats
 
+    # Show tool performance data
+    ./reposcan --bench
+
 OUTPUT:
-    Results are displayed in the terminal and saved to output/report.json
+    Results are displayed in the terminal and saved (except benchmarking data) to output/report.json
 
 EOF
 }
@@ -38,6 +42,12 @@ EOF
 # Check if no arguments or help flag provided
 if [ $# -eq 0 ] || [[ "$1" == "-h" || "$1" == "--help" ]]; then
     show_help
+    exit 0
+fi
+
+# Benchmark suite execution
+if [ "$1" == "--bench" ]; then
+    python3 tests/benchmark.py
     exit 0
 fi
 
