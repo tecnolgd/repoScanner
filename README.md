@@ -102,6 +102,38 @@ python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
 ### Output
 Reports are automatically saved to `output/report.json`
 
+## Performance & Benchmarking
+
+`repoScanner` includes a built-in automated performance profiling harness to track filesystem traversal latency and processing velocity across massive directory trees.
+
+The benchmark suite programmatically allocates a temporary mock repository(`perf_test_sandbox`) containing thousands of deeply nested files across multiple language profiles (`.py`, `.cpp`, `.md`) to stress-test system I/O bounds, executes the scanner via the shell wrapper, and enforces strict post-run sandbox sanitation.
+
+### Running the Benchmarks
+
+To execute the performance suite and generate a local processing velocity report, run:
+
+```bash
+python3 tests/benchmark.py
+```
+
+### Sample telemetry output
+
+```txt
+[✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
+
+[✓] Launching tool environment execution via ./reposcan wrapper...
+
+==================================================
+           repoScanner Benchmark Suite            
+==================================================
+  Target Workspace        : tests/perf_test_sandbox
+  Total Files Processed   : 2500
+  Execution Time          : 0.38995 seconds
+  I/O Processing Velocity : 6411.05 files/sec
+==================================================
+[✓] Flushed test sandbox environment directories cleanly.
+```
+
 ## Supported Languages
 
 Detects and maps **40+ extensions** to human-readable names, including:
