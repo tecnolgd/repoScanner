@@ -115,6 +115,11 @@ To execute the performance suite and generate a local processing velocity report
 ```bash
 python3 tests/benchmark.py
 ```
+or use shell command
+
+```bash
+./reposcan --bench
+```
 
 ### Sample telemetry output
 
