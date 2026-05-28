@@ -6,6 +6,7 @@
 - ✓ Terminal reporting (stats & raw modes)
 - ✓ Extended language support (40+ languages including JavaScript, Go, Rust, and more)
 - ✓ Added wrapper script for fast scanning
+- ✓ Added Benchmarking suite
 
 ## Coming Soon
 
