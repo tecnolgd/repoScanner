@@ -34,7 +34,7 @@ EXAMPLES:
     ./reposcan --bench
 
 OUTPUT:
-    Results are displayed in the terminal and saved to output/report.json
+    Results are displayed in the terminal and saved (except benchmarking data) to output/report.json
 
 EOF
 }
