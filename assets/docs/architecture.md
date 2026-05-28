@@ -8,3 +8,4 @@
 - reports/     → Terminal & JSON report generation 
 - cli.py       → Entry point and orchestration
 - output/      → JSON report output
+- tests/       → Benchmarking and testing
