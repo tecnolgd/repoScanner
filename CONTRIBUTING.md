@@ -7,9 +7,7 @@ Whether you're fixing a bug, adding support for a new language, improving report
 
 ### Development Setup
 
-To set up your local development environment and build the project, please follow the Installation Instructions in the [README.md](README.md#build-instructions).
-
-*Additional Dev Note: Ensure you have Python 3.8+ and pip installed, as our project relies on standard Python tooling*.
+To set up your local development environment and build the project, please follow the Installation Instructions in the [README.md](README.md#requirements).
 
 ### Development Workflow
 
