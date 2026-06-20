@@ -51,14 +51,20 @@ if [ "$1" == "--bench" ]; then
     exit 0
 fi
 
-# Extract path (first argument) and mode (optional second argument)
-REPO_PATH="$1"
-MODE="${2:---stats}"  # Default to --stats if not specified
+# Parse arguments order-independently: the first non-flag is the path,
+# the recognized flag (if any) is the mode. This avoids assuming a fixed
+# position, so "./reposcan --raw" and "./reposcan <path> --raw" behave the
+# same as the underlying "python3 -m repoScan.cli" command.
+REPO_PATH="."
+MODE="--stats"  # Default to --stats if no mode flag is given
 
-# Convert --dev to --raw for consistency
-if [ "$MODE" == "--dev" ]; then
-    MODE="--raw"
-fi
+for arg in "$@"; do
+    case "$arg" in
+        --raw|--dev)   MODE="--raw" ;;   # --dev is an alias for --raw
+        --stats|--nerd) MODE="--stats" ;;
+        *)             REPO_PATH="$arg" ;;
+    esac
+done
 
 # Run the scanner
 python3 -m repoScan.cli "$REPO_PATH" "$MODE"
