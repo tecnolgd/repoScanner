@@ -36,7 +36,12 @@
 - Per-file dependency counts
 - Language distribution
 - Largest files and most-dependent files
-- File mapping with dependencies(for --dev/raw mode)
+- File mapping with dependencies(for --dev/raw mode)     
+
+**Zero External Dependencies**     
+- Built entirely using the Python Standard Library.
+- No external packages or `pip install` commands are required.
+
 
 ## Requirements
 - Python 3.12+ (tested on Ubuntu 24.04 LTS)
