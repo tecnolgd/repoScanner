@@ -167,7 +167,6 @@ A huge thanks to the developers contributing to repoScanner.
 - [@AzarAI-TOP](https://github.com/AzarAI-TOP)
 
 
-## Author & Version
+## Author & License
 - **Author:** tecnolgd
-- **Version:** v0.2.0
 - **License:** [MIT](LICENSE.md)
