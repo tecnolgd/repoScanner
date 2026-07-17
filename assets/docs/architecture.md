@@ -35,12 +35,31 @@ Example: [testData.txt](assets/data/testData.txt).
 Mermaid overview:
 
 ```mermaid
-flowchart LR
-	CLI[CLI: repoScan/cli.py] --> Scanner[Scanner: repoScan/scanner]
-	Scanner --> Analyzers[Analyzers: repoScan/analyzer/*]
-	Analyzers --> Metrics[Metrics: repoScan/scanner/metrics.py]
-	Metrics --> Reports[Reports: repoScan/reports/*]
-	Reports --> Output[Output: output/]
+flowchart TD
+	
+	Input[Input Path / Current Dir] --> CLI
+	CLI --> Scanner
+
+	subgraph Analyzers [The Analysis Core]
+		Structure[Structure Analyzer]
+		Size[Size Analyzer]
+		Dependency[Dependency Analyzer]
+	end
+
+	Scanner --> Structure
+	Scanner --> Size
+	Scanner --> Dependency
+
+	
+	Structure --Report--> Raw_Analysis[Raw / Dev Analysis]
+	Size --Size Report--> Raw_Analysis
+	Dependency --Dependency Report--> Raw_Analysis
+
+	Size --> Metrics[Generate Metrics]
+	Dependency --> Metrics
+
+	Metrics --> Stats[Stats / Nerd Analysis]
+	Metrics --> JSON[JSON Report]
 ```
 
 **Extension Points**
