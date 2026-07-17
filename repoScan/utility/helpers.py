@@ -56,9 +56,9 @@ def total_lines(size_report):
     return 0
 
 def average_lines_per_file(size_report):
-    # For size_report from sizeAnalyzer, use average_file_size
-    if isinstance(size_report, dict) and "average_file_size" in size_report:
-        return size_report.get("average_file_size", 0)
+    # Use average_lines from size_report
+    if isinstance(size_report, dict) and "average_lines" in size_report:
+        return size_report.get("average_lines", 0)
     return 0
 
 def largest_file_by_lines(size_report):
@@ -98,124 +98,3 @@ def average_dependencies_per_file(dep_report):
     if count == 0:
         return 0
     return total_dependencies(dep_report) / count
-
-# Mapping of file extensions to human-readable language names.
-# Fixes #3: extend coverage beyond Python and C/C++.
-_EXTENSION_TO_LANGUAGE = {
-    # Python
-    ".py": "Python",
-    ".pyw": "Python",
-    ".pyi": "Python",
-    # C / C++
-    ".c": "C",
-    ".h": "C",
-    ".cpp": "C++",
-    ".cc": "C++",
-    ".cxx": "C++",
-    ".hpp": "C++",
-    ".hxx": "C++",
-    # JavaScript / TypeScript
-    ".js": "JavaScript",
-    ".mjs": "JavaScript",
-    ".cjs": "JavaScript",
-    ".jsx": "JavaScript",
-    ".ts": "TypeScript",
-    ".tsx": "TypeScript",
-    # Web
-    ".html": "HTML",
-    ".htm": "HTML",
-    ".css": "CSS",
-    ".scss": "SCSS",
-    ".sass": "SCSS",
-    # JVM
-    ".java": "Java",
-    ".kt": "Kotlin",
-    ".kts": "Kotlin",
-    ".scala": "Scala",
-    ".groovy": "Groovy",
-    # .NET
-    ".cs": "C#",
-    ".vb": "Visual Basic",
-    ".fs": "F#",
-    # Systems
-    ".rs": "Rust",
-    ".go": "Go",
-    ".swift": "Swift",
-    ".zig": "Zig",
-    # Scripting
-    ".rb": "Ruby",
-    ".php": "PHP",
-    ".pl": "Perl",
-    ".sh": "Shell",
-    ".bash": "Shell",
-    ".zsh": "Shell",
-    ".fish": "Shell",
-    ".ps1": "PowerShell",
-    ".lua": "Lua",
-    ".r": "R",
-    ".R": "R",
-    # Data / Config
-    ".sql": "SQL",
-    ".json": "JSON",
-    ".yaml": "YAML",
-    ".yml": "YAML",
-    ".toml": "TOML",
-    ".xml": "XML",
-    ".csv": "CSV",
-    # Docs
-    ".md": "Markdown",
-    ".rst": "reStructuredText",
-    ".tex": "LaTeX",
-}
-
-
-#language metrics function
-def language_metrics(file_path):
-    lang_counts = {}
-
-    for file in file_path:
-        ext = os.path.splitext(file)[1]
-        if not ext:
-            continue
-        # Map extension to a readable language name when known,
-        # otherwise fall back to the raw extension.
-        language = _EXTENSION_TO_LANGUAGE.get(ext, ext)
-        lang_counts[language] = lang_counts.get(language, 0) + 1
-
-    return lang_counts
-
-#helper/guide function
-def help_guide():
-    helper_data = """repoScanner - Repository Analysis Tool
-
-USAGE:
-   python3 -m repoScan.cli <path> [--raw|--dev|--stats|--help]
-
-ARGUMENTS:
-    <path>          Directory path to scan (required)
-    --stats         Show summary statistics (default)
-    --raw, --dev    Show detailed file-by-file analysis with dependency tree
-    --help, -h      Show this help message
-
-EXAMPLES:
-    # Scan current directory in stats mode
-    python3 -m repoScan.cli .
-
-    # Scan a specific path
-    python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
-
-
-    # Show detailed analysis (tree with file dependencies)
-    python3 -m repoScan.cli /path/to/repo --raw
-    python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw
-
-    # Scan in explicit stats mode
-    python3 -m repoScan.cli /path/to/repo --stats
-
-    # Show tool usage
-    python3 -m repoScan.cli /path/to/repo --help    # Same as -h
-
-OUTPUT:
-    Results are displayed in the terminal and saved to output/report.json
-"""
-    print(helper_data)
