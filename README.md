@@ -1,16 +1,17 @@
 
 <div align = "center">
+
 <img src = "assets/repoScanner_logo.png" alt = "repoScanner logo">
 
-<a href = "https://opensource.org/licenses/MIT"><img src = "https://img.shields.io/badge/License-MIT-green.svg" alt = "License: MIT"></a>
-<a href = "https://www.python.org/downloads/"><img src = "https://img.shields.io/badge/Python-3.12%2B-blue" alt = "Python 3.7+"></a>
-<img src = "https://img.shields.io/badge/interface-CLI-white">
-<a href="https://github.com/tecnolgd/repoScanner/releases"><img src="https://img.shields.io/github/v/release/tecnolgd/repoScanner?include_prereleases&t=TIMESTAMP" alt="Release">
-</a>
-<a href="https://github.com/tecnolgd/repoScanner/graphs/contributors">
-<img src="https://img.shields.io/github/contributors/tecnolgd/repoScanner?style=flat&color=orange" alt="Contributors Badge">
-</a>
-<a href = "#documentation"><img src = "https://img.shields.io/badge/docs-minimal-pink" alt = "Docs: Minimal"></a>
+<a href = "LICENSE.md">
+<img src = "https://img.shields.io/badge/license-MIT-1a1a1a?style=flat-square" alt = "License: MIT"></a>
+<a href = "https://www.python.org/downloads/">
+<img src = "https://img.shields.io/badge/python-3.12+-1a1a1a?style=flat-square&logo=python&logoColor=888888" alt = "Python: 3.12+"></a>
+<a href = "https://github.com/tecnolgd/repoScanner">
+<img src = "https://img.shields.io/badge/interface-CLI-1a1a1a?style=flat-square" alt = "Interface: CLI"></a>
+<a href = "https://github.com/tecnolgd/repoScanner/releases">
+<img src="https://img.shields.io/github/v/release/tecnolgd/blog-tecnolgd?color=1a1a1a&style=flat-square" alt="Version"></a>
+
 </div>
 
 >**repoScanner** is a lightweight repository analysis tool for developers.          
@@ -44,6 +45,7 @@
 
 
 ## Requirements
+
 - Python 3.12+ (tested on Ubuntu 24.04 LTS)
 
 > The code uses only Python standard libraries and should be compatible with Python 3.10+,
@@ -69,40 +71,40 @@ The easiest way to use repoScanner is with the provided shell script wrapper:
 **Examples:**
 
 - **Quick Summary** (Recommended)
-```bash 
-./reposcan .                      # Scan current directory (stats mode)
-./reposcan /path/to/repo          # Scan a specific path (default: stats mode)
-./reposcan /path/to/repo --stats  # Explicitly use stats mode
-```
+  ```bash 
+  ./reposcan .                      # Scan current directory (stats mode)
+  ./reposcan /path/to/repo          # Scan a specific path (default: stats mode)
+  ./reposcan /path/to/repo --stats  # Explicitly use stats mode
+  ```
 
 - **Detailed Analysis** (Developer Mode - Tree with File Mapping)
-```bash
-./reposcan /path/to/repo --raw    # File-by-file with dependency tree
-./reposcan /path/to/repo --dev    # Same as --raw (alias)
-```
+  ```bash
+  ./reposcan /path/to/repo --raw    # File-by-file with dependency tree
+  ./reposcan /path/to/repo --dev    # Same as --raw (alias)
+  ```
 
 The `--raw` / `--dev` mode displays all files in a tree structure with their dependencies mapped, perfect for detailed codebase analysis.
 
 - **Get Help**
-```bash
-./reposcan --help                 # Show all available options
-./reposcan -h    #Same as --help(alias)
-```
+  ```bash
+  ./reposcan --help                 # Show all available options
+  ./reposcan -h    #Same as --help(alias)
+  ```
 
 #### Alternative: Direct Python Execution
 
 - You can also run the scanner directly:
 
-```bash
-python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
-python3 -m repoScan.cli /path/to/repo --raw    # Detailed analysis with dependency tree
-python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
-```
+  ```bash
+  python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
+  python3 -m repoScan.cli /path/to/repo --raw    # Detailed analysis with dependency tree
+  python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
+  ```
 
 - Help command
-```bash
-    python3 -m repoScan.cli /path/to/repo --help    # Same as -h
-```
+  ```bash
+  python3 -m repoScan.cli /path/to/repo --help    # Same as -h
+  ```
 
 ### Output
 Reports are automatically saved to `output/report.json`
@@ -150,8 +152,7 @@ Detects and maps **40+ extensions** to human-readable names, including:
 * **Systems:** C, C++, Rust, Go, Zig, Swift
 * **Web:** HTML, CSS, JavaScript, TypeScript, PHP
 * **Data:** JSON, YAML, TOML, SQL, XML
-* **Scripting:** Python, Ruby, Lua, Shell, PowerShell
-* ...and many more. 
+* **Scripting:** Python, Ruby, Lua, Shell, PowerShell and many more. 
 *(Unrecognized extensions fall back to their raw string format).*
 
 ## Documentation
