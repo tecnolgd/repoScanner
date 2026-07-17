@@ -2,7 +2,7 @@
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (exection command)
 
 import sys
-from .scanner.dependency import dependency_analyzer
+from .analyzer.dependencyAnalyzer import dependency_analyzer
 from .scanner.dirScanner import dir_scanner
 from .analyzer.structureAnalyzer import structure_analyzer
 from .analyzer.sizeAnalyzer import size_analyzer
