@@ -13,17 +13,17 @@ This document describes the high-level architecture of the repoScanner project, 
 **Core Components:**
 
 - **scanner/**: Responsible for repository traversal and raw data collection (file lists, dependency hints, file sizes).     
-Example files: [dirScanner.py](repoScan/scanner/dirScanner.py).
+Example files: [dirScanner.py](../../repoScan/scanner/dirScanner.py).
 - **analyzer/**: Implements domain-specific analysis of the raw scan data. Current analyzers include size and structure analysis.      
-Example files: [sizeAnalyzer.py](repoScan/analyzer/sizeAnalyzer.py), [structureAnalyzer.py](repoScan/analyzer/structureAnalyzer.py), [dependencyAnalyzer.py](repoScan/analyzer/dependencyAnalyzer.py).
+Example files: [sizeAnalyzer.py](../../repoScan/analyzer/sizeAnalyzer.py), [structureAnalyzer.py](../../repoScan/analyzer/structureAnalyzer.py), [dependencyAnalyzer.py](../../repoScan/analyzer/dependencyAnalyzer.py).
 - **scanner/metrics.py**: Aggregates basic metrics and performs derived calculations used by analyzers and reports.       
-See [metrics.py](repoScan/scanner/metrics.py).
+See [metrics.py](../../repoScan/scanner/metrics.py).
 - **reports/**: Renders analysis results in multiple formats (`terminal`, `JSON`).        
-Example files: [terminalReports.py](repoScan/reports/terminalReports.py), [jsonReports.py](repoScan/reports/jsonReports.py) and [htmlReports.py](repoScan/reports/htmlReports.py) (Currently unavailable).
-- **cli.py**: CLI entrypoint and orchestration layer. Responsible for wiring together scanning, analysis, and report generation. See [cli.py](repoScan/cli.py).
+Example files: [terminalReports.py](../../repoScan/reports/terminalReports.py), [jsonReports.py](../../repoScan/reports/jsonReports.py) and [htmlReports.py](../../repoScan/reports/htmlReports.py) (Currently unavailable).
+- **cli.py**: CLI entrypoint and orchestration layer. Responsible for wiring together scanning, analysis, and report generation. See [cli.py](../../repoScan/cli.py).
 - **output/**: Default location for produced artifacts such as `report.json`.
 - **assets/data/**: Example and test data used by development and CI.     
-Example: [testData.txt](assets/data/testData.txt).
+Example: [testData.txt](../data/testData.txt).
 
 **Data Flow**
 
@@ -69,7 +69,7 @@ flowchart TD
 - Add new scanner rules: extend `repoScan/scanner/dirScanner.py` or add dependency heuristics in `repoScan/analyzer/dependencyAnalyzer.py` to include more file heuristics.
 
 **Testing & Benchmarking**
-- Unit tests and quick benchmarks live in `tests/` (for example, [tests/benchmark.py](tests/benchmark.py)). Use the sample data in `assets/data/` to create deterministic test cases.
+- Unit tests and quick benchmarks live in `tests/` (for example, [tests/benchmark.py](../../tests/benchmark.py)). Use the sample data in `assets/data/` to create deterministic test cases.
 
 **Running locally (example)**
 1. Run the CLI against a path to scan and write JSON output:
