@@ -166,6 +166,7 @@ Detects and maps **40+ extensions** to human-readable names, including:
 A huge thanks to the developers contributing to repoScanner.
 - [@Ghraven](https://github.com/Ghraven)
 - [@AzarAI-TOP](https://github.com/AzarAI-TOP)
+- [@Benjamin Ayiovh](https://github.com/BenjaminAyivoh1)
 
 
 ## Author & License
