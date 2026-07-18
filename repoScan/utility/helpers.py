@@ -56,9 +56,9 @@ def total_lines(size_report):
     return 0
 
 def average_lines_per_file(size_report):
-    # For size_report from sizeAnalyzer, use average_file_size
-    if isinstance(size_report, dict) and "average_file_size" in size_report:
-        return size_report.get("average_file_size", 0)
+    # For size_report from sizeAnalyzer, return average number of lines per file
+    if isinstance(size_report, dict) and "average_lines" in size_report:
+        return size_report.get("average_lines", 0)
     return 0
 
 def largest_file_by_lines(size_report):
