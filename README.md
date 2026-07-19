@@ -11,6 +11,8 @@
 <img src = "https://img.shields.io/badge/interface-CLI-1a1a1a?style=flat-square" alt = "Interface: CLI"></a>
 <a href = "https://github.com/tecnolgd/repoScanner/releases">
 <img src="https://img.shields.io/github/v/release/tecnolgd/blog-tecnolgd?color=1a1a1a&style=flat-square" alt="Version"></a>
+<a href = "#documentation">
+<img src = "https://img.shields.io/badge/docs-available-1a1a1a?style=flat-square" alt = "Docs: Available"></a>
 
 </div>
 
