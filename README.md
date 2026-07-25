@@ -130,23 +130,9 @@ or use shell command
 ./reposcan --bench
 ```
 
-### Sample telemetry output
+> [!TIP]        
+> Check the [sample outputs](assets/docs/architecture.md#sample-execution) for more info.
 
-```txt
-[✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
-
-[✓] Launching tool environment execution via ./reposcan wrapper...
-
-==================================================
-           repoScanner Benchmark Suite            
-==================================================
-  Target Workspace        : tests/perf_test_sandbox
-  Total Files Processed   : 2500
-  Execution Time          : 0.38995 seconds
-  I/O Processing Velocity : 6411.05 files/sec
-==================================================
-[✓] Flushed test sandbox environment directories cleanly.
-```
 
 ## Supported Languages
 
