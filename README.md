@@ -131,7 +131,7 @@ or use shell command
 ```
 
 > [!TIP]        
-> Check the [sample outputs](assets/architecture.md#sample-execution) for more info.
+> Check the [sample outputs](assets/docs/architecture.md#sample-execution) for more info.
 
 
 ## Supported Languages
