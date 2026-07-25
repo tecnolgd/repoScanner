@@ -71,24 +71,87 @@ flowchart TD
 **Testing & Benchmarking**
 - Unit tests and quick benchmarks live in `tests/` (for example, [tests/benchmark.py](../../tests/benchmark.py)). Use the sample data in `assets/data/` to create deterministic test cases.
 
-**Running locally (example)**
-1. Run the CLI against a path to scan and write JSON output:
+## Sample execution
 
-```bash
-python repoScan/cli.py --path . --output output/report.json --format json
-```
+1. Run the CLI against a path to scan and display repo telemetry:
+
+    ```bash
+    python3 -m repoScan.cli . --stats //run from the repo 'repoScanner'
+    ```
+
+    Output:
+
+    ```txt
+     MODE: STATS/SUMMARY
+
+    Repository Summary
+    ==================
+
+    File Metrics
+    ------------
+    Total files          : 308
+    Total lines          : 5128
+    Average lines/file   : 16
+    Largest file         : ('./.git/objects/pack/pack-9196ac0a6218e2225604c3563ba93163ee061f7f.pack', 117398)
+
+    Dependency Metrics
+    ------------------
+    Total dependencies   : 27
+    File with most deps  : ./repoScan/cli.py
+    Avg deps/file        : 0.09
+
+    Language Breakdown
+    ------------------
+    Markdown             : 5
+    TOML                 : 1
+    .sample              : 14
+    .0                   : 1
+    .pack                : 1
+    .rev                 : 1
+    .idx                 : 1
+    .png                 : 1
+    .txt                 : 1
+    Python               : 16
+    JSON                 : 1
+    .pyc                 : 10
+
+    Generating JSON report...
+    ✓ Report generated. Check: output/report.json
+    ```
+
 
 2. Run the benchmark script:
 
-```bash
-python tests/benchmark.py
-```
+    ```bash
+    python3 tests/benchmark.py 
+    ```
+
+    Output:
+
+    ```txt
+    [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
+
+    [✓] Launching tool environment execution via ./reposcan wrapper...
+
+    ==================================================
+             repoScanner Benchmark Suite
+    ==================================================
+      Target Workspace        : tests/perf_test_sandbox
+      Total Files Processed   : 2500
+      Execution Time          : 0.33595 seconds
+      I/O Processing Velocity : 7441.56 files/sec
+    ==================================================
+    [✓] Flushed test sandbox environment directories cleanly.
+    ```
+
 
 **Design Notes & Rationale**
+
 - Separation of concerns: scanning, analyzing, and reporting are intentionally decoupled to keep each component small and testable.
 - Normalized intermediate model: analyzers consume a consistent data model produced by the scanner+metrics layer to simplify adding new analyzers.
 
 **Next steps**
+
 - Add sequence diagrams for complex analyzer interactions (optional).
 - Expand the example JSON schema produced by `jsonReports` into a spec file for portability.
 - HTML report generation via some module under `repoScan/reports`.
