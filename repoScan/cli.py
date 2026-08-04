@@ -2,7 +2,7 @@
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (exection command)
 
 import sys
-import libcvault
+import libcvault #external library(git submodule)
 
 from .analyzer.dependencyAnalyzer import dependency_analyzer
 from .scanner.dirScanner import dir_scanner
@@ -41,7 +41,7 @@ def main():
         elif arg in ["--sort"]:
             mode = "sort"
         elif arg in ["--search", "--lc"]:
-            mode = arg.lstrip("-")
+            mode = arg.lstrip("-") #removes '-' from the arg dynamically avoiding confusions in choosing the mode from the list
 
             if i + 1 < len(args):
                 file_name = args[i + 1]
