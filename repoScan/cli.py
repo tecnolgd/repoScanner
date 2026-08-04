@@ -70,21 +70,25 @@ def main():
     elif mode == "help":
         help_guide()
         sys.exit(0)
-   # elif mode == "sort":
-    #    print('Sorted Directory', end = '\n');
-     #   libcvault.sort_file_on_byte(0);
+    elif mode == "sort":
 
-      #  for file in root:
-       #     print(file)
+        print("\nSorted Directory (by byte size):")
+        libcvault.populate_data(root)
+        libcvault.sort_file_on_byte() # Sorts vector in place
+    
+        # Iterate through C++ memory cleanly via getters
+        for i in range(libcvault.get_file_count()):
+            name = libcvault.get_file_name(i)
+            size = libcvault.get_file_size(i)
+            print(f"{size:>10} bytes  |  {name}") 
 
-        
     elif mode == "max":
         print('Largest file: ', libcvault.max_file())
     elif mode == "search":
         libcvault.populate_data(root)
         result = libcvault.search_file(file_name)
         if result != -3:
-            print(f"File found: {file_name}[{result}]")
+            print(f"File found: {file_name}[{result} bytes]")
         else:
             print("File NOT found")
     elif mode == "lc":
