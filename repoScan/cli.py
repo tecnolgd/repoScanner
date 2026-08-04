@@ -18,35 +18,41 @@ from .utility.helpers import help_guide
 # - Add all the required function calls for various features and flags
 # - Update the same in 'reposcan' bash script as well as update the required docs and help sections as well
 # - The next stage would be using reposcanner in piped instructions using streams
-# - Fix the search file function issues and explore ideas and implement the sort display
 
 def main():
     # Parse arguments
     root = "."
     mode = "stats"  # Default mode
     
-    for arg in sys.argv[1:]:
-        if arg in ["--raw", "--dev",]:
+    args = sys.argv[1:]
+    i = 0
+    while i < len(args):
+        arg = args[i]
+        if arg in ["--raw", "--dev"]:
             mode = "raw"
         elif arg in ["--stats", "--nerd"]:
             mode = "stats"
         elif arg in ["--help", "-h"]:
             mode = "help"
-        elif arg in ["--sort"]:
-            mode = "sort"
         elif arg in ["--max"]:
             mode = "max"
-        elif arg in ["--search"]:
-            mode = "search"
-            file_name = sys.argv[2]
-        elif arg in ["--lc"]: 
-            mode = "lc"
-            file_name = sys.argv[2]
         elif arg in ["--tbytes"]:
             mode = "tbytes"
+        elif arg in ["--sort"]:
+            mode = "sort"
+        elif arg in ["--search", "--lc"]:
+            mode = arg.lstrip("-")
+
+            if i + 1 < len(args):
+                file_name = args[i + 1]
+                i += 1  # Advance past the filename value
+            else:
+                print(f"Error: {arg} requires a filename argument.")
+                sys.exit(1)
         else:
             root = arg
-    
+        i += 1    
+
     files = dir_scanner(root)
     report = structure_analyzer(files)
     size_report = size_analyzer(files)
