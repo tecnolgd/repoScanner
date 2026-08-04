@@ -74,13 +74,13 @@ def main():
         
     elif mode == "max":
         print('Largest file: ', libcvault.max_file())
-    '''elif mode == "search":
-        result = int(libcvault.search_file(file_name))
+    elif mode == "search":
+        libcvault.populate_data(root)
+        result = libcvault.search_file(file_name)
         if result != -3:
             print(f"File found: {file_name}[{result}]")
         else:
             print("File NOT found")
-    '''
     elif mode == "lc":
         print(f"Line count of {file_name}: {libcvault.line_count(file_name)}")
     elif mode == "tbytes":
