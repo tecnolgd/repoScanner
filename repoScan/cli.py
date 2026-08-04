@@ -18,6 +18,7 @@ from .utility.helpers import help_guide
 # - Add all the required function calls for various features and flags
 # - Update the same in 'reposcan' bash script as well as update the required docs and help sections as well
 # - The next stage would be using reposcanner in piped instructions using streams
+# - Fix the search file function issues and explore ideas and implement the sort display
 
 def main():
     # Parse arguments
@@ -36,10 +37,11 @@ def main():
         elif arg in ["--max"]:
             mode = "max"
         elif arg in ["--search"]:
-            file_name = input("\t");
             mode = "search"
-        elif arg in ["--lc"]:   
+            file_name = sys.argv[2]
+        elif arg in ["--lc"]: 
             mode = "lc"
+            file_name = sys.argv[2]
         elif arg in ["--tbytes"]:
             mode = "tbytes"
         else:
@@ -50,7 +52,8 @@ def main():
     size_report = size_analyzer(files)
     dep_report = dependency_analyzer(files)
     metrics = generate_metrics(files, size_report, dep_report)
-    
+
+
     # Output based on mode
     if mode == "raw":
         print("\nMODE: RAW/DEVELOPER")
@@ -61,16 +64,25 @@ def main():
     elif mode == "help":
         help_guide()
         sys.exit(0)
-    # elif mode == "sort":
-        #sort function call
-    
-   # elif mode == "max":
-        #max byte function
-    # elif mode == "search":
-        #search for a file
+   # elif mode == "sort":
+    #    print('Sorted Directory', end = '\n');
+     #   libcvault.sort_file_on_byte(0);
 
-    # elif mode == "lc":
-        #line count
+      #  for file in root:
+       #     print(file)
+
+        
+    elif mode == "max":
+        print('Largest file: ', libcvault.max_file())
+    '''elif mode == "search":
+        result = int(libcvault.search_file(file_name))
+        if result != -3:
+            print(f"File found: {file_name}[{result}]")
+        else:
+            print("File NOT found")
+    '''
+    elif mode == "lc":
+        print(f"Line count of {file_name}: {libcvault.line_count(file_name)}")
     elif mode == "tbytes":
         libcvault.populate_data(root); 
         print('Total bytes:', libcvault.get_total_bytes())
