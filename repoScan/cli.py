@@ -15,7 +15,9 @@ from .utility.helpers import help_guide
 
 # Task to be completed
 
-# - Add all the required function calls for various features and flags
+# - Halt remote push until the libcvault issue is fixed regarding nested dir scanning.
+# - Plan about handling dir scans via libcvault only if possible
+# - Upgrades to algorithms for higher perf.
 # - Update the same in 'reposcan' bash script as well as update the required docs and help sections as well
 # - The next stage would be using reposcanner in piped instructions using streams
 
