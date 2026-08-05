@@ -15,11 +15,17 @@ from .utility.helpers import help_guide
 
 # Task to be completed
 
-# - Halt remote push until the libcvault issue is fixed regarding nested dir scanning.
 # - Plan about handling dir scans via libcvault only if possible
 # - Upgrades to algorithms for higher perf.
 # - Update the same in 'reposcan' bash script as well as update the required docs and help sections as well
 # - The next stage would be using reposcanner in piped instructions using streams
+
+# Dev notes
+# - To create the .so:
+    # g++ -O3 -shared -std=c++17 -fPIC   -I/usr/local/lib/python3.12/dist-packages/pybind11/include   -I/usr/include/python3.12   -I vendor/libcvault   vendor/bridge.cpp vendor/libcvault/main.cpp   -o libcvault$(python3-config --extension-suffix)
+# - To update the library in 'repoScanner'
+    # git submodule update --remote libcvault
+
 
 def main():
     # Parse arguments
@@ -86,6 +92,7 @@ def main():
 
     elif mode == "max":
         print('Largest file: ', libcvault.max_file())
+
     elif mode == "search":
         libcvault.populate_data(root)
         result = libcvault.search_file(file_name)
@@ -93,6 +100,7 @@ def main():
             print(f"File found: {file_name}[{result} bytes]")
         else:
             print("File NOT found")
+
     elif mode == "lc":
         print(f"Line count of {file_name}: {libcvault.line_count(file_name)}")
     elif mode == "tbytes":
