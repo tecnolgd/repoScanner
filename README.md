@@ -17,9 +17,12 @@
 
 </div>
 
->**repoScanner** is a lightweight repository analysis tool for developers.          
->- Quickly understand your codebase structure, dependencies, and metrics with a single command.
->- Built for developers with the intent of saving time and peace-of-mind
+---
+
+**repoScanner** is a lightweight repository analysis tool for developers.          
+
+- Quickly understand your codebase structure, dependencies, and metrics with a single command.
+- Built for developers with the intent of saving time and peace-of-mind
 
 ## What It Does
 
@@ -98,7 +101,7 @@ The `vendor/libcvault` submodule provides optional native helpers used only for 
 - If you want to use the advanced `libcvault`-backed CLI modes, build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
 
     ```bash
-    g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
+    g++ -O3 -shared -std=c++17 -fPIC   -I/usr/local/lib/python3.12/dist-packages/pybind11/include   -I/usr/include/python3.12   -I vendor/libcvault   vendor/bridge.cpp vendor/libcvault/main.cpp   -o libcvault$(python3-config --extension-suffix)
     ```
 
 </details>
