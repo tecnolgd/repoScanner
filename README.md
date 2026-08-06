@@ -66,7 +66,7 @@ cd repoScanner
 ```
 
 <details>
-<summary><b>Optional `libcvault` native helper</b> (advanced CLI modes)</summary>
+<summary><b>Optional <code>libcvault</code> native helper</b> (advanced CLI modes)</summary>
 <br>
 
 The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
