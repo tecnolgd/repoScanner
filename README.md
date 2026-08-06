@@ -56,6 +56,8 @@
 
 ## Build Instructions
 
+### 1. Setup
+
 ```bash
 git clone https://github.com/tecnolgd/repoScanner.git
 ```
@@ -63,7 +65,8 @@ git clone https://github.com/tecnolgd/repoScanner.git
 cd repoScanner
 ```
 
-### Optional `libcvault` native helper (advanced CLI modes)
+<details>
+<summary><b>Optional <code>`libcvault</code> native helper</b> (advanced CLI modes)</summary>
 
 The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
 The `vendor/libcvault` submodule provides optional native helpers used only for advanced CLI modes such as `--sort`, `--max`, `--search`, `--lc`, and `--tbytes`.
@@ -91,8 +94,10 @@ The `vendor/libcvault` submodule provides optional native helpers used only for 
     g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
     ```
 
+</details>
 
-### Tool Execution/Run
+
+### 2. Tool Execution/Run
 
 The easiest way to use repoScanner is with the provided shell script wrapper:
 
@@ -153,7 +158,7 @@ The `--raw` / `--dev` mode displays all files in a tree structure with their dep
   python3 -m repoScan.cli /path/to/repo --help    # Same as -h
   ```
 
-### Output
+### 3. Output
 Reports are automatically saved to `output/report.json`
 
 ## Performance & Benchmarking
@@ -162,7 +167,7 @@ Reports are automatically saved to `output/report.json`
 
 The benchmark suite programmatically allocates a temporary mock repository(`perf_test_sandbox`) containing thousands of deeply nested files across multiple language profiles (`.py`, `.cpp`, `.md`) to stress-test system I/O bounds, executes the scanner via the shell wrapper, and enforces strict post-run sandbox sanitation.
 
-### Running the Benchmarks
+### 4. Running the Benchmarks
 
 To execute the performance suite and generate a local processing velocity report, run:
 
