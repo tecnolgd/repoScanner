@@ -63,33 +63,34 @@ git clone https://github.com/tecnolgd/repoScanner.git
 cd repoScanner
 ```
 
-## Optional `libcvault` native helper (advanced CLI modes)
+### Optional `libcvault` native helper (advanced CLI modes)
 
 The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
 The `vendor/libcvault` submodule provides optional native helpers used only for advanced CLI modes such as `--sort`, `--max`, `--search`, `--lc`, and `--tbytes`.
 
-To fetch the bundled native helper after cloning the repository:
+- To fetch the bundled native helper after cloning the repository:
 
-```bash
-git submodule update --init --recursive vendor/libcvault
-```
+    ```bash
+    git submodule update --init --recursive vendor/libcvault
+    ```
 
-- `git submodule init` registers the submodule in your local repo configuration.
-- `git submodule update --init` also clones and checks out the correct commit for the submodule.
+    - `git submodule init` registers the submodule in your local repo configuration.
+    - `git submodule update --init` also clones and checks out the correct commit for the submodule.
 
-If you later want to refresh `libcvault` from its remote repository, run:
+- If you later want to refresh `libcvault` from its remote repository, run:
 
-```bash
-git submodule update --remote vendor/libcvault
-```
+    ```bash
+    git submodule update --remote vendor/libcvault
+    ```
 
-This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
+    This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
 
-If you want to use the advanced `libcvault`-backed CLI modes, build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
+- If you want to use the advanced `libcvault`-backed CLI modes, build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
 
-```bash
-g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
-```
+    ```bash
+    g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
+    ```
+
 
 ### Tool Execution/Run
 
