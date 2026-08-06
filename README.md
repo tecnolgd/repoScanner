@@ -71,7 +71,7 @@ cd repoScanner
 <br>
 
 
-> [!NOTE]       
+> **NOTE**:       
 > Core `repoScanner` functionality is pure Python (zero external dependencies). The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
 
 
