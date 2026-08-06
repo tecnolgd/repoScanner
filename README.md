@@ -13,6 +13,7 @@
 <img src="https://img.shields.io/github/v/release/tecnolgd/blog-tecnolgd?color=1a1a1a&style=flat-square" alt="Version"></a>
 <a href = "#documentation">
 <img src = "https://img.shields.io/badge/docs-available-1a1a1a?style=flat-square" alt = "Docs: Available"></a>
+<a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault">
 
 </div>
 
@@ -56,6 +57,8 @@
 
 ## Build Instructions
 
+### 1. Setup
+
 ```bash
 git clone https://github.com/tecnolgd/repoScanner.git
 ```
@@ -63,35 +66,45 @@ git clone https://github.com/tecnolgd/repoScanner.git
 cd repoScanner
 ```
 
-## Optional `libcvault` native helper (advanced CLI modes)
+<details>
+<summary><b>Optional <code>libcvault</code> native helper</b> (advanced CLI modes)</summary>
+<br>
+
+
+> **NOTE**:       
+> Core `repoScanner` functionality is pure Python (zero external dependencies). The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
+
 
 The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
 The `vendor/libcvault` submodule provides optional native helpers used only for advanced CLI modes such as `--sort`, `--max`, `--search`, `--lc`, and `--tbytes`.
 
-To fetch the bundled native helper after cloning the repository:
+- To fetch the bundled native helper after cloning the repository:
 
-```bash
-git submodule update --init --recursive vendor/libcvault
-```
+    ```bash
+    git submodule update --init --recursive vendor/libcvault
+    ```
 
-- `git submodule init` registers the submodule in your local repo configuration.
-- `git submodule update --init` also clones and checks out the correct commit for the submodule.
+    - `git submodule init` registers the submodule in your local repo configuration.
+    - `git submodule update --init` also clones and checks out the correct commit for the submodule.
 
-If you later want to refresh `libcvault` from its remote repository, run:
+- If you later want to refresh `libcvault` from its remote repository, run:
 
-```bash
-git submodule update --remote vendor/libcvault
-```
+    ```bash
+    git submodule update --remote vendor/libcvault
+    ```
 
-This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
+    This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
 
-If you want to use the advanced `libcvault`-backed CLI modes, build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
+- If you want to use the advanced `libcvault`-backed CLI modes, build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
 
-```bash
-g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
-```
+    ```bash
+    g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
+    ```
 
-### Tool Execution/Run
+</details>
+
+
+### 2. Tool Execution/Run
 
 The easiest way to use repoScanner is with the provided shell script wrapper:
 
@@ -152,7 +165,7 @@ The `--raw` / `--dev` mode displays all files in a tree structure with their dep
   python3 -m repoScan.cli /path/to/repo --help    # Same as -h
   ```
 
-### Output
+### 3. Output
 Reports are automatically saved to `output/report.json`
 
 ## Performance & Benchmarking
@@ -161,7 +174,7 @@ Reports are automatically saved to `output/report.json`
 
 The benchmark suite programmatically allocates a temporary mock repository(`perf_test_sandbox`) containing thousands of deeply nested files across multiple language profiles (`.py`, `.cpp`, `.md`) to stress-test system I/O bounds, executes the scanner via the shell wrapper, and enforces strict post-run sandbox sanitation.
 
-### Running the Benchmarks
+### 4. Running the Benchmarks
 
 To execute the performance suite and generate a local processing velocity report, run:
 
