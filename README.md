@@ -66,7 +66,8 @@ cd repoScanner
 ```
 
 <details>
-<summary><b>Optional <code>`libcvault</code> native helper</b> (advanced CLI modes)</summary>
+<summary><b>Optional `libcvault` native helper</b> (advanced CLI modes)</summary>
+<br>
 
 The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
 The `vendor/libcvault` submodule provides optional native helpers used only for advanced CLI modes such as `--sort`, `--max`, `--search`, `--lc`, and `--tbytes`.
