@@ -13,7 +13,7 @@
 <img src="https://img.shields.io/github/v/release/tecnolgd/blog-tecnolgd?color=1a1a1a&style=flat-square" alt="Version"></a>
 <a href = "#documentation">
 <img src = "https://img.shields.io/badge/docs-available-1a1a1a?style=flat-square" alt = "Docs: Available"></a>
-<a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/Submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault">
+<a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault">
 
 </div>
 
@@ -70,7 +70,8 @@ cd repoScanner
 <summary><b>Optional <code>libcvault</code> native helper</b> (advanced CLI modes)</summary>
 <br>
 
-> **Note:** Core `repoScanner` functionality is pure Python (zero external dependencies). The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
+> [!NOTE]       
+> Core `repoScanner` functionality is pure Python (zero external dependencies). The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
 
 The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
 The `vendor/libcvault` submodule provides optional native helpers used only for advanced CLI modes such as `--sort`, `--max`, `--search`, `--lc`, and `--tbytes`.
