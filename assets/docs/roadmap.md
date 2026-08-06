@@ -8,6 +8,7 @@
 - ✓ Added wrapper script for fast scanning
 - ✓ Added Benchmarking suite
 - ✓ Included text-based sample outputs  
+- ✓ Optional native `libcvault` submodule integration for advanced CLI utilities
 
 ## Coming Soon
 
