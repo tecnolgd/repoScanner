@@ -1,0 +1,3 @@
+[submodule "vendor/libcvault"]
+	path = vendor/libcvault
+	url = https://github.com/tecnolgd/libcvault.git

@@ -19,8 +19,10 @@ Example files: [sizeAnalyzer.py](../../repoScan/analyzer/sizeAnalyzer.py), [stru
 - **scanner/metrics.py**: Aggregates basic metrics and performs derived calculations used by analyzers and reports.       
 See [metrics.py](../../repoScan/scanner/metrics.py).
 - **reports/**: Renders analysis results in multiple formats (`terminal`, `JSON`).        
-Example files: [terminalReports.py](../../repoScan/reports/terminalReports.py), [jsonReports.py](../../repoScan/reports/jsonReports.py) and [htmlReports.py](../../repoScan/reports/htmlReports.py) (Currently unavailable).
-- **cli.py**: CLI entrypoint and orchestration layer. Responsible for wiring together scanning, analysis, and report generation. See [cli.py](../../repoScan/cli.py).
+Example files: [terminalReports.py](../../repoScan/reports/terminalReports.py), [jsonReports.py](../../repoScan/reports/jsonReports.py) and [htmlReports.py](../../repoScan/reports/htmlReports.py) (`htmlReports.py` is a placeholder at present).
+- **vendor/libcvault**: Bundled native C++ library submodule that provides optional optimized file operations for the CLI.
+- **reposcan**: Shell wrapper script that forwards scan commands to `python3 -m repoScan.cli` and also supports the benchmark harness via `--bench`.
+- **cli.py**: CLI entrypoint and orchestration layer. Responsible for wiring together scanning, analysis, report generation, and optional `libcvault`-backed utility modes. See [cli.py](../../repoScan/cli.py).
 - **output/**: Default location for produced artifacts such as `report.json`.
 - **assets/data/**: Example and test data used by development and CI.     
 Example: [testData.txt](../data/testData.txt).

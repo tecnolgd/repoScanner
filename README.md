@@ -22,11 +22,12 @@
 
 ## What It Does
 
-- **File Analysis**: Scan total files, lines of code, and average file size
+- **Directory Analysis**: Scan total files, lines of code, average file size, etc.
 - **Dependency Detection**: Extract and map dependencies (Python imports, C/C++ includes)
 - **Language Breakdown**: See what languages dominate your repo
 - **Smart Reporting**: Choose between quick stats or detailed developer mode
 - **JSON Export**: Machine-readable reports for automation
+- **Native File Utilities**: Optional `vendor/libcvault` submodule supports advanced CLI file sorting, search, and byte/line metrics when initialized.
 
 ## Features
 
@@ -62,12 +63,40 @@ git clone https://github.com/tecnolgd/repoScanner.git
 cd repoScanner
 ```
 
+## Optional `libcvault` native helper (advanced CLI modes)
+
+The core `repoScanner` functionality is pure Python and does not require external packages beyond a Python interpreter.
+The `vendor/libcvault` submodule provides optional native helpers used only for advanced CLI modes such as `--sort`, `--max`, `--search`, `--lc`, and `--tbytes`.
+
+To fetch the bundled native helper after cloning the repository:
+
+```bash
+git submodule update --init --recursive vendor/libcvault
+```
+
+- `git submodule init` registers the submodule in your local repo configuration.
+- `git submodule update --init` also clones and checks out the correct commit for the submodule.
+
+If you later want to refresh `libcvault` from its remote repository, run:
+
+```bash
+git submodule update --remote vendor/libcvault
+```
+
+This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
+
+If you want to use the advanced `libcvault`-backed CLI modes, build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
+
+```bash
+g++ -O3 -shared -std=c++17 -fPIC -I/usr/include/python3.12 -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o libcvault$(python3-config --extension-suffix)
+```
+
 ### Tool Execution/Run
 
 The easiest way to use repoScanner is with the provided shell script wrapper:
 
 ```bash
-./reposcan <path> [--stats|--raw|--dev]
+./reposcan <path> [--stats|--raw|--dev|--bench]
 ```
 
 **Examples:**
@@ -83,6 +112,11 @@ The easiest way to use repoScanner is with the provided shell script wrapper:
   ```bash
   ./reposcan /path/to/repo --raw    # File-by-file with dependency tree
   ./reposcan /path/to/repo --dev    # Same as --raw (alias)
+  ```
+
+- **Run Benchmarks**
+  ```bash
+  ./reposcan --bench                # Execute the built-in benchmark harness
   ```
 
 The `--raw` / `--dev` mode displays all files in a tree structure with their dependencies mapped, perfect for detailed codebase analysis.
@@ -101,6 +135,16 @@ The `--raw` / `--dev` mode displays all files in a tree structure with their dep
   python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
   python3 -m repoScan.cli /path/to/repo --raw    # Detailed analysis with dependency tree
   python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
+  ```
+
+- Advanced utility modes (requires the bundled `vendor/libcvault` submodule):
+
+  ```bash
+  python3 -m repoScan.cli /path/to/repo --sort              # Sort files by byte size
+  python3 -m repoScan.cli /path/to/repo --max               # Show the largest file
+  python3 -m repoScan.cli /path/to/repo --search filename    # Search for a file
+  python3 -m repoScan.cli /path/to/repo --lc filename        # Show line count for a file
+  python3 -m repoScan.cli /path/to/repo --tbytes            # Show total bytes in a directory
   ```
 
 - Help command
