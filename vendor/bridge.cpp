@@ -17,4 +17,5 @@ PYBIND11_MODULE(libcvault, m) {
     m.def("line_count", &lineCount, "Count lines in a file");
     m.def("get_file_name", &getFileName, "Returns the name of the file");
     m.def("get_file_size", &getFileSize, "Returns the size of the file");
+    m.def("get_files", &getFiles, "Returns a pointer to access the file array"); 
 }
