@@ -13,7 +13,7 @@
 <img src="https://img.shields.io/github/v/release/tecnolgd/blog-tecnolgd?color=1a1a1a&style=flat-square" alt="Version"></a>
 <a href = "#documentation">
 <img src = "https://img.shields.io/badge/docs-available-1a1a1a?style=flat-square" alt = "Docs: Available"></a>
-<a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault">
+<a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault"></a>
 
 </div>
 
@@ -115,84 +115,16 @@ The easiest way to use repoScanner is with the provided shell script wrapper:
 ./reposcan <path> [--stats|--raw|--dev|--bench]
 ```
 
-**Examples:**
+**Quick start:**
 
-- **Quick Summary** (Recommended)
-  ```bash 
-  ./reposcan .                      # Scan current directory (stats mode)
-  ./reposcan /path/to/repo          # Scan a specific path (default: stats mode)
-  ./reposcan /path/to/repo --stats  # Explicitly use stats mode
-  ```
-
-- **Detailed Analysis** (Developer Mode - Tree with File Mapping)
-  ```bash
-  ./reposcan /path/to/repo --raw    # File-by-file with dependency tree
-  ./reposcan /path/to/repo --dev    # Same as --raw (alias)
-  ```
-
-- **Run Benchmarks**
-  ```bash
-  ./reposcan --bench                # Execute the built-in benchmark harness
-  ```
-
-The `--raw` / `--dev` mode displays all files in a tree structure with their dependencies mapped, perfect for detailed codebase analysis.
-
-- **Get Help**
-  ```bash
-  ./reposcan --help                 # Show all available options
-  ./reposcan -h    #Same as --help(alias)
-  ```
-
-#### Alternative: Direct Python Execution
-
-- You can also run the scanner directly:
-
-  ```bash
-  python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
-  python3 -m repoScan.cli /path/to/repo --raw    # Detailed analysis with dependency tree
-  python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw (alias)
-  ```
-
-- Advanced utility modes (requires the bundled `vendor/libcvault` submodule):
-
-  ```bash
-  python3 -m repoScan.cli /path/to/repo --sort              # Sort files by byte size
-  python3 -m repoScan.cli /path/to/repo --max               # Show the largest file
-  python3 -m repoScan.cli /path/to/repo --search filename    # Search for a file
-  python3 -m repoScan.cli /path/to/repo --lc filename        # Show line count for a file
-  python3 -m repoScan.cli /path/to/repo --tbytes            # Show total bytes in a directory
-  ```
-
-- Help command
-  ```bash
-  python3 -m repoScan.cli /path/to/repo --help    # Same as -h
-  ```
+```bash
+./reposcan .                       # stats mode
+./reposcan /path/to/repo --raw     # detailed developer output
+./reposcan /path/to/repo --bench   # benchmark harness
+```
 
 ### 3. Output
 Reports are automatically saved to `output/report.json`
-
-## Performance & Benchmarking
-
-`repoScanner` includes a built-in automated performance profiling harness to track filesystem traversal latency and processing velocity across massive directory trees.
-
-The benchmark suite programmatically allocates a temporary mock repository(`perf_test_sandbox`) containing thousands of deeply nested files across multiple language profiles (`.py`, `.cpp`, `.md`) to stress-test system I/O bounds, executes the scanner via the shell wrapper, and enforces strict post-run sandbox sanitation.
-
-### 4. Running the Benchmarks
-
-To execute the performance suite and generate a local processing velocity report, run:
-
-```bash
-python3 tests/benchmark.py
-```
-or use shell command
-
-```bash
-./reposcan --bench
-```
-
-> [!TIP]        
-> Check the [sample outputs](assets/docs/architecture.md#sample-execution) for more info.
-
 
 ## Supported Languages
 
@@ -205,6 +137,8 @@ Detects and maps **40+ extensions** to human-readable names, including:
 
 ## Documentation
 * [Architecture](assets/docs/architecture.md)
+* [Usage](assets/docs/usage.md)
+* [Testing](assets/docs/testing.md)
 * [Roadmap](assets/docs/roadmap.md)
 
 ## [Contributing](CONTRIBUTING.md)
