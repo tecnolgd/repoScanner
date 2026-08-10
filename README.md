@@ -50,6 +50,25 @@
 - Built entirely using the Python Standard Library.
 - No external packages or `pip install` commands are required.
 
+## Benchmarks
+
+These numbers are obtained by testing the commands using hyperfine.
+
+| Scenario | Command | Mean (ms) | Std Dev (ms) | Range (ms) | Runs |
+|---|---|---:|---:|---|---:|
+| OS walk, shell wrapper | `./reposcan --stats` | 234.6 | 19.0 | 215.6–284.4 | 10 |
+| std::directory, shell wrapper | `./reposcan --stats` | 204.8 | 15.5 | 185.6–238.3 | 12 |
+| Direct Python mode | `python3 -m repoScan.cli --stats` | 116.3 | 9.5 | 105.6–145.0 | 20 |
+| Direct Python mode | `python3 -m repoScan.cli --dev` | 116.9 | 8.4 | 109.2–138.0 | 21 |
+| libcvult mode | `python3 -m repoScan.cli --search main.cpp` | 157.4 | 14.0 | 138.8–194.4 | 15 |
+| libcvult mode | `python3 -m repoScan.cli --tbytes` | 166.0 | 19.2 | 144.7–219.9 | 13 |
+| libcvult mode | `python3 -m repoScan.cli --sort` | 162.2 | 14.0 | 140.4–193.3 | 15 |
+| libcvult mode | `python3 -m repoScan.cli --help` | 116.8 | 12.4 | 102.0–146.5 | 20 |
+| libcvult mode | `python3 -m repoScan.cli --max` | 121.0 | 13.9 | 104.3–151.8 | 19 |
+| libcvult mode | `python3 -m repoScan.cli --lc README.md` | 124.5 | 15.2 | 106.5–153.6 | 20 |
+
+> [!TIP]     
+> For reproducing benchmarks and additional details, check [benchmarking using hyperfine]().
 
 ## Requirements
 
