@@ -18,14 +18,6 @@ or:
 
 The benchmark suite creates a temporary sandbox directory, executes the CLI wrapper, and reports execution velocity along with cleanup status.
 
-## Test data
-
-Example and sample data for tests are available in:
-
-- `assets/data/testData.txt`
-
-Use these files to build deterministic test cases or validation scenarios.
-
 ## Test guidance
 
 - Add unit tests or sample scenarios under `tests/`.
