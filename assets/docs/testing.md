@@ -1,15 +1,44 @@
 # Benchmarking
 
-This project uses **hyperfine** for benhcmarking.
+This project includes both script-based benchmark suite as well as precision performance profiling benchmarks.
+
 
 ## Reproducing benchmarks
 
-> [!IMPORTANT]    
-> Requires hyperfine 1.18.0 and above.
+- **Quick Synthetic Benchmark**
 
-- Mode based testing     
+- Open the terminal and run      
+    ```bash
+    python3 test/benchmark.py
+    #or
+    ./reposcan --bench
+    ```
+- Sample Output    
 
-    1. Open the terminal and run
+    ```txt
+    [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
+
+    [✓] Launching tool environment execution via ./reposcan wrapper...
+
+    ==================================================
+           repoScanner Benchmark Suite            
+    ==================================================
+      Target Workspace        : tests/perf_test_sandbox
+      Total Files Processed   : 2500
+      Execution Time          : 0.36267 seconds
+      I/O Processing Velocity : 6893.38 files/sec
+    ==================================================
+    [✓] Flushed test sandbox environment directories cleanly.
+    ```
+
+- **Precision Performance Profiling**
+
+    > [!IMPORTANT]    
+    > Requires `hyperfine 1.18.0` and above.
+
+    
+
+    - Open the terminal and run
         ```bash
         hyperfine 'command'
         ```
@@ -24,23 +53,23 @@ This project uses **hyperfine** for benhcmarking.
             - `python3 -m repoScan.cli <path> --tybtes` 
             - `python3 -m repoScan.cli <path> --search <filename>`
 
-## Sample outputs
+    - Sample outputs     
+    
+        - `hyperfine 'python3 -m repoScan.cli --stats'`
 
-- `hyperfine 'python3 -m repoScan.cli --stats'`
+            ```txt
+            Benchmark 1: python3 -m repoScan.cli --stats
+            Time (mean ± σ):     122.9 ms ±  13.9 ms    [User: 70.3 ms, System: 63.2 ms]
+            Range (min … max):   102.8 ms … 151.2 ms    22 runs
+            ```
 
-    ```txt
-    Benchmark 1: python3 -m repoScan.cli --stats
-    Time (mean ± σ):     122.9 ms ±  13.9 ms    [User: 70.3 ms, System: 63.2 ms]
-    Range (min … max):   102.8 ms … 151.2 ms    22 runs
-    ```
+        - `hyperfine 'python3 -m repoScan.cli --dev`    
 
-- `hyperfine 'python3 -m repoScan.cli --dev`    
-
-    ```txt
-    Benchmark 1: python3 -m repoScan.cli --dev
-    Time (mean ± σ):     127.8 ms ±  22.8 ms    [User: 72.7 ms, System: 66.3 ms]
-    Range (min … max):   106.8 ms … 208.0 ms    20 runs
-    ```
+            ```txt
+            Benchmark 1: python3 -m repoScan.cli --dev
+            Time (mean ± σ):     127.8 ms ±  22.8 ms    [User: 72.7 ms, System: 66.3 ms]
+            Range (min … max):   106.8 ms … 208.0 ms    20 runs
+            ```
 
 
 ## Test guidance
