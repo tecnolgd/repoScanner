@@ -80,8 +80,9 @@
 
 - Python 3.12+ (tested on Ubuntu 24.04 LTS)
 
-> The code uses only Python standard libraries and should be compatible with Python 3.10+,
-> but has been officially tested on Python 3.12.
+    > The code uses only Python standard libraries and should be compatible with Python 3.10+,
+    > but has been officially tested on Python 3.12.
+
 
 ## Build Instructions
 
@@ -133,12 +134,12 @@
 >   vendor/bridge.cpp vendor/libcvault/main.cpp \
 >   -o libcvault$(python3-config --extension-suffix)
 >    ```
->
-> Note: the native helper is optional. If you prefer zero native dependencies, do not build or commit the `.so` binary into the repository.
+
 
 > [!IMPORTANT]
 > 1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
-> 2. Building the helper requires a C++ compiler (e.g., `g++`) and Python development headers. This is optional for normal usage but required if you want the optimized native features.
+> 2. Building the helper requires a C++ compiler (e.g., `g++`) and Python development headers. 
+> 3. The native helper is optional. If you prefer zero native dependencies, you can safely add `.gitmodules` to your `.gitignore`.
 
 The repository may include a prebuilt binary (e.g. `libcvault.cpython-312-x86_64-linux-gnu.so`) for convenience; if you plan to distribute, prefer providing prebuilt wheels rather than committing `.so` artifacts in the repo.
 
