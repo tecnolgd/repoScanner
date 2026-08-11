@@ -1,6 +1,8 @@
 
 # reposcan - Simple wrapper script for quick scanning
 
+#!/usr/bin/env bash
+
 # Function to display help
 show_help() {
     cat << EOF
