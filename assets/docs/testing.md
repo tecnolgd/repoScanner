@@ -1,22 +1,47 @@
-# Testing
+# Benchmarking
 
-This project includes benchmark and automated test guidance to help verify repoScanner behavior.
+This project uses **hyperfine** for benhcmarking.
 
-## Benchmarking
+## Reproducing benchmarks
 
-To run the built-in benchmark harness:
+> ![!IMPORTANT]    
+> Requires hyperfine 1.18.0 and above.
 
-```bash
-python3 tests/benchmark.py
-```
+- Mode based testing     
 
-or:
+    1. Open the terminal and run
+        ```bash
+        hyperfine 'command'
+        ```
+        where command:      
+        - `python3 -m repoScan.cli <path> [--stats|--dev]`      
+        - `./reposcan <path> [--stats|--dev]`
+            
+            Mode based:      
+            - `python3 -m repoScan.cli <path> --sort`    
+            - `python3 -m repoScan.cli <path> --lc`     
+            - `python3 -m repoScan.cli <path> --max`    
+            - `python3 -m repoScan.cli <path> --tybtes` 
+            - `python3 -m repoScan.cli <path> --search <filename>`
 
-```bash
-./reposcan --bench
-```
+## Sample outputs
 
-The benchmark suite creates a temporary sandbox directory, executes the CLI wrapper, and reports execution velocity along with cleanup status.
+- `hyperfine 'python3 -m repoScan.cli --stats'`
+
+    ```txt
+    Benchmark 1: python3 -m repoScan.cli --stats
+    Time (mean ± σ):     122.9 ms ±  13.9 ms    [User: 70.3 ms, System: 63.2 ms]
+    Range (min … max):   102.8 ms … 151.2 ms    22 runs
+    ```
+
+- `hyperfine 'python3 -m repoScan.cli --dev`    
+
+    ```txt
+    Benchmark 1: python3 -m repoScan.cli --dev
+    Time (mean ± σ):     127.8 ms ±  22.8 ms    [User: 72.7 ms, System: 66.3 ms]
+    Range (min … max):   106.8 ms … 208.0 ms    20 runs
+    ```
+
 
 ## Test guidance
 
@@ -24,7 +49,3 @@ The benchmark suite creates a temporary sandbox directory, executes the CLI wrap
 - Keep tests small and repeatable.
 - When adding new analyzers or CLI features, verify both normal and edge-case scanning behavior.
 
-## Notes
-
-- The repository currently relies on the Python standard library, so tests should be runnable with the same Python interpreter used to run the tool.
-- Benchmark execution should not depend on external network resources.
