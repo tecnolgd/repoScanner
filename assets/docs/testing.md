@@ -7,10 +7,10 @@ This project includes both script-based benchmark suite as well as precision per
 
 - **Quick Synthetic Benchmark**
 
-- Open the terminal and run      
+- Open the terminal and run
     ```bash
-    python3 test/benchmark.py
-    #or
+    python3 tests/benchmark.py
+    # or
     ./reposcan --bench
     ```
 - Sample Output    
@@ -36,8 +36,6 @@ This project includes both script-based benchmark suite as well as precision per
     > [!IMPORTANT]    
     > Requires `hyperfine 1.18.0` and above.
 
-    
-
     - Open the terminal and run
         ```bash
         hyperfine 'command'
@@ -46,12 +44,12 @@ This project includes both script-based benchmark suite as well as precision per
         - `python3 -m repoScan.cli <path> [--stats|--dev]`      
         - `./reposcan <path> [--stats|--dev]`
             
-            Mode based:      
-            - `python3 -m repoScan.cli <path> --sort`    
-            - `python3 -m repoScan.cli <path> --lc`     
-            - `python3 -m repoScan.cli <path> --max`    
-            - `python3 -m repoScan.cli <path> --tybtes` 
-            - `python3 -m repoScan.cli <path> --search <filename>`
+        Mode based:
+        - `python3 -m repoScan.cli <path> --sort`
+        - `python3 -m repoScan.cli <path> --lc`
+        - `python3 -m repoScan.cli <path> --max`
+        - `python3 -m repoScan.cli <path> --tbytes`
+        - `python3 -m repoScan.cli <path> --search <filename>`
 
     - Sample outputs     
     
