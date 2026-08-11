@@ -51,7 +51,7 @@
 
 ## Benchmarks
 
-> These numbers are obtained by testing the commands using **hyperfine**.
+> These numbers are obtained by testing the commands using [**hyperfine**](https://github.com/sharkdp/hyperfine).
 
 ### os.path vs std::recursive dir
 
