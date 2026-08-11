@@ -18,7 +18,9 @@ def dir_scanner(root_path):
         raw = libcvault.get_files()
         if raw is None:
             return []
-        return [item[0] for item in raw]
+        # libcvault.get_files() returns a list of file path strings.
+        # If it returns tuples, preserve compatibility by extracting the first element.
+        return [item if isinstance(item, str) else item[0] for item in raw]
 
     # Pure-Python fallback
     scanned_files = []
