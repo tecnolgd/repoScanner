@@ -1,5 +1,8 @@
 import os
 
+from ..scanner import libcvault_wrapper
+
+
 def read_file_safely(file_path):
     try:
         with open(file_path, "r", errors="ignore") as f:
@@ -190,14 +193,8 @@ def sort_files_by_size(root_path):
     #Return a list of (size, path) tuples sorted by size descending.
     #Uses libcvault when available for performance, otherwise computes sizes via os.stat.
 
-    if LIBCVAULT_AVAILABLE:
-        #libcvault.populate_data(root_path)
-        libcvault.sort_file_on_byte()
-        results = []
-        for i in range(libcvault.get_file_count()):
-            name = libcvault.get_file_name(i)
-            size = libcvault.get_file_size(i)
-            results.append((size, name))
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        results = libcvault_wrapper.sort_file_on_byte()
         return results
 
     files = dir_scanner(root_path)
@@ -213,8 +210,9 @@ def sort_files_by_size(root_path):
 
 
 def get_max_file(root_path):
-    if LIBCVAULT_AVAILABLE:
-        return libcvault.max_file()
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        libcvault_wrapper.ensure_populated(root_path)
+        return libcvault_wrapper.max_file()
 
     files = dir_scanner(root_path)
     max_file = None
@@ -233,9 +231,9 @@ def get_max_file(root_path):
 def search_file(root_path, filename):
     #Search for `filename` under `root_path` and return size or -3 if not found.
 
-    if LIBCVAULT_AVAILABLE:
-        #libcvault.populate_data(root_path)
-        return libcvault.search_file(filename)
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        libcvault_wrapper.ensure_populated(root_path)
+        return libcvault_wrapper.search_file(filename)
 
     files = dir_scanner(root_path)
     for f in files:
@@ -256,9 +254,9 @@ def line_count(file_path):
 
 
 def get_total_bytes(root_path):
-    if LIBCVAULT_AVAILABLE:
-        libcvault.populate_data(root_path)
-        return libcvault.get_total_bytes()
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        libcvault_wrapper.ensure_populated(root_path)
+        return libcvault_wrapper.get_total_bytes()
 
     total = 0
     for f in dir_scanner(root_path):
