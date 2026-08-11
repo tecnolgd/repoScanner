@@ -15,17 +15,17 @@ Cases:
 ```bash
 ./reposcan .                        # scan current directory in summary mode
 ./reposcan /path/to/repo --stats    # explicit stats mode
-./reposcan /path/to/repo --raw      # detailed file-by-file dependency analysis
-./reposcan /path/to/repo --dev      # alias for --raw
+./reposcan /path/to/repo --raw # or '--dev'(alias)   # detailed file-by-file dependency analysis
 ./reposcan /path/to/repo --bench    # run benchmark harness
-- ./reposcan --help #or 
-./reposcan -h` #shows available CLI options.
+./reposcan --help 
+# or 
+./reposcan -h  # shows available CLI options.
 ```
 
 ## Direct python execution
 
 ```bash
-- python3 -m repoScan.cli /path/to/repo [--stats|--raw|--dev|--help]
+python3 -m repoScan.cli /path/to/repo [--stats|--raw|--dev|--help]
 ```
 
 ## Advanced options
