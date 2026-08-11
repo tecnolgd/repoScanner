@@ -2,10 +2,16 @@
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (exection command)
 
 import sys
-import libcvault #external library(git submodule)
 
 from .analyzer.dependencyAnalyzer import dependency_analyzer
-from .scanner.dirScanner import dir_scanner
+from .scanner.dirScanner import (
+    dir_scanner,
+    sort_files_by_size,
+    get_max_file,
+    search_file,
+    line_count,
+    get_total_bytes,
+)
 from .analyzer.structureAnalyzer import structure_analyzer
 from .analyzer.sizeAnalyzer import size_analyzer
 from .scanner.metrics import generate_metrics
@@ -81,31 +87,27 @@ def main():
     elif mode == "sort":
 
         print("\nSorted Directory (by byte size):")
-        libcvault.populate_data(root)
-        libcvault.sort_file_on_byte() # Sorts vector in place
-    
-        # Iterate through C++ memory cleanly via getters
-        for i in range(libcvault.get_file_count()):
-            name = libcvault.get_file_name(i)
-            size = libcvault.get_file_size(i)
-            print(f"{size:>10} bytes  |  {name}") 
-
+        results = sort_files_by_size(root)
+        for size, name in results:
+            print(f"{size:>10} bytes  |  {name}")
     elif mode == "max":
-        print('Largest file: ', libcvault.max_file())
+        max_info = get_max_file(root)
+        if isinstance(max_info, tuple):
+            print('Largest file: ', max_info)
+        else:
+            print('Largest file: ', max_info)
 
     elif mode == "search":
-        libcvault.populate_data(root)
-        result = libcvault.search_file(file_name)
+        result = search_file(root, file_name)
         if result != -3:
             print(f"File found: {file_name}[{result} bytes]")
         else:
             print("File NOT found")
 
     elif mode == "lc":
-        print(f"Line count of {file_name}: {libcvault.line_count(file_name)}")
+        print(f"Line count of {file_name}: {line_count(file_name)}")
     elif mode == "tbytes":
-        libcvault.populate_data(root); 
-        print('Total bytes:', libcvault.get_total_bytes())
+        print('Total bytes:', get_total_bytes(root))
     else:
         print("Invalid Mode!")
 
