@@ -103,9 +103,9 @@
     git submodule update --init --recursive vendor/libcvault
     ```
     - `git submodule init` registers the submodule in your local repo configuration.
-    - `git submodule update --init` also clones and checks out the correct commit for the submodule.
-
-    > [!TIP]      
+    - `git submodule update --init` also clones and checks out the correct commit for the submodule.        
+    
+    > [!TIP]          
     > - If you later want to refresh `libcvault` from its remote repository, run:       
     >
     > ```bash

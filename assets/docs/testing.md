@@ -7,33 +7,33 @@ This project includes both script-based benchmark suite as well as precision per
 
 - **Quick Synthetic Benchmark**
 
-- Open the terminal and run
-    ```bash
-    python3 tests/benchmark.py
-    # or
-    ./reposcan --bench
-    ```
-- Sample Output    
+    - Open the terminal and run
+        ```bash
+        python3 tests/benchmark.py
+        # or
+        ./reposcan --bench
+        ```
+    - Sample Output    
 
-    ```txt
-    [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
+        ```txt
+        [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
 
-    [✓] Launching tool environment execution via ./reposcan wrapper...
+        [✓] Launching tool environment execution via ./reposcan wrapper...
 
-    ==================================================
-           repoScanner Benchmark Suite            
-    ==================================================
-      Target Workspace        : tests/perf_test_sandbox
-      Total Files Processed   : 2500
-      Execution Time          : 0.36267 seconds
-      I/O Processing Velocity : 6893.38 files/sec
-    ==================================================
-    [✓] Flushed test sandbox environment directories cleanly.
-    ```
+        ==================================================
+            repoScanner Benchmark Suite            
+        ==================================================
+        Target Workspace        : tests/perf_test_sandbox
+        Total Files Processed   : 2500
+        Execution Time          : 0.36267 seconds
+        I/O Processing Velocity : 6893.38 files/sec
+        ==================================================
+        [✓] Flushed test sandbox environment directories cleanly.
+        ```
 
-- **Precision Performance Profiling**
-
-    > [!IMPORTANT]    
+- **Precision Performance Profiling**     
+   
+    > [!IMPORTANT]       
     > Requires `hyperfine 1.18.0` and above.
 
     - Open the terminal and run
