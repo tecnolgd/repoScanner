@@ -4,8 +4,8 @@
 import sys
 
 from .analyzer.dependencyAnalyzer import dependency_analyzer
-from .scanner.dirScanner import (
-    dir_scanner,
+from .scanner.dirScanner import dir_scanner
+from .utility.helpers import (
     sort_files_by_size,
     get_max_file,
     search_file,
