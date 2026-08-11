@@ -18,8 +18,7 @@
 </div>
 
 ---
-
-**repoScanner** is a lightweight repository analysis tool for developers.          
+<h3 align = "center">repoScanner is a lightweight repository analysis tool for developers.</h3>          
 
 - Quickly understand your codebase structure, dependencies, and metrics with a single command.
 - Built for developers with the intent of saving time and peace-of-mind
@@ -46,13 +45,13 @@
 - Largest files and most-dependent files
 - File mapping with dependencies(for --dev/raw mode)     
 
-**Zero External Dependencies**     
-- Built entirely using the Python Standard Library.
-- No external packages or `pip install` commands are required.
+**No Third-Party Python Packages Required**
+- The core tool uses only the Python Standard Library for normal operation.
+- An optional native helper (`vendor/libcvault`) provides optimized filesystem routines and requires a C++ toolchain and Python development headers to build.
 
 ## Benchmarks
 
-These numbers are obtained by testing the commands using hyperfine.
+> These numbers are obtained by testing the commands using **hyperfine**.
 
 ### os.path vs std::recursive dir
 
@@ -75,7 +74,7 @@ These numbers are obtained by testing the commands using hyperfine.
 | file line count | `python3 -m repoScan.cli --lc README.md` | 124.5 | 15.2 | 106.5–153.6 | 20 |
 
 > [!TIP]     
-> For reproducing benchmarks check [benchmarking using hyperfine](assets/docs/testing.md#reproducing-benchmarks).
+> For reproducing benchmarks, check [benchmarking using hyperfine](assets/docs/testing.md#reproducing-benchmarks).
 
 ## Requirements
 
@@ -98,7 +97,7 @@ These numbers are obtained by testing the commands using hyperfine.
     ```bash
     cd repoScanner
     ```
-- Fetch bundled native helper(`libcvault`)
+- **Optional**: Fetch bundled native helper(`libcvault`)
 
      ```bash
     git submodule update --init --recursive vendor/libcvault
@@ -108,22 +107,40 @@ These numbers are obtained by testing the commands using hyperfine.
 
     > [!TIP]      
     > - If you later want to refresh `libcvault` from its remote repository, run:       
-    
+    >
     > ```bash
     > git submodule update --remote vendor/libcvault
     > ```
-
+    >
     > - This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
-
-    > - Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.      
-
+    >
+    > - Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
+    >
+    > Before building, make sure system dev packages and `pybind11` are available. Debian/Ubuntu example:
+    >
     > ```bash
-    > g++ -O3 -shared -std=c++17 -fPIC   -I/usr/local/lib/python3.12/dist-packages/pybind11/include   -I/usr/include/python3.12   -I vendor/libcvault   vendor/bridge.cpp vendor/libcvault/main.cpp   -o libcvault$(python3-config --extension-suffix)
+    > sudo apt-get update
+    > sudo apt-get install -y build-essential python3-dev
+    > python3 -m pip install --user pybind11
     > ```
+    >
+    > Then compile using `pybind11` includes for portability:
+    >
+    > ```bash
+    > g++ -O3 -shared -std=c++17 -fPIC \
+    >   $(python3 -m pybind11 --includes) \
+    >   -I vendor/libcvault \
+    >   vendor/bridge.cpp vendor/libcvault/main.cpp \
+    >   -o libcvault$(python3-config --extension-suffix)
+    > ```
+    >
+    > Note: the native helper is optional. If you prefer zero native dependencies, do not build or commit the `.so` binary into the repository.
 
-> [!IMPORTANT]       
->1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.   
-> 2. For local builds and usage, `g++` compiler is necessary to make sure the `.so` is compiled. 
+> [!IMPORTANT]
+> 1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
+> 2. Building the helper requires a C++ compiler (e.g., `g++`) and Python development headers. This is optional for normal usage but required if you want the optimized native features.
+
+The repository may include a prebuilt binary (e.g. `libcvault.cpython-312-x86_64-linux-gnu.so`) for convenience; if you plan to distribute, prefer providing prebuilt wheels rather than committing `.so` artifacts in the repo.
 
 ### 2. Tool Execution/Run
 
