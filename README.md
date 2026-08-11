@@ -121,7 +121,7 @@
 >
 >   ```bash
 >   sudo apt-get update
->   sudo apt-get install -y build-essential python3-dev
+>   sudo apt-get install -y build-essential g++ python3-dev
 >   python3 -m pip install --user pybind11
 >   ```
 >
