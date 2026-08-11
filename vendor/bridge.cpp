@@ -17,5 +17,16 @@ PYBIND11_MODULE(libcvault, m) {
     m.def("line_count", &lineCount, "Count lines in a file");
     m.def("get_file_name", &getFileName, "Returns the name of the file");
     m.def("get_file_size", &getFileSize, "Returns the size of the file");
-    m.def("get_files", &getFiles, "Returns a pointer to access the file array"); 
+    m.def("get_files", []() {
+        size_t count = 0;
+        const fileStructure* ptr = getFiles(&count); // Get starting RAM address + count
+
+        py::list result;
+        if (ptr != nullptr) {
+            for (size_t i = 0; i < count; ++i) {
+                result.append(ptr[i].name); // return file name string only
+            }
+        }
+        return result; // Returns a native Python list of tuples (name, size)
+    }, "Returns a list of scanned files"); 
 }

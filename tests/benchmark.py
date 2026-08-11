@@ -43,17 +43,16 @@ def execute_wrapper_benchmark():
         print(f"\n[✓] Launching tool environment execution via ./reposcan wrapper...")
         
         # 2. Match the shell script syntax: ./reposcan <path> <mode>
-        # Redirecting stdout/stderr ensures terminal output noise doesn't corrupt your benchmark timer
-        command = f"./reposcan {sandbox_dir} --stats"
-        
+        # Used an argument list to avoid shell=True and improve safety.
+        command = ["./reposcan", sandbox_dir, "--stats"]
+
         # High-resolution monotonic clock start
         start_time = time.perf_counter()
-        
+
         subprocess.run(
-            command, 
-            shell=True, 
-            stdout=subprocess.DEVNULL, 
-            stderr=subprocess.DEVNULL, 
+            command,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
             check=True
         )
         
