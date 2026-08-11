@@ -4,7 +4,7 @@ This project uses **hyperfine** for benhcmarking.
 
 ## Reproducing benchmarks
 
-> ![!IMPORTANT]    
+> [!IMPORTANT]    
 > Requires hyperfine 1.18.0 and above.
 
 - Mode based testing     

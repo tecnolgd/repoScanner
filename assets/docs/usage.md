@@ -32,7 +32,7 @@ Cases:
 
 The tool also supports utility operations and optional native helper modes.
 
-> ![IMPORTANT]     
+> [!IMPORTANT]     
 > Requires external module [libcvault](https://github.com/tecnolgd/libcvault)
 
 
@@ -44,7 +44,7 @@ python3 -m repoScan.cli /path/to/repo --lc filename #returns line count of a fil
 python3 -m repoScan.cli /path/to/repo --tbytes #returns total bytes in the repo
 ```
 
-> ![TIP]      
+> [!TIP]      
 > For more libcvault API details, [check this out](https://github.com/tecnolgd/libcvault/blob/main/docs/reference.md#3-api-reference).
 
 ## Output
