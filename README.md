@@ -74,7 +74,7 @@ These numbers are obtained by testing the commands using hyperfine.
 | max file size| `python3 -m repoScan.cli --max` | 121.0 | 13.9 | 104.3–151.8 | 19 |
 | file line count | `python3 -m repoScan.cli --lc README.md` | 124.5 | 15.2 | 106.5–153.6 | 20 |
 
-> ![TIP]     
+> [!TIP]     
 > For reproducing benchmarks check [benchmarking using hyperfine](assets/docs/testing.md#reproducing-benchmarks).
 
 ## Requirements
@@ -106,7 +106,7 @@ These numbers are obtained by testing the commands using hyperfine.
     - `git submodule init` registers the submodule in your local repo configuration.
     - `git submodule update --init` also clones and checks out the correct commit for the submodule.
 
-    > ![TIP]      
+    > [!TIP]      
     > - If you later want to refresh `libcvault` from its remote repository, run:       
     
     > ```bash
@@ -121,7 +121,7 @@ These numbers are obtained by testing the commands using hyperfine.
     > g++ -O3 -shared -std=c++17 -fPIC   -I/usr/local/lib/python3.12/dist-packages/pybind11/include   -I/usr/include/python3.12   -I vendor/libcvault   vendor/bridge.cpp vendor/libcvault/main.cpp   -o libcvault$(python3-config --extension-suffix)
     > ```
 
-> ![IMPORTANT]       
+> [!IMPORTANT]       
 >1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.   
 > 2. For local builds and usage, `g++` compiler is necessary to make sure the `.so` is compiled. 
 
