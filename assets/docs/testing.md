@@ -32,8 +32,7 @@ This project includes both script-based benchmark suite as well as precision per
         ```
 
 - **Precision Performance Profiling**     
-   
-    > [!IMPORTANT]       
+      
     > Requires `hyperfine 1.18.0` and above.
 
     - Open the terminal and run

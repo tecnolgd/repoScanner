@@ -104,37 +104,37 @@
     ```
     - `git submodule init` registers the submodule in your local repo configuration.
     - `git submodule update --init` also clones and checks out the correct commit for the submodule.        
-    
-    > [!TIP]          
-    > - If you later want to refresh `libcvault` from its remote repository, run:       
-    >
-    > ```bash
-    > git submodule update --remote vendor/libcvault
-    > ```
-    >
-    > - This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
-    >
-    > - Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
-    >
-    > Before building, make sure system dev packages and `pybind11` are available. Debian/Ubuntu example:
-    >
-    > ```bash
-    > sudo apt-get update
-    > sudo apt-get install -y build-essential python3-dev
-    > python3 -m pip install --user pybind11
-    > ```
-    >
-    > Then compile using `pybind11` includes for portability:
-    >
-    > ```bash
-    > g++ -O3 -shared -std=c++17 -fPIC \
-    >   $(python3 -m pybind11 --includes) \
-    >   -I vendor/libcvault \
-    >   vendor/bridge.cpp vendor/libcvault/main.cpp \
-    >   -o libcvault$(python3-config --extension-suffix)
-    > ```
-    >
-    > Note: the native helper is optional. If you prefer zero native dependencies, do not build or commit the `.so` binary into the repository.
+
+> [!TIP]          
+> - If you later want to refresh `libcvault` from its remote repository, run:       
+>
+>   ```bash
+>    git submodule update --remote vendor/libcvault
+>    ```
+>
+> - This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
+>
+> - Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
+>
+> Before building, make sure system dev packages and `pybind11` are available. Debian/Ubuntu example:
+>
+>   ```bash
+>   sudo apt-get update
+>   sudo apt-get install -y build-essential python3-dev
+>   python3 -m pip install --user pybind11
+>   ```
+>
+> Then compile using `pybind11` includes for portability:
+>
+>   ```bash
+>   g++ -O3 -shared -std=c++17 -fPIC \ 
+>   $(python3 -m pybind11 --includes) \
+>   -I vendor/libcvault \
+>   vendor/bridge.cpp vendor/libcvault/main.cpp \
+>   -o libcvault$(python3-config --extension-suffix)
+>    ```
+>
+> Note: the native helper is optional. If you prefer zero native dependencies, do not build or commit the `.so` binary into the repository.
 
 > [!IMPORTANT]
 > 1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
