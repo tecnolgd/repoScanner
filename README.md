@@ -53,7 +53,7 @@
 
 ## Benchmarks
 
-> These numbers are obtained by testing the commands using **hyperfine**.
+> These numbers are obtained by testing the commands using [**hyperfine**](https://github.com/sharkdp/hyperfine).
 
 ### os.path vs std::recursive dir
 
@@ -82,8 +82,9 @@
 
 - Python 3.12+ (tested on Ubuntu 24.04 LTS)
 
-> The code uses only Python standard libraries and should be compatible with Python 3.10+,
-> but has been officially tested on Python 3.12.
+    > The code uses only Python standard libraries and should be compatible with Python 3.10+,
+    > but has been officially tested on Python 3.12.
+
 
 ## Build Instructions
 
@@ -105,42 +106,44 @@
     git submodule update --init --recursive vendor/libcvault
     ```
     - `git submodule init` registers the submodule in your local repo configuration.
-    - `git submodule update --init` also clones and checks out the correct commit for the submodule.
+    - `git submodule update --init` also clones and checks out the correct commit for the submodule.        
 
-    > [!TIP]      
-    > - If you later want to refresh `libcvault` from its remote repository, run:       
-    >
-    > ```bash
-    > git submodule update --remote vendor/libcvault
-    > ```
-    >
-    > - This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
-    >
-    > - Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
-    >
-    > Before building, make sure system dev packages and `pybind11` are available. Debian/Ubuntu example:
-    >
-    > ```bash
-    > sudo apt-get update
-    > sudo apt-get install -y build-essential python3-dev
-    > python3 -m pip install --user pybind11
-    > ```
-    >
-    > Then compile using `pybind11` includes for portability:
-    >
-    > ```bash
-    > g++ -O3 -shared -std=c++17 -fPIC \
-    >   $(python3 -m pybind11 --includes) \
-    >   -I vendor/libcvault \
-    >   vendor/bridge.cpp vendor/libcvault/main.cpp \
-    >   -o libcvault$(python3-config --extension-suffix)
-    > ```
-    >
-    > Note: the native helper is optional. If you prefer zero native dependencies, do not build or commit the `.so` binary into the repository.
+> [!TIP]          
+> If you later want to refresh `libcvault` from its remote repository, run:       
+>
+>   ```bash
+>    git submodule update --remote vendor/libcvault
+>    ```
+>
+> - This updates the submodule to the latest commit from its configured branch. You should then review and commit the updated submodule pointer in the main repo.
+>
+> Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
+>
+> - Before building, make sure system dev packages and `pybind11` are available. Debian/Ubuntu example:
+>
+>   ```bash
+>   sudo apt-get update
+>   sudo apt-get install -y build-essential g++ python3-dev
+>   python3 -m pip install --user pybind11
+>   ```
+>
+> - Compile using `pybind11` includes for portability:
+>
+>   ```bash
+>   g++ -O3 -shared -std=c++17 -fPIC   -I 
+>   usr/local/lib/python3.12/dist-packages/
+>   pybind11/include   -I/usr/include/
+>   python3.12   -I vendor/libcvault   
+>   vendor/bridge.cpp vendor/libcvault/
+>   main.cpp   -o libcvault$
+>   (python3-config --extension-suffix)
+>    ```
+
 
 > [!IMPORTANT]
 > 1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
-> 2. Building the helper requires a C++ compiler (e.g., `g++`) and Python development headers. This is optional for normal usage but required if you want the optimized native features.
+> 2. Building the helper requires a C++ compiler (e.g., `g++`) and Python development headers. 
+> 3. The native helper is optional. If you prefer zero native dependencies, you can safely add `.gitmodules` and `vendor/` to your `.gitignore`.
 
 The repository may include a prebuilt binary (e.g. `libcvault.cpython-312-x86_64-linux-gnu.so`) for convenience; if you plan to distribute, prefer providing prebuilt wheels rather than committing `.so` artifacts in the repo.
 

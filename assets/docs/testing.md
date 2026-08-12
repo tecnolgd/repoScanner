@@ -7,49 +7,45 @@ This project includes both script-based benchmark suite as well as precision per
 
 - **Quick Synthetic Benchmark**
 
-- Open the terminal and run
-    ```bash
-    python3 tests/benchmark.py
-    # or
-    ./reposcan --bench
-    ```
-- Sample Output    
+    - Open the terminal and run:
+        ```bash
+        python3 tests/benchmark.py #or ./reposcan --bench
+        ```
+    - Sample Output    
 
-    ```txt
-    [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
+        ```txt
+        [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
 
-    [✓] Launching tool environment execution via ./reposcan wrapper...
+        [✓] Launching tool environment execution via ./reposcan wrapper...
 
-    ==================================================
-           repoScanner Benchmark Suite            
-    ==================================================
-      Target Workspace        : tests/perf_test_sandbox
-      Total Files Processed   : 2500
-      Execution Time          : 0.36267 seconds
-      I/O Processing Velocity : 6893.38 files/sec
-    ==================================================
-    [✓] Flushed test sandbox environment directories cleanly.
-    ```
+        ==================================================
+            repoScanner Benchmark Suite            
+        ==================================================
+        Target Workspace        : tests/perf_test_sandbox
+        Total Files Processed   : 2500
+        Execution Time          : 0.36267 seconds
+        I/O Processing Velocity : 6893.38 files/sec
+        ==================================================
+        [✓] Flushed test sandbox environment directories cleanly.
+        ```
 
-- **Precision Performance Profiling**
-
-    > [!IMPORTANT]    
+- **Precision Performance Profiling**     
+      
     > Requires `hyperfine 1.18.0` and above.
 
-    - Open the terminal and run
+    - Run individual benchmark modes:
         ```bash
-        hyperfine 'command'
+        # Standard stats & dev boot
+        hyperfine 'python3 -m repoScan.cli <path> --stats'
+        hyperfine 'python3 -m repoScan.cli <path> --dev'
+
+        # Feature modes
+        hyperfine 'python3 -m repoScan.cli <path> --sort'
+        hyperfine 'python3 -m repoScan.cli <path> --lc'
+        hyperfine 'python3 -m repoScan.cli <path> --max'
+        hyperfine 'python3 -m repoScan.cli <path> --tbytes'
+        hyperfine 'python3 -m repoScan.cli <path> --search <filename>'
         ```
-        where command:      
-        - `python3 -m repoScan.cli <path> [--stats|--dev]`      
-        - `./reposcan <path> [--stats|--dev]`
-            
-        Mode based:
-        - `python3 -m repoScan.cli <path> --sort`
-        - `python3 -m repoScan.cli <path> --lc`
-        - `python3 -m repoScan.cli <path> --max`
-        - `python3 -m repoScan.cli <path> --tbytes`
-        - `python3 -m repoScan.cli <path> --search <filename>`
 
     - Sample outputs     
     
