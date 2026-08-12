@@ -18,10 +18,10 @@
 </div>
 
 ---
-<h3 align = "center">repoScanner is a lightweight repository analysis tool for developers.</h3>          
+<p align = "center">repoScanner is a lightweight repository analysis tool for developers.</p>          
 
-- Quickly understand your codebase structure, dependencies, and metrics with a single command.
-- Built for developers with the intent of saving time and peace-of-mind
+> - Quickly understand your codebase structure, dependencies, and metrics with a single command.
+> - Built for developers with the intent of saving time and peace-of-mind
 
 ## What It Does
 
@@ -30,7 +30,8 @@
 - **Language Breakdown**: See what languages dominate your repo
 - **Smart Reporting**: Choose between quick stats or detailed developer mode
 - **JSON Export**: Machine-readable reports for automation
-- **Native File Utilities**: Optional `vendor/libcvault` submodule supports advanced CLI file sorting, search, and byte/line metrics when initialized.
+- **Native File Utilities**: Optional `vendor/libcvault` support adds faster CLI directory scanning, file sorting, search, and byte/line metrics when available.
+- **Transparent Fallback**: If the native helper is missing or unavailable, repoScanner falls back to Python's `os.walk` and standard-library utilities so the same commands still work.
 
 ## Features
 
@@ -48,6 +49,7 @@
 **No Third-Party Python Packages Required**
 - The core tool uses only the Python Standard Library for normal operation.
 - An optional native helper (`vendor/libcvault`) provides optimized filesystem routines and requires a C++ toolchain and Python development headers to build.
+- When the helper is available, repoScanner uses a shared wrapper(`repoScan/scanner/libcvault_wrapper.py`) to load it once per scanned root and reuse the results; when it is not available, the tool automatically falls back to Python scanning logic.
 
 ## Benchmarks
 

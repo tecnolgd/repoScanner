@@ -44,7 +44,7 @@ def execute_wrapper_benchmark():
         
         # 2. Match the shell script syntax: ./reposcan <path> <mode>
         # Used an argument list to avoid shell=True and improve safety.
-        command = ["./reposcan", sandbox_dir, "--stats"]
+        command = ["./reposcan", sandbox_dir]
 
         # High-resolution monotonic clock start
         start_time = time.perf_counter()

@@ -1,5 +1,8 @@
 import os
 
+from ..scanner import libcvault_wrapper
+
+
 def read_file_safely(file_path):
     try:
         with open(file_path, "r", errors="ignore") as f:
@@ -183,6 +186,86 @@ def language_metrics(file_path):
         lang_counts[language] = lang_counts.get(language, 0) + 1
 
     return lang_counts
+
+#'libcvault' based functions with pure python fallbacks
+
+def sort_files_by_size(root_path):
+    #Return a list of (size, path) tuples sorted by size descending.
+    #Uses libcvault when available for performance, otherwise computes sizes via os.stat.
+
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        results = libcvault_wrapper.sort_file_on_byte()
+        return results
+
+    files = dir_scanner(root_path)
+    results = []
+    for f in files:
+        try:
+            size = os.path.getsize(f)
+        except Exception:
+            size = 0
+        results.append((size, f))
+    results.sort(reverse=True)
+    return results
+
+
+def get_max_file(root_path):
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        libcvault_wrapper.ensure_populated(root_path)
+        return libcvault_wrapper.max_file()
+
+    files = dir_scanner(root_path)
+    max_file = None
+    max_size = -1
+    for f in files:
+        try:
+            s = os.path.getsize(f)
+        except Exception:
+            s = -1
+        if s > max_size:
+            max_size = s
+            max_file = f
+    return (max_file, max_size)
+
+
+def search_file(root_path, filename):
+    #Search for `filename` under `root_path` and return size or -3 if not found.
+
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        libcvault_wrapper.ensure_populated(root_path)
+        return libcvault_wrapper.search_file(filename)
+
+    files = dir_scanner(root_path)
+    for f in files:
+        if os.path.basename(f) == filename:
+            try:
+                return os.path.getsize(f)
+            except Exception:
+                return -1
+    return -3
+
+
+def line_count(file_path):
+    try:
+        with open(file_path, "r", errors="ignore") as fh:
+            return sum(1 for _ in fh)
+    except Exception:
+        return -1
+
+
+def get_total_bytes(root_path):
+    if libcvault_wrapper.LIBCVAULT_AVAILABLE:
+        libcvault_wrapper.ensure_populated(root_path)
+        return libcvault_wrapper.get_total_bytes()
+
+    total = 0
+    for f in dir_scanner(root_path):
+        try:
+            total += os.path.getsize(f)
+        except Exception:
+            continue
+    return total
+
 
 #helper/guide function
 def help_guide():

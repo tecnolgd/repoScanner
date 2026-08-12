@@ -9,6 +9,8 @@
 - ✓ Added Benchmarking suite
 - ✓ Included text-based sample outputs  
 - ✓ Optional native `libcvault` submodule integration for advanced CLI utilities
+- ✓ Added a shared wrapper for `libcvault` and transparent Python fallback when the native module is unavailable
+- ✓ Cached directory scanning per root path to avoid redundant rescans
 
 ## Coming Soon
 
@@ -18,3 +20,4 @@
 - Auto-detect and scan Repositories
 - Improved UI and formatting
 - Performance optimization for large repositories
+- Optional incremental or changed-file scanning for very large repositories
