@@ -1,7 +1,27 @@
 #.gitignore file
 
-*.pyc
-*.txt
-_init_.py
-*.json
+# Python envs
+.venv/
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+.eggs/
+
+# Caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Local env / editor
+.env
+.vscode/
+.DS_Store
+
+# Optional: native extension artifacts
 *.so
