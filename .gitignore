@@ -24,5 +24,8 @@ __pycache__/
 .vscode/
 .DS_Store
 
-# Optional: native extension artifacts
+# Optional: Native extension artifacts
 *.so
+
+# Other
+*.txt
