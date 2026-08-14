@@ -38,9 +38,9 @@ include-package-data = true
 "repoScan" = ["data/*", "docs/*"]
 
 [tool.setuptools_scm]
-write_to = "repoScan/_version.py"
-write_to_template = '__version__ = "{version}"\n'
-fallback_version = "0.3.0.dev0"
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+fallback_version = "0.3.0b8"
 
 [project.urls]
 Homepage = "https://github.com/tecnolgd/repoScanner"
