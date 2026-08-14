@@ -40,6 +40,7 @@ include-package-data = true
 [tool.setuptools_scm]
 version_scheme = "post-release"
 local_scheme = "no-local-version"
+write_to = "repoScan/_version.py"
 fallback_version = "0.3.0b8"
 
 [project.urls]
