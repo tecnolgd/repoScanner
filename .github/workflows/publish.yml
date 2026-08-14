@@ -25,7 +25,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install pybind11 and build tools (Linux/macOS)
-        if: runner.os != 'Windows'
+        if: runner.os == 'Linux'
         run: |
           python -m pip install --upgrade pip pybind11
           # Compile bridge on Linux/macOS
