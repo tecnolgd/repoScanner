@@ -29,3 +29,5 @@ __pycache__/
 
 # Other
 *.txt
+repoScan/_version.py
+repoScan/_version.py.bak
