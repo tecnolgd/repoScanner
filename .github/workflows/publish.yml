@@ -37,11 +37,11 @@ jobs:
         with:
           output-dir: wheelhouse
         env:
-          # Build for Python 3.12+
-          CIBW_BEFORE_BUILD: "python -m pip install pybind11 setuptools"
-             
+          PIP_CONSTRAINT: ""
+          CIBW_BEFORE_BUILD: "python -m pip install --upgrade pip 'packaging>=24.2' setuptools"
           CIBW_BUILD: cp312-*
           CIBW_SKIP: pp*
+          
           # For Windows: skip native build (pure Python fallback)
           CIBW_BEFORE_BUILD_WINDOWS: python -m pip install --upgrade pybind11
           CIBW_BEFORE_BUILD_LINUX: echo "Bridge already compiled"
