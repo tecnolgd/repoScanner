@@ -38,7 +38,7 @@ jobs:
           output-dir: wheelhouse
         env:
           # Build for Python 3.12+
-          CIBW_BEFORE_BUILD: "python -m pip install pybind11 setuptools 'packaging>=24.2'"
+          CIBW_BEFORE_BUILD: "python -m pip install pybind11 setuptools"
              
           CIBW_BUILD: cp312-*
           CIBW_SKIP: pp*
