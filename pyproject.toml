@@ -19,7 +19,6 @@ classifiers = [
 ]
 dependencies = []
 
-urls = { "Homepage" = "https://github.com/tecnolgd/repoScanner" }
 
 [project.optional-dependencies]
 dev = ["build", "twine"]
@@ -46,3 +45,4 @@ fallback_version = "0.3.0.dev0"
 [project.urls]
 Homepage = "https://github.com/tecnolgd/repoScanner"
 Repository = "https://github.com/tecnolgd/repoScanner"
+Documentation = "https://github.com/tecnolgd/repoScanner#documentation"
