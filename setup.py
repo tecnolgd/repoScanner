@@ -1,19 +1,16 @@
-from setuptools import Extension, setup
-
-try:
-    import pybind11
-    pybind_include = pybind11.get_include()
-except ImportError:
-    pybind_include = ""
+from setuptools import setup
+from pybind11.setup_helpers import Pybind11Extension, build_ext
 
 ext_modules = [
-    Extension(
+    Pybind11Extension(
         "libcvault",
         sources=["vendor/bridge.cpp", "vendor/libcvault/main.cpp"],
-        include_dirs=[pybind_include, "vendor/libcvault"],
-        language="c++",
-        extra_compile_args=["-O3", "-std=c++17"],
-    )
+        include_dirs=["vendor/libcvault"],
+        cxx_std=17,
+    ),
 ]
 
-setup(ext_modules=ext_modules)
+setup(
+    ext_modules=ext_modules,
+    cmdclass={"build_ext": build_ext},
+)
