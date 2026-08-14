@@ -1,16 +1,18 @@
 <!--Roadmap for repoScanner-->
 
-## Completed
+## ✓ Completed
 
-- ✓ JSON export with machine-readable reports
-- ✓ Terminal reporting (stats & raw modes)
-- ✓ Extended language support (40+ languages including JavaScript, Go, Rust, and more)
-- ✓ Added wrapper script for fast scanning
-- ✓ Added Benchmarking suite
-- ✓ Included text-based sample outputs  
-- ✓ Optional native `libcvault` submodule integration for advanced CLI utilities
-- ✓ Added a shared wrapper for `libcvault` and transparent Python fallback when the native module is unavailable
-- ✓ Cached directory scanning per root path to avoid redundant rescans
+-  JSON export with machine-readable reports
+-  Terminal reporting (stats & raw modes)
+-  Extended language support (40+ languages including JavaScript, Go, Rust, and more)
+-  Added wrapper script for fast scanning
+-  Added Benchmarking suite
+-  Included text-based sample outputs  
+-  Optional native `libcvault` submodule integration for advanced CLI utilities
+-  Added a shared wrapper for `libcvault` and transparent Python fallback when the native module is unavailable
+-  Cached directory scanning per root path to avoid redundant rescans
+-  PyPI packaging with multi-platform wheel builds (Linux, macOS, Windows)
+-  CI/CD publish workflow with `cibuildwheel` for end-user distribution
 
 ## Coming Soon
 
