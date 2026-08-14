@@ -28,9 +28,11 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           python -m pip install --upgrade pip pybind11
-          EXT_SUFFIX=$(python3 -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))")
-          g++ -O3 -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault${EXT_SUFFIX}
-
+          INCLUDES=$(python -c "import pybind11; print(pybind11.get_include())")
+          PY_INCLUDES=$(python -c "from sysconfig import get_paths; print(get_paths()['include'])")
+          EXT_SUFFIX=$(python -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))")
+    
+          g++ -O3 -shared -std=c++17 -fPIC -I"$INCLUDES" -I"$PY_INCLUDES" -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault${EXT_SUFFIX}
       - name: Build wheels with cibuildwheel
         uses: pypa/cibuildwheel@v2.19.2
         with:
