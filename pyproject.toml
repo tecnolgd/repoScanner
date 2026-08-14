@@ -42,3 +42,10 @@ include-package-data = true
 write_to = "repoScan/_version.py"
 write_to_template = '__version__ = "{version}"\n'
 fallback_version = "0.3.0.dev0"
+
+[[tool.setuptools.ext-modules]]
+name = "libcvault"
+sources = ["vendor/bridge.cpp", "vendor/libcvault/main.cpp"]
+include-dirs = ["vendor/libcvault"]
+language = "c++"
+extra-compile-args = ["-O3", "-std=c++17"]
