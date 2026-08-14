@@ -25,7 +25,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install pybind11 and build tools (Linux/macOS)
-        if: runner.os != 'Windows'
+        if: runner.os != 'macOS'
         env:
           MACOSX_DEPLOYMENT_TARGET: '10.15'
       
