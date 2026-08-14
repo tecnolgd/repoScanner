@@ -68,13 +68,7 @@ sudo apt-get install -y build-essential g++ python3-dev
 python -m pip install pybind11
 
 # Compile the bridge into the package
-g++ -O3 -shared -std=c++17 -fPIC   -I 
-usr/local/lib/python3.12/dist-packages/
-pybind11/include   -I/usr/include/
-python3.12   -I vendor/libcvault   
-vendor/bridge.cpp vendor/libcvault/
-main.cpp   -o libcvault$
-(python3-config --extension-suffix)
+g++ -O3 -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault$(python3-config --extension-suffix)
 
 # Test the compiled extension
 python -m repoScan.cli <path>
