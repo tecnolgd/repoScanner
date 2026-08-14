@@ -1,0 +1,68 @@
+name: Publish Python package to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch: {}
+
+jobs:
+  build-wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Build wheels with cibuildwheel
+        uses: pypa/cibuildwheel@v2.19.2
+        with:
+          output-dir: wheelhouse
+        env:
+          # Build for Python 3.12+
+          CIBW_BUILD: cp312-*
+          CIBW_SKIP: pp*
+          # Compile C++ extension before building each wheel
+          CIBW_BEFORE_BUILD: |
+            python -m pip install pybind11
+            python -c "import sys; print(f'Python: {sys.executable}')"
+            if command -v g++ &> /dev/null; then
+              g++ -O3 -shared -std=c++17 -fPIC $(python -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault$(python3-config --extension-suffix)
+            fi
+
+      - name: Upload wheels as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
+
+  publish-to-pypi:
+    name: Publish wheels to PyPI
+    needs: build-wheels
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Download all wheels
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install twine
+        run: pip install --upgrade twine
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*.whl
