@@ -10,7 +10,7 @@
 <a href = "https://github.com/tecnolgd/repoScanner">
 <img src = "https://img.shields.io/badge/interface-CLI-1a1a1a?style=flat-square" alt = "Interface: CLI"></a>
 <a href = "https://github.com/tecnolgd/repoScanner/releases">
-<img src="https://img.shields.io/github/v/release/tecnolgd/blog-tecnolgd?color=1a1a1a&style=flat-square" alt="Version"></a>
+<img src="https://img.shields.io/github/v/release/tecnolgd/repoScanner?include_prereleases&color=1a1a1a&style=flat-square" alt="Version"></a>
 <a href = "#documentation">
 <img src = "https://img.shields.io/badge/docs-available-1a1a1a?style=flat-square" alt = "Docs: Available"></a>
 <a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault"></a>
@@ -85,6 +85,29 @@
     > The code uses only Python standard libraries and should be compatible with Python 3.10+,
     > but has been officially tested on Python 3.12.
 
+## Quick Install
+
+Install directly from PyPI for end users:
+
+```bash
+pip install repoScanner
+```
+
+Run:
+```bash
+reposcan <path> [--stats|--dev|--help| --bench]
+```
+
+More commnads:
+
+```bash
+reposcan <path> --sort #sorted list based on byte size
+reposcan <path> --search <filename> #search for a file
+reposcan <path> --lc <filename> #return line count of a file
+reposcan <path> --max #return largest file by size
+reposcan <path> --tbytes # return total bytes
+```
+
 
 ## Build Instructions
 
@@ -130,14 +153,8 @@
 > - Compile using `pybind11` includes for portability:
 >
 >   ```bash
->   g++ -O3 -shared -std=c++17 -fPIC   -I 
->   usr/local/lib/python3.12/dist-packages/
->   pybind11/include   -I/usr/include/
->   python3.12   -I vendor/libcvault   
->   vendor/bridge.cpp vendor/libcvault/
->   main.cpp   -o libcvault$
->   (python3-config --extension-suffix)
->    ```
+>   g++ -O3 -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault$(python3-config --extension-suffix)
+>   ```
 
 
 > [!IMPORTANT]
@@ -146,6 +163,7 @@
 > 3. The native helper is optional. If you prefer zero native dependencies, you can safely add `.gitmodules` and `vendor/` to your `.gitignore`.
 
 The repository may include a prebuilt binary (e.g. `libcvault.cpython-312-x86_64-linux-gnu.so`) for convenience; if you plan to distribute, prefer providing prebuilt wheels rather than committing `.so` artifacts in the repo.
+
 
 ### 2. Tool Execution/Run
 

@@ -1,1 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repoScanner"
+dynamic = ["version"]
+description = "A lightweight CLI tool for rapid codebase analysis with native C++ acceleration."
+readme = "README.md"
 requires-python = ">=3.12"
+license = { file = "LICENSE.md" }
+authors = [{ name = "tecnolgd" }]
+keywords = ["repo", "scanner", "analysis", "cpp", "pybind11", "cli"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+urls = { "Homepage" = "https://github.com/tecnolgd/repoScanner" }
+
+[project.optional-dependencies]
+dev = ["build", "twine"]
+
+# Creates the CLI executable command
+[project.scripts]
+reposcan = "repoScan.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["repoScan*"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"repoScan" = ["data/*", "docs/*"]
+
+[tool.setuptools_scm]
+write_to = "repoScan/_version.py"
+write_to_template = '__version__ = "{version}"\n'
+fallback_version = "0.3.0.dev0"

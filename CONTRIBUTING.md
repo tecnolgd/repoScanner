@@ -49,6 +49,33 @@ To keep the codebase stable and ensure your time isn't wasted, all contributors 
 3. Push to your fork: `git push origin feature/your-feature`
 4. Open a Pull Request with a clear description linking to the issue
 
+### Local Development
+
+Run the tool from source without any C++ compilation:
+
+```bash
+python -m repoScan.cli <path>
+./reposcan <path>
+```
+
+**Optional: Build the native C++ helper locally**
+
+If you modify `vendor/bridge.cpp` or want to test the compiled extension:
+
+```bash
+# Install build dependencies (Debian/Ubuntu)
+sudo apt-get install -y build-essential g++ python3-dev
+python -m pip install pybind11
+
+# Compile the bridge into the package
+g++ -O3 -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault$(python3-config --extension-suffix)
+
+# Test the compiled extension
+python -m repoScan.cli <path>
+```
+
+The compiled `.so` will be included in wheels built by CI on release.
+
 ### Current Priorities
 
 Looking for a place to start?
