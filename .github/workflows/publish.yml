@@ -30,7 +30,7 @@ jobs:
           output-dir: wheelhouse
         env:
           PIP_CONSTRAINT: ""
-          CIBW_BEFORE_BUILD: "python -m pip install --upgrade pip 'packaging>=24.2' setuptools"
+          CIBW_BEFORE_BUILD: 'python -m pip install --upgrade pip "packaging>=24.2" setuptools'
           CIBW_BUILD: cp312-*
           CIBW_SKIP: pp*
 
