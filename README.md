@@ -99,7 +99,7 @@ Run:
 reposcan <path> [--stats|--dev|--help| --bench]
 ```
 
-More commnads:
+More commands:
 
 ```bash
 reposcan <path> --sort #sorted list based on byte size
