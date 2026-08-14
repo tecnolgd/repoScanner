@@ -42,3 +42,7 @@ include-package-data = true
 write_to = "repoScan/_version.py"
 write_to_template = '__version__ = "{version}"\n'
 fallback_version = "0.3.0.dev0"
+
+[project.urls]
+Homepage = "https://github.com/tecnolgd/repoScanner"
+Repository = "https://github.com/tecnolgd/repoScanner"
