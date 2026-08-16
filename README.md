@@ -109,6 +109,8 @@ reposcan <path> --max #return largest file by size
 reposcan <path> --tbytes # return total bytes
 ```
 
+> Check [PyPI/repoScanner](https://pypi.org/project/repoScanner/) for more details.
+
 
 ## Build Instructions
 
