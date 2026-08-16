@@ -2,6 +2,7 @@
 #cd /home/chief/projects/repoScanner && python3 -m repoScan.cli 2>&1 (exection command)
 
 import sys
+from pathlib import Path
 
 from .analyzer.dependencyAnalyzer import dependency_analyzer
 from .scanner.dirScanner import dir_scanner
@@ -35,7 +36,7 @@ from .utility.helpers import help_guide
 
 def main():
     # Parse arguments
-    root = "."
+    root_arg = "."
     mode = "stats"  # Default mode
     
     args = sys.argv[1:]
@@ -64,8 +65,13 @@ def main():
                 print(f"Error: {arg} requires a filename argument.")
                 sys.exit(1)
         else:
-            root = arg
+            root_arg = arg
         i += 1    
+    
+    if root_arg in [".", ""]:
+        root = str(Path.cwd())
+    else:
+        root = str(Path(root_arg))
 
     files = dir_scanner(root)
     report = structure_analyzer(files)
