@@ -53,27 +53,28 @@
 
 ## Benchmarks
 
-> These numbers are obtained by testing the commands using [**hyperfine**](https://github.com/sharkdp/hyperfine).
+> These numbers are obtained by testing the commands using [**hyperfine**](https://github.com/sharkdp/hyperfine) on my own repository called [velocache](https://github.com/tecnolgd/velocache).
 
-### os.path vs std::recursive dir
-
-
-| Mode | os.walk (ms) | std::recursive dir (ms) | Difference |
-|---|---:|---:|---:|
-| Shell wrapper --stats | 234.6 | 204.8 | std::directory is 29.8 ms faster |
-| Shell wrapper --dev | 242.9 | 206.8 | std::directory is 36.1 ms faster |
-| Direct Python --stats | 162.1 | 116.3 | std::directory is 45.8 ms faster |
-| Direct Python --dev | 174.2 | 116.9 | std::directory is 57.3 ms faster |
 
 ### Modes using libcvault
 
 | Operation | Command | Mean (ms) | Std Dev (ms) | Range (ms) | Runs |
 |---|---|---:|---:|---|---:|
-| search | `python3 -m repoScan.cli --search main.cpp` | 157.4 | 14.0 | 138.8–194.4 | 15 |
-| total bytes | `python3 -m repoScan.cli --tbytes` | 166.0 | 19.2 | 144.7–219.9 | 13 |
+| stats | `python3 -m repoScan.cli --stats` | 56.3 | 1.8 | 52.6-62.7 | 52 |
+| dev | `python3 -m repoScan.cli --dev` | 55.4 | 1.5 | 51.5-58.4 | 51 |  
+| search | `python3 -m repoScan.cli --search src/cache.cpp` | 58.1 | 2.8 | 53.1-66.4 | 46 |
+| total bytes | `python3 -m repoScan.cli --tbytes` | 56.8 | 2.1 | 52.9-61.6 | 50 |
 | sort(size-based) | `python3 -m repoScan.cli --sort` | 162.2 | 14.0 | 140.4–193.3 | 15 |
-| max file size| `python3 -m repoScan.cli --max` | 121.0 | 13.9 | 104.3–151.8 | 19 |
-| file line count | `python3 -m repoScan.cli --lc README.md` | 124.5 | 15.2 | 106.5–153.6 | 20 |
+| max file size| `python3 -m repoScan.cli --max` | 56.7 | 2.5 | 52.9-67.6 | 50 |
+| file line count | `python3 -m repoScan.cli --lc src/cache.cpp` | 124.5 | 15.2 | 106.5–153.6 | 20 |
+
+### Direct Python vs. Shell Wrapper(reposcan)         
+
+| Mode | Direct Python(ms) | Shell Wrapper(ms) | Shell overhead(ms) |
+| :--: | :--: | :--: | :--: |
+| stats | 56.3 | 56.5 | ~0.2 |
+| dev | 55.4 | 56.4 | ~1.0 |
+
 
 > [!TIP]     
 > For reproducing benchmarks, check [benchmarking using hyperfine](assets/docs/testing.md#reproducing-benchmarks).
