@@ -72,8 +72,8 @@
 
 | Mode | Direct Python(ms) | Shell Wrapper(ms) | Shell overhead(ms) |
 | :--: | :--: | :--: | :--: |
-| stats | 56.3 | 56.5 | ~0.2 |
-| dev | 55.4 | 56.4 | ~1.0 |
+| stats | 49.9 | 56.5 | ~6.6 |
+| dev | 48.9 | 56.4 | ~7.5 |
 
 
 > [!TIP]     
