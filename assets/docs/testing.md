@@ -16,17 +16,17 @@ This project includes both script-based benchmark suite as well as precision per
         ```txt
         [✓] Pre-allocating mock codebase in 'tests/perf_test_sandbox' with 2500 files...
 
-        [✓] Launching tool environment execution via ./reposcan wrapper...
+        [✓] Launching tool environment execution...
 
         ==================================================
-            repoScanner Benchmark Suite            
+                repoScanner Benchmark Suite
         ==================================================
-        Target Workspace        : tests/perf_test_sandbox
-        Total Files Processed   : 2500
-        Execution Time          : 0.36267 seconds
-        I/O Processing Velocity : 6893.38 files/sec
+         Target Workspace        : tests/perf_test_sandbox
+         Total Files Processed   : 2500
+         Execution Time          : 0.24334 seconds
+         I/O Processing Velocity : 10273.71 files/sec
         ==================================================
-        [✓] Flushed test sandbox environment directories cleanly.
+        [✓] Flushed test sandbox environment directories cleanly. 
         ```
 
 - **Precision Performance Profiling**     
@@ -47,23 +47,19 @@ This project includes both script-based benchmark suite as well as precision per
         hyperfine 'python3 -m repoScan.cli <path> --search <filename>'
         ```
 
-    - Sample outputs     
-    
-        - `hyperfine 'python3 -m repoScan.cli --stats'`
+    - Sample output(tested on `velocache`)         
 
-            ```txt
-            Benchmark 1: python3 -m repoScan.cli --stats
-            Time (mean ± σ):     122.9 ms ±  13.9 ms    [User: 70.3 ms, System: 63.2 ms]
-            Range (min … max):   102.8 ms … 151.2 ms    22 runs
-            ```
+        ```txt
+        Benchmark 1: ./reposcan ~projects/velocache --stats
+        Time (mean ± σ):      56.5 ms ±   3.7 ms    [User: 37.9 ms, System: 23.6 ms]
+        Range (min … max):    50.5 ms …  73.3 ms    49 runs
+        ```
 
-        - `hyperfine 'python3 -m repoScan.cli --dev`    
-
-            ```txt
-            Benchmark 1: python3 -m repoScan.cli --dev
-            Time (mean ± σ):     127.8 ms ±  22.8 ms    [User: 72.7 ms, System: 66.3 ms]
-            Range (min … max):   106.8 ms … 208.0 ms    20 runs
-            ```
+        ```txt
+        Benchmark 1: ./reposcan ~projects/velocache --dev
+        Time (mean ± σ):      56.4 ms ±   3.3 ms    [User: 36.7 ms, System: 24.5 ms]
+        Range (min … max):    50.2 ms …  65.2 ms    47 runs
+        ```
 
 
 ## Test guidance

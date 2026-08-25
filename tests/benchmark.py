@@ -40,7 +40,7 @@ def execute_wrapper_benchmark():
         # 1. Build out the temporary sandbox tree
         setup_mock_repository(sandbox_dir, file_count=total_files)
         
-        print(f"\n[✓] Launching tool environment execution via ./reposcan wrapper...")
+        print(f"\n[✓] Launching tool environment execution...")
         
         # 2. Match the shell script syntax: ./reposcan <path> <mode>
         # Used an argument list to avoid shell=True and improve safety.
