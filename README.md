@@ -64,7 +64,7 @@
 | dev | `python3 -m repoScan.cli --dev` | 48.9 | 2.6 | 42.4-54.6 | 53 |  
 | search | `python3 -m repoScan.cli --search src/cache.cpp` | 58.1 | 2.8 | 53.1-66.4 | 46 |
 | total bytes | `python3 -m repoScan.cli --tbytes` | 56.8 | 2.1 | 52.9-61.6 | 50 |
-| sort(size-based) | `python3 -m repoScan.cli --sort` | 162.2 | 14.0 | 140.4–193.3 | 15 |
+| sort(size-based) | `python3 -m repoScan.cli --sort` | 48.8 | 3.2 | 43.7-56.3 | 58 |
 | max file size| `python3 -m repoScan.cli --max` | 56.7 | 2.5 | 52.9-67.6 | 50 |
 | file line count | `python3 -m repoScan.cli --lc src/cache.cpp` | 124.5 | 15.2 | 106.5–153.6 | 20 |
 
