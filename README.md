@@ -66,7 +66,7 @@
 | total bytes | `python3 -m repoScan.cli --tbytes` | 56.8 | 2.1 | 52.9-61.6 | 50 |
 | sort(size-based) | `python3 -m repoScan.cli --sort` | 48.8 | 3.2 | 43.7-56.3 | 58 |
 | max file size| `python3 -m repoScan.cli --max` | 56.7 | 2.5 | 52.9-67.6 | 50 |
-| file line count | `python3 -m repoScan.cli --lc src/cache.cpp` | 124.5 | 15.2 | 106.5–153.6 | 20 |
+| file line count | `python3 -m repoScan.cli --lc src/cache.cpp` | 55.6 | 1.7 | 52.8-60.7 | 50 |
 
 ### Direct Python vs. Shell Wrapper(reposcan)         
 
