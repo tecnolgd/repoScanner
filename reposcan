@@ -58,14 +58,35 @@ fi
 # same as the underlying "python3 -m repoScan.cli" command.
 REPO_PATH="."
 MODE="--stats"  # Default to --stats if no mode flag is given
+FILE_NAME="" # Default is empty string
 
-for arg in "$@"; do
-    case "$arg" in
-        --raw|--dev)   MODE="--raw" ;;   # --dev is an alias for --raw
-        --stats|--nerd) MODE="--stats" ;;
-        *)             REPO_PATH="$arg" ;;
+ARGS=()
+
+# Parse arguments using an index-shifting loop similar to cli.py
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --raw|--dev|--stats|--nerd|--max|--tbytes|--sort)
+            ARGS+=("$1")
+            shift
+            ;;
+        --search|--lc)
+            if [[ -n "$2" && "$2" != -* ]]; then
+                ARGS+=("$1" "$2")
+                shift 2
+            else
+                echo "Error: $1 requires a filename argument." >&2
+                exit 1
+            fi
+            ;;
+        -h|--help)
+            show_help
+            ;;
+        *)
+            # Capture root directory path or unknown options
+            ARGS+=("$1")
+            shift
+            ;;
     esac
 done
 
-# Run the scanner
 python3 -m repoScan.cli "$REPO_PATH" "$MODE"
