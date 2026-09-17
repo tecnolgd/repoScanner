@@ -5,17 +5,22 @@
 # Function to display help
 show_help() {
     cat << EOF
-repoScanner - Repository Analysis Tool
+repoScanner - Repository Analysis CLI
 
 USAGE:
     ./reposcan <path> [--raw|--dev|--stats|--help]
 
 ARGUMENTS:
-    <path>          Directory path to scan (required)
-    --stats         Show summary statistics (default)
-    --raw, --dev    Show detailed file-by-file analysis with dependency tree
-    --bench         Show tool performance details
-    --help, -h      Show this help message
+    <path>              Directory path to scan (required)
+    --stats             Show summary statistics (default)
+    --raw, --dev        Show detailed file-by-file analysis with dependency tree
+    --bench             Show tool performance details
+    --help, -h          Show this help message
+    --max               Return the largest file name with its size(in bytes)
+    --sort              Sort the files in the directory(Ascending)
+    --tbytes            Return total size of the directory
+    --lc <filename>     Return the line count of a given file
+    --search <filename> Search a given file
 
 EXAMPLES:
     # Scan current directory in stats mode
@@ -34,8 +39,15 @@ EXAMPLES:
     # Show tool performance data
     ./reposcan --bench
 
+    # Additional Modes
+    ./repoScan /path/to/repo --max
+    ./repoScan /path/to/repo --tbytes
+    ./repoScan /path/to/repo --sort
+    ./repoScan /path/to/repo --lc <filename>
+    ./repoScan /path/to/repo --search <filename>
+
 OUTPUT:
-    Results are displayed in the terminal and saved (except benchmarking data) to output/report.json
+    Results are displayed in the terminal and saved (except benchmarking data & some other data(max_file, total_bytes) to output/report.json
 
 EOF
 }
@@ -56,16 +68,34 @@ fi
 # the recognized flag (if any) is the mode. This avoids assuming a fixed
 # position, so "./reposcan --raw" and "./reposcan <path> --raw" behave the
 # same as the underlying "python3 -m repoScan.cli" command.
-REPO_PATH="."
-MODE="--stats"  # Default to --stats if no mode flag is given
 
-for arg in "$@"; do
-    case "$arg" in
-        --raw|--dev)   MODE="--raw" ;;   # --dev is an alias for --raw
-        --stats|--nerd) MODE="--stats" ;;
-        *)             REPO_PATH="$arg" ;;
+ARGS=() #would contain all the entered strings as a single line of string
+
+# Parse arguments using an index-shifting loop similar to cli.py
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --raw|--dev|--stats|--nerd|--max|--tbytes|--sort)
+            ARGS+=("$1")
+            shift
+            ;;
+        --search|--lc)
+            if [[ -n "$2" && "$2" != -* ]]; then
+                ARGS+=("$1" "$2")
+                shift 2
+            else
+                echo "Error: $1 requires a filename argument." >&2
+                exit 1
+            fi
+            ;;
+        -h|--help)
+            show_help
+            ;;
+        *)
+            # Capture root directory path or unknown options
+            ARGS+=("$1")
+            shift
+            ;;
     esac
 done
 
-# Run the scanner
-python3 -m repoScan.cli "$REPO_PATH" "$MODE"
+python3 -m repoScan.cli "${ARGS[@]}"
