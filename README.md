@@ -30,7 +30,7 @@
 - **Language Breakdown**: See what languages dominate your repo
 - **Smart Reporting**: Choose between quick stats or detailed developer mode
 - **JSON Export**: Machine-readable reports for automation
-- **Native File Utilities**: Optional `vendor/libcvault` support adds faster CLI directory scanning, file sorting, search, and byte/line metrics when available.
+- **Native File Utilities**: Optional `vendor/libcvault` support adds faster CLI directory scanning, file sorting, search, and byte/line metrics when available
 - **Transparent Fallback**: If the native helper is missing or unavailable, repoScanner falls back to Python's `os.walk` and standard-library utilities so the same commands still work.
 
 ## Features
@@ -97,7 +97,7 @@ pip install repoScanner
 
 Run:
 ```bash
-reposcan <path> [--stats|--dev|--help| --bench]
+reposcan <path> [--stats|--dev|--help|--bench]
 ```
 
 More commands:

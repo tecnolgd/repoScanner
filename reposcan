@@ -47,7 +47,7 @@ EXAMPLES:
     ./repoScan /path/to/repo --search <filename>
 
 OUTPUT:
-    Results are displayed in the terminal and saved (except benchmarking data) to output/report.json
+    Results are displayed in the terminal and saved (except benchmarking data & some other data(max_file, total_bytes) to output/report.json
 
 EOF
 }
