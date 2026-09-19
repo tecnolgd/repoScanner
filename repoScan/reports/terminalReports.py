@@ -13,8 +13,12 @@ def print_kv(label, value, width=20):
 def print_file_metrics(file_metrics):
     print_section("File Metrics")
     print_kv("Total files", file_metrics["total"])
+    if "total_bytes" in file_metrics:
+        print_kv("Total bytes", f"{file_metrics['total_bytes']} bytes")
     print_kv("Total lines", file_metrics["total_lines"])
     print_kv("Average lines/file", round(file_metrics["average_lines"], 2))
+    if "average_file_size" in file_metrics:
+        print_kv("Average file size", f"{round(file_metrics['average_file_size'], 2)} bytes")
     print_kv("Largest file", file_metrics["largest_file"])
 
 def print_dependency_metrics(dependency_metrics):

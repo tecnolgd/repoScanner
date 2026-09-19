@@ -115,7 +115,10 @@ def main():
     # Always generate JSON report
     print("\nGenerating JSON report...")
     json_path = write_json_report(metrics)
-    print(f"✓ Report generated. Check: {json_path}")
+    try:
+        print(f"✓ Report generated. Check: {json_path}")
+    except UnicodeEncodeError:
+        print(f"[OK] Report generated. Check: {json_path}")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import os
 
 from ..scanner import libcvault_wrapper
+from ..scanner.dirScanner import dir_scanner
 
 
 def read_file_safely(file_path):
@@ -51,6 +52,16 @@ def extract_c_includes(lines):
 #file metrics functions
 def total_files(file_path):
     return len(file_path)
+
+def total_bytes(size_report):
+    if isinstance(size_report, dict) and "total_bytes" in size_report:
+        return size_report.get("total_bytes", 0)
+    return 0
+
+def average_file_size(size_report):
+    if isinstance(size_report, dict) and "average_file_size" in size_report:
+        return size_report.get("average_file_size", 0)
+    return 0
 
 def total_lines(size_report):
     # size_report is already a dict with totals from sizeAnalyzer
@@ -210,6 +221,24 @@ def sort_files_by_size(root_path):
 
 
 def get_max_file(root_path):
+    if isinstance(root_path, dict) and "largest_files" in root_path:
+        files = root_path.get("largest_files", [])
+        if files:
+            return files[0]
+        return (None, -1)
+    if isinstance(root_path, (list, tuple)):
+        max_file = None
+        max_size = -1
+        for f in root_path:
+            try:
+                s = os.path.getsize(f)
+            except Exception:
+                s = -1
+            if s > max_size:
+                max_size = s
+                max_file = f
+        return (max_file, max_size)
+
     if libcvault_wrapper.LIBCVAULT_AVAILABLE:
         libcvault_wrapper.ensure_populated(root_path)
         return libcvault_wrapper.max_file()
@@ -254,6 +283,17 @@ def line_count(file_path):
 
 
 def get_total_bytes(root_path):
+    if isinstance(root_path, dict) and "total_bytes" in root_path:
+        return root_path.get("total_bytes", 0)
+    if isinstance(root_path, (list, tuple)):
+        total = 0
+        for f in root_path:
+            try:
+                total += os.path.getsize(f)
+            except Exception:
+                continue
+        return total
+
     if libcvault_wrapper.LIBCVAULT_AVAILABLE:
         libcvault_wrapper.ensure_populated(root_path)
         return libcvault_wrapper.get_total_bytes()
