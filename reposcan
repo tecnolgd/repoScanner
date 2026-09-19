@@ -40,14 +40,14 @@ EXAMPLES:
     ./reposcan --bench
 
     # Additional Modes
-    ./repoScan /path/to/repo --max
-    ./repoScan /path/to/repo --tbytes
-    ./repoScan /path/to/repo --sort
-    ./repoScan /path/to/repo --lc <filename>
-    ./repoScan /path/to/repo --search <filename>
+    ./reposcan /path/to/repo --max
+    ./reposcan /path/to/repo --tbytes
+    ./reposcan /path/to/repo --sort
+    ./reposcan /path/to/repo --lc <filename>
+    ./reposcan /path/to/repo --search <filename>
 
 OUTPUT:
-    Results are displayed in the terminal and saved (except benchmarking data & some other data(max_file, total_bytes) to output/report.json
+    Results are displayed in the terminal and saved (except benchmarking data) to output/report.json
 
 EOF
 }
