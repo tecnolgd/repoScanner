@@ -76,6 +76,10 @@ python -m repoScan.cli <path>
 
 The compiled `.so` will be included in wheels built by CI on release.
 
+Run the unit test suite(requires `pytest`) to make sure the code changes dont break anything.    
+```bash
+    pytest
+```
 ### Current Priorities
 
 Looking for a place to start?
