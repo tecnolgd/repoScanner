@@ -21,7 +21,7 @@ dependencies = []
 
 
 [project.optional-dependencies]
-dev = ["build", "twine"]
+dev = ["build", "twine", "pytest"]
 
 # Creates the CLI executable command
 [project.scripts]

@@ -62,9 +62,20 @@ This project includes both script-based benchmark suite as well as precision per
         ```
 
 
-## Test guidance
+## Testing
+
+repoScanner uses `pytest` for running the unit test suite.
+
+### Running the test suite
+```bash
+pytest 
+```
+
+
+### Test Guidelines
 
 - Add unit tests or sample scenarios under `tests/`.
+- Make sure the test function name starts with `test_` so that pytest will automatically detect the test functions.
 - Keep tests small and repeatable.
 - When adding new analyzers or CLI features, verify both normal and edge-case scanning behavior.
 

@@ -24,7 +24,7 @@ def dir_scanner(root_path):
             _cached_root = root_path
             _cached_files = []
             return []
-        files = [item if isinstance(item, str) else item[0] for item in raw]
+        files = [os.path.join(root_path, item if isinstance(item, str) else item[0]) for item in raw]
     else:
         files = []
         for dirpath, _, filenames in os.walk(root_path):
