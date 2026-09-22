@@ -1,5 +1,7 @@
 import os
+import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from repoScan.analyzer.dependencyAnalyzer import dependency_analyzer
 from repoScan.analyzer.sizeAnalyzer import size_analyzer
