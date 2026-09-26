@@ -19,12 +19,12 @@ Cases:
 ./reposcan --bench                           # run benchmark harness
 ./reposcan --help  #or -h                    # shows available CLI options.
 
-# Additonal Modes
-./repoScan /path/to/repo --max               # return largest file
-./repoScan /path/to/repo --tbytes            # returns total size of the directory(in bytes)
-./repoScan /path/to/repo --sort              # sorts files in ascending order
-./repoScan /path/to/repo --lc <filename>     # returns line count of a given file
-./repoScan /path/to/repo --search <filename> # search a given file
+# Additional Modes
+./reposcan /path/to/repo --max               # return largest file
+./reposcan /path/to/repo --tbytes            # returns total size of the directory(in bytes)
+./reposcan /path/to/repo --sort              # sorts files in ascending order
+./reposcan /path/to/repo --lc <filename>     # returns line count of a given file
+./reposcan /path/to/repo --search <filename> # search a given file
 ```
 
 ## Direct python execution
