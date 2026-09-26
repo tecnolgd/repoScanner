@@ -209,8 +209,7 @@ A huge thanks to the developers contributing to repoScanner.
 - [@Ghraven](https://github.com/Ghraven)
 - [@AzarAI-TOP](https://github.com/AzarAI-TOP)
 - [@Benjamin Ayiovh](https://github.com/BenjaminAyivoh1)
+- [@faizan-7890](https://github.com/faizan-7890)
 
-
-## Author & License
-- **Author:** tecnolgd
-- **License:** [MIT](LICENSE.md)
+## License   
+MIT
