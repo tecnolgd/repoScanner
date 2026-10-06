@@ -312,45 +312,31 @@ def help_guide():
     helper_data = """repoScanner - Repository Analysis Tool
 
 USAGE:
-   python3 -m repoScan.cli <path> [--raw|--dev|--stats|--sort|--max|--search|--lc|--tbytes|--help]
+   python3 -m repoScan.cli <path> [--raw|--dev|--stats|--nerd|--sort|--max|--search <filename>|--lc <filename>|--tbytes|--help]
 
 ARGUMENTS:
     <path>          Directory path to scan (required)
     --stats         Show summary statistics (default)
     --raw, --dev    Show detailed file-by-file analysis with dependency tree
-    --sort          Sort files by byte size using the bundled libcvault helper
-    --max           Show the largest file using libcvault
-    --search        Search for a file name using libcvault
-    --lc            Show the line count for a file using libcvault
-    --tbytes        Show total bytes across the scanned repository using libcvault
+    --nerd          Alias for --stats
+    --sort          Sort files by byte size; native and Python implementations currently use different orders
+    --max           Show the largest file and its byte size
+    --search        Search for a file name and return its byte size
+    --lc            Show the line count for a file
+    --tbytes        Show total bytes across the scanned repository
     --help, -h      Show this help message
 
 EXAMPLES:
-    # Scan current directory in stats mode
     python3 -m repoScan.cli .
-
-    # Scan a specific path
-    python3 -m repoScan.cli /path/to/repo          # Stats mode (default)
-
-
-    # Show detailed analysis (tree with file dependencies)
-
     python3 -m repoScan.cli /path/to/repo --raw
-    python3 -m repoScan.cli /path/to/repo --dev    # Same as --raw
-
-    # Show advanced libcvault-backed utilities
-
     python3 -m repoScan.cli /path/to/repo --sort
-    python3 -m repoScan.cli /path/to/repo --max
     python3 -m repoScan.cli /path/to/repo --search filename
     python3 -m repoScan.cli /path/to/repo --lc filename
     python3 -m repoScan.cli /path/to/repo --tbytes
 
-    # Scan in explicit stats mode
-    python3 -m repoScan.cli /path/to/repo --stats
-
-    # Show tool usage
-    python3 -m repoScan.cli /path/to/repo --help    # Same as -h
+NOTE:
+    libcvault is optional. When unavailable, directory scanning and utility
+    commands use the built-in Python fallback.
 
 OUTPUT:
     Results are displayed in the terminal and saved to output/report.json
