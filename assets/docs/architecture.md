@@ -12,63 +12,53 @@ This document describes the high-level architecture of the repoScanner project, 
 
 **Core Components:**
 
-- **scanner/**: Responsible for repository traversal and raw data collection (file lists, dependency hints, file sizes).     
-Example files: [dirScanner.py](../../repoScan/scanner/dirScanner.py).
-- **analyzer/**: Implements domain-specific analysis of the raw scan data. Current analyzers include size and structure analysis.      
-Example files: [sizeAnalyzer.py](../../repoScan/analyzer/sizeAnalyzer.py), [structureAnalyzer.py](../../repoScan/analyzer/structureAnalyzer.py), [dependencyAnalyzer.py](../../repoScan/analyzer/dependencyAnalyzer.py).
-- **scanner/metrics.py**: Aggregates basic metrics and performs derived calculations used by analyzers and reports.       
-See [metrics.py](../../repoScan/scanner/metrics.py).
-- **reports/**: Renders analysis results in multiple formats (`terminal`, `JSON`).        
-Example files: [terminalReports.py](../../repoScan/reports/terminalReports.py), [jsonReports.py](../../repoScan/reports/jsonReports.py) and [htmlReports.py](../../repoScan/reports/htmlReports.py) (`htmlReports.py` is a placeholder at present).
-- **vendor/libcvault**: Bundled native C++ library submodule that provides optional optimized file operations for the CLI.
-- **reposcan**: Shell wrapper script that forwards scan commands to `python3 -m repoScan.cli` and also supports the benchmark harness via `--bench`.
-- **cli.py**: CLI entrypoint and orchestration layer. Responsible for wiring together scanning, analysis, report generation, and optional `libcvault`-backed utility modes. See [cli.py](../../repoScan/cli.py).
-- **output/**: Default location for produced artifacts such as `report.json`.
-- **assets/data/**: Example and test data used by development and CI.     
-Example: [testData.txt](../data/testData.txt).
+- **scanner/**: Traverses directories and collects file paths. [dirScanner.py](../../repoScan/scanner/dirScanner.py) uses `libcvault` when available and otherwise falls back to `os.walk`.
+- **scanner/libcvault_wrapper.py**: Provides the shared native-helper availability check, root-level population, and cached scan result boundary.
+- **analyzer/**: Converts normalized file lists into domain results. Current analyzers are [sizeAnalyzer.py](../../repoScan/analyzer/sizeAnalyzer.py), [structureAnalyzer.py](../../repoScan/analyzer/structureAnalyzer.py), and [dependencyAnalyzer.py](../../repoScan/analyzer/dependencyAnalyzer.py).
+- **scanner/metrics.py**: Aggregates analyzer output into the normalized metrics object consumed by reports.
+- **reports/**: Renders terminal and JSON results. [terminalReports.py](../../repoScan/reports/terminalReports.py) and [jsonReports.py](../../repoScan/reports/jsonReports.py) are implemented; [htmlReports.py](../../repoScan/reports/htmlReports.py) is currently a placeholder.
+- **utility/helpers.py**: Implements file utilities, language mapping, CLI help, and native-helper fallbacks.
+- **vendor/libcvault**: Optional native C++ submodule used for optimized file operations.
+- **reposcan**: Shell wrapper that forwards commands to `python3 -m repoScan.cli` and supports `--bench`.
+- **cli.py**: CLI entrypoint and orchestration layer for scanning, analysis, mode-specific utilities, terminal output, and JSON serialization.
+- **output/**: Default location for generated artifacts such as `report.json`.
+- **tests/**: Contains the benchmark harness and pytest tests for scanner, analyzer, and metrics behavior.
 
 **Data Flow**
 
-1. The CLI triggers the scanner to walk the repository tree and collect raw file metadata.
-2. The raw scan output is consumed by one or more **analyzers** (size, structure, dependency).
-3. Analyzer outputs are aggregated by `metrics` to produce normalized statistics and summaries.
-4. Results are handed to the reports layer to produce output artifacts (terminal summary, JSON files, or HTML pages placed under `output/`).
+1. The CLI resolves the requested root and selected mode.
+2. `dirScanner` walks the repository, using `libcvault` when available or Python's `os.walk` otherwise.
+3. The scanner returns absolute file paths, which are cached for the current process and root.
+4. The size, structure, and dependency analyzers consume the same file list.
+5. `generate_metrics` combines analyzer outputs into the normalized report model.
+6. The CLI prints the requested terminal view and writes the normalized metrics to `output/report.json`.
+7. Utility modes may use the native helper directly or use the Python fallback for the same operation.
 
 Mermaid overview:
 
 ```mermaid
 flowchart TD
-	
-	Input[Input Path / Current Dir] --> CLI
-	CLI --> Scanner
-
-	subgraph Analyzers [The Analysis Core]
-		Structure[Structure Analyzer]
-		Size[Size Analyzer]
-		Dependency[Dependency Analyzer]
-	end
-
-	Scanner --> Structure
-	Scanner --> Size
-	Scanner --> Dependency
-
-	
-	Structure --Report--> Raw_Analysis[Raw / Dev Analysis]
-	Size --Size Report--> Raw_Analysis
-	Dependency --Dependency Report--> Raw_Analysis
-
-	Size --> Metrics[Generate Metrics]
-	Dependency --> Metrics
-
-	Metrics --> Stats[Stats / Nerd Analysis]
-	Metrics --> JSON[JSON Report]
+    Input[Input Path / Current Dir] --> CLI[CLI Entry Point]
+    CLI --> Scanner[Directory Scanner]
+    Scanner --> Files[Absolute File List]
+    Files --> Size[Size Analyzer]
+    Files --> Structure[Structure Analyzer]
+    Files --> Dependency[Dependency Analyzer]
+    Size --> Metrics[Metrics Aggregator]
+    Structure --> Metrics
+    Dependency --> Metrics
+    Metrics --> Terminal[Terminal Report]
+    Metrics --> JSON[JSON Report]
+    Metrics --> Raw[Raw Dependency Report]
 ```
 
-**Extension Points**
+**Current behavior notes**
 
-- Add a new analyzer: implement a new module under `repoScan/analyzer/` that accepts normalized scan data and returns structured results. Plug it into the CLI orchestration.
-- Add a new report format: implement a new renderer under `repoScan/reports/` that consumes analyzer output and writes artifacts.
-- Add new scanner rules: extend `repoScan/scanner/dirScanner.py` or add dependency heuristics in `repoScan/analyzer/dependencyAnalyzer.py` to include more file heuristics.
+- The scanner caches files by absolute root path within one Python process.
+- Dependency analysis currently recognizes Python imports and C/C++ includes.
+- Language names are derived from a fixed extension map; unknown extensions remain as their raw extension.
+- HTML report generation is not implemented in the current codebase.
+- The JSON report is the single normalized artifact; analyzer internals are not serialized directly.
 
 **Testing & Benchmarking**
 - Benchmark and test guidance is available in [assets/docs/testing.md](assets/docs/testing.md).
@@ -76,11 +66,14 @@ flowchart TD
 
 **Design Notes & Rationale**
 
-- Separation of concerns: scanning, analyzing, and reporting are intentionally decoupled to keep each component small and testable.
-- Normalized intermediate model: analyzers consume a consistent data model produced by the scanner+metrics layer to simplify adding new analyzers.
+- Scanning, analyzing, and reporting are intentionally separated so each layer can be tested independently.
+- The file list is the common input to analyzers, while `generate_metrics` becomes the normalized report boundary.
+- Native operations are isolated behind `libcvault_wrapper`, allowing the CLI to retain a standard-library fallback.
+- The CLI remains the orchestration point for both scan modes and utility commands.
 
 **Next steps**
 
-- Add sequence diagrams for complex analyzer interactions (optional).
-- Expand the example JSON schema produced by `jsonReports` into a spec file for portability.
-- HTML report generation via some module under `repoScan/reports`.
+- Add sequence diagrams for complex analyzer interactions.
+- Define a stable JSON schema specification with versioned fields.
+- Implement HTML report generation under `repoScan/reports`.
+- Add circular dependency detection and repository-aware scanning options.
