@@ -76,23 +76,34 @@ python -m repoScan.cli <path>
 
 The compiled `.so` will be included in wheels built by CI on release.
 
-Run the unit test suite(requires `pytest`) to make sure the code changes dont break anything.    
+Run the unit test suite (requires `pytest`) to make sure the code changes do not break anything.
+
 ```bash
-    pytest
+pytest
 ```
+
+For a focused test during development, pass the test file or test name explicitly:
+
+```bash
+pytest tests/test_core.py
+pytest tests/test_core.py::test_dir_scanner_list
+```
+
 ### Current Priorities
 
-Looking for a place to start?
-Check:
+Looking for a place to start? Check:
 
-- [Roadmap](assets/docs/roadmap.md) for planned ideas
-- [Open Issues](https://github.com/tecnolgd/repoScanner/issues) to find bugs and features you can contribute to
+- [Roadmap](assets/docs/roadmap.md) for planned ideas.
+- [Open Issues](https://github.com/tecnolgd/repoScanner/issues) for bugs and features.
+- [Testing guide](assets/docs/testing.md) for benchmark and test conventions.
 
-### Ideas for Contribution
+### Some Ideas for Contribution
 
-- Add language support (JavaScript, Go, Rust, TypeScript, etc.)
-- Add HTML report generation
-- Add circular dependency detection
-- Write comprehensive tests
-- Improve documentation
-- Optimize scan time and memory usage
+- Add HTML report generation.
+- Add circular dependency detection.
+- Expand tests for CLI modes, native-helper fallback, and edge-case files.
+- Improve documentation and add a versioned JSON schema specification.
+- Optimize scan time and memory usage while preserving the fallback behavior.
+- Add a new analyzer under `repoScan/analyzer/` that consumes the normalized file list and returns structured results, then connect it to the CLI orchestration.
+- Add a new report renderer under `repoScan/reports/` that consumes analyzer output and writes artifacts.
+- Add scanner rules or dependency heuristics for additional file types and language syntaxes.

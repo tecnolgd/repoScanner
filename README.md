@@ -25,31 +25,42 @@
 
 ## What It Does
 
-- **Directory Analysis**: Scan total files, lines of code, average file size, etc.
-- **Dependency Detection**: Extract and map dependencies (Python imports, C/C++ includes)
-- **Language Breakdown**: See what languages dominate your repo
-- **Smart Reporting**: Choose between quick stats or detailed developer mode
-- **JSON Export**: Machine-readable reports for automation
-- **Native File Utilities**: Optional `vendor/libcvault` support adds faster CLI directory scanning, file sorting, search, and byte/line metrics when available
-- **Transparent Fallback**: If the native helper is missing or unavailable, repoScanner falls back to Python's `os.walk` and standard-library utilities so the same commands still work.
+- **Directory Analysis**: Scan total files, lines of code, average file size, and directory structure.
+- **Dependency Detection**: Extract Python imports and C/C++ includes for each file.
+- **Language Breakdown**: Group files by recognized language or extension.
+- **Summary and Raw Reporting**: Choose a compact summary or detailed file-by-file dependency output.
+- **JSON Export**: Generate a machine-readable report for every scan invocation.
+- **Native File Utilities**: Optional `vendor/libcvault` support accelerates directory scanning, file sorting, search, byte totals, and line counts.
+- **Transparent Fallback**: When the native helper is unavailable, repoScanner uses Python's `os.walk` and standard-library utilities.
+
+## Current Version
+
+The current development version is **0.3.0b10.dev26**, generated from the repository's Git history. The package metadata declares the release line as `0.3.0b10` with a development suffix.
 
 ## Features
 
-**Dual Reporting Modes**
-- **Stats Mode** (default): High-level summary—perfect for a quick glance
-- **Raw Mode**: File-by-file dependency details for developers who need everything
+### Reporting Modes
 
-**Key Metrics**
-- Total files and lines of code
-- Per-file dependency counts
-- Language distribution
-- Largest files and most-dependent files
-- File mapping with dependencies(for --dev/raw mode)     
+- **Stats mode** (default): High-level repository summary.
+- **Raw mode** (`--raw` or `--dev`): Detailed, file-by-file dependency output.
+- **Nerd mode** (`--nerd`): Alias for stats mode.
 
-**No Third-Party Python Packages Required**
-- The core tool uses only the Python Standard Library for normal operation.
-- An optional native helper (`vendor/libcvault`) provides optimized filesystem routines and requires a C++ toolchain and Python development headers to build.
-- When the helper is available, repoScanner uses a shared wrapper(`repoScan/scanner/libcvault_wrapper.py`) to load it once per scanned root and reuse the results; when it is not available, the tool automatically falls back to Python scanning logic.
+### Key Metrics
+
+- Total files, bytes, and lines of code.
+- Average file size and average lines per file.
+- Largest files by line count and by byte size.
+- Dependency totals, most-dependent file, and average dependencies per file.
+- Language distribution by extension.
+- Directory counts, extension counts, and maximum path depth.
+
+### Runtime Dependencies
+
+- The normal Python runtime uses only the Python Standard Library.
+- The optional native helper is bundled as the `vendor/libcvault` submodule.
+- `repoScan/scanner/libcvault_wrapper.py` loads the helper once per root path and caches the scan result.
+- The native helper is not required for the core scan, summary, raw, or JSON-report commands.
+- Building the helper requires a C++ compiler, Python development headers, and `pybind11`.
 
 ## Benchmarks
 
@@ -97,19 +108,25 @@ pip install repoScanner
 
 Run:
 ```bash
-reposcan <path> [--stats|--dev|--help|--bench]
+reposcan <path> [--stats|--raw|--dev|--nerd|--sort|--max|--search <filename>|--lc <filename>|--tbytes|--help|--bench]
 ```
 
-More commands:
+The scan and utility commands use the same argument parser. Options may appear before or after the path. The `--bench` command runs the bundled benchmark suite instead of scanning a repository.
 
 ```bash
-reposcan <path> --sort #sorted list based on byte size
-reposcan <path> --search <filename> #search for a file
-reposcan <path> --lc <filename> #return line count of a file
-reposcan <path> --max #return largest file by size
-reposcan <path> --tbytes # return total bytes
+reposcan <path> --stats
+reposcan <path> --raw
+reposcan <path> --dev                 # alias for --raw
+reposcan <path> --nerd                # alias for --stats
+reposcan <path> --sort                # files sorted by byte size
+reposcan <path> --max                 # largest file and its byte size
+reposcan <path> --search <filename>   # matching file name and its byte size
+reposcan <path> --lc <filename>       # line count for a file
+reposcan <path> --tbytes              # total bytes for the scanned tree
+reposcan <path> --help                # show CLI help
 ```
 
+Every normal scan or utility invocation also writes `output/report.json`. The benchmark command does not write this report. The native `libcvault` implementation sorts files by byte size in ascending order, while the Python fallback currently sorts them in descending order.
 
 ## Build Instructions
 
@@ -160,11 +177,12 @@ reposcan <path> --tbytes # return total bytes
 
 
 > [!IMPORTANT]
-> 1. The `vendor/libcvault` native helper uses Python's C/C++ bindings (pybind11 bridge) for optimized file system operations.
-> 2. Building the helper requires a C++ compiler (e.g., `g++`) and Python development headers. 
-> 3. The native helper is optional. If you prefer zero native dependencies, you can safely add `.gitmodules` and `vendor/` to your `.gitignore`.
+> 1. The `vendor/libcvault` native helper uses a pybind11 bridge for optimized filesystem operations.
+> 2. Building the helper requires a C++ compiler (for example, `g++`), Python development headers, and `pybind11`.
+> 3. The helper is optional. The Python fallback keeps the core commands working without it.
+> 4. The submodule is tracked by `.gitmodules`; do not exclude `vendor/` from version control if the native helper must remain reproducible.
 
-The repository may include a prebuilt binary (e.g. `libcvault.cpython-312-x86_64-linux-gnu.so`) for convenience; if you plan to distribute, prefer providing prebuilt wheels rather than committing `.so` artifacts in the repo.
+The repository may contain a prebuilt binary such as `libcvault.cpython-312-x86_64-linux-gnu.so`. Distribution packages should prefer wheels for the target platforms rather than committing platform-specific `.so` files.
 
 
 ### 2. Tool Execution/Run
@@ -172,7 +190,7 @@ The repository may include a prebuilt binary (e.g. `libcvault.cpython-312-x86_64
 The easiest way to use repoScanner is with the provided shell script wrapper:
 
 ```bash
-./reposcan <path> [--stats|--raw|--dev|--bench]
+./reposcan <path> [--stats|--raw|--dev|--nerd|--sort|--max|--search <filename>|--lc <filename>|--tbytes|--help|--bench]
 ```
 
 **Quick start:**
@@ -181,10 +199,15 @@ The easiest way to use repoScanner is with the provided shell script wrapper:
 ./reposcan .                       # stats mode
 ./reposcan /path/to/repo --raw     # detailed developer output
 ./reposcan /path/to/repo --bench   # benchmark harness
+./reposcan /path/to/repo --sort    # files sorted by byte size, largest first
 ```
 
 ### 3. Output
-Reports are automatically saved to `output/report.json`
+
+- Terminal output is printed according to the selected mode.
+- A JSON report is always written to `output/report.json` for normal scans and utility commands.
+- The JSON report contains the UTC generation timestamp and the normalized metrics returned by `generate_metrics`.
+- The output directory is created automatically when needed.
 
 ## Supported Languages
 
