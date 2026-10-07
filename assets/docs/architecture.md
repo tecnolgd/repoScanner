@@ -61,8 +61,8 @@ flowchart TD
 - The JSON report is the single normalized artifact; analyzer internals are not serialized directly.
 
 **Testing & Benchmarking**
-- Benchmark and test guidance is available in [assets/docs/testing.md](assets/docs/testing.md).
-- Usage examples are available in [assets/docs/usage.md](assets/docs/usage.md).
+- Benchmark and test guidance is available in [assets/docs/testing.md](testing.md).
+- Usage examples are available in [assets/docs/usage.md](usage.md).
 
 **Design Notes & Rationale**
 
