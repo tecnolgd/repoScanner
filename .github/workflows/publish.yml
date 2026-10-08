@@ -46,6 +46,8 @@ jobs:
     name: Publish wheels to PyPI
     needs: build-wheels
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Download all wheels
@@ -63,7 +65,4 @@ jobs:
         run: pip install --upgrade twine
 
       - name: Publish to PyPI
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: twine upload dist/*.whl
