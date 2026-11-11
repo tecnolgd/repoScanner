@@ -3,6 +3,8 @@ name: repoScanner CI
 on:
   push:
     branches: ["main"]
+  pull_request:
+    types: [opened, synchronize, reopened]
   pull_request_target:
     types: [opened, synchronize, reopened]
 
@@ -94,16 +96,33 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - name: Check out repository
+        if: matrix.os != 'windows-latest'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Check out Windows sources without the conflicting wrapper
+        if: matrix.os == 'windows-latest'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          sparse-checkout: |
+            /repoScan/
+            /tests/
+            /vendor/
+            /pyproject.toml
+            /setup.py
+            /README.md
+            /LICENSE.md
+            /.gitmodules
+          sparse-checkout-cone-mode: false
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
 
       - name: Install Linux build tools
         if: runner.os == 'Linux'
@@ -111,13 +130,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential
 
-      - name: Install package and development dependencies
+      - name: Set up MSVC
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install test and extension build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install ".[dev]"
+          python -m pip install setuptools wheel setuptools-scm pybind11 pytest
 
-      - name: Verify package import
-        run: python -c "import repoScan; print(repoScan.__file__)"
+      - name: Build native C++ extension
+        run: python setup.py build_ext --inplace
 
       - name: Run tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: python -m pytest -q
