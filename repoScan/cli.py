@@ -39,6 +39,11 @@ def main():
     mode = "stats"  # Default mode
     
     args = sys.argv[1:]
+    
+    if "--help" in args or "-h" in args:
+        help_guide()
+        sys.exit(0);
+
     i = 0
     while i < len(args):
         arg = args[i]
@@ -46,8 +51,6 @@ def main():
             mode = "raw"
         elif arg in ["--stats", "--nerd"]:
             mode = "stats"
-        elif arg in ["--help", "-h"]:
-            mode = "help"
         elif arg in ["--max"]:
             mode = "max"
         elif arg in ["--tbytes"]:
@@ -78,12 +81,11 @@ def main():
     if mode == "raw":
         print("\nMODE: RAW/DEVELOPER")
         print_raw_analysis(files, report, size_report, dep_report)
+    
     elif mode == "stats":  # stats mode (default)
         print("\n MODE: STATS/SUMMARY")
         print_summary(metrics)
-    elif mode == "help":
-        help_guide()
-        sys.exit(0)
+    
     elif mode == "sort":
 
         print("\nSorted Directory (by byte size):")
