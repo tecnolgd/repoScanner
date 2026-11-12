@@ -85,7 +85,6 @@ jobs:
             console.log(`Assignment verified for @${author} on issue #${issueNumber}.`);
 
   build-and-test:
-    if: github.event_name != 'pull_request_target'
     name: Build and test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     permissions:
