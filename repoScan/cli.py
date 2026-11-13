@@ -33,45 +33,62 @@ from .utility.helpers import help_guide
     # git submodule update --remote libcvault
 
 
+_OPTIONS = {
+    "--raw": "raw",
+    "--dev": "raw",
+    "--stats": "stats",
+    "--nerd": "stats",
+    "--max": "max",
+    "--tbytes": "tbytes",
+    "--sort": "sort",
+    "--search": "search",
+    "--lc": "lc",
+    "--help": "help",
+    "-h": "help",
+}
+
+
+def _looks_like_option(arg):
+    if arg.startswith("-"):
+        return arg != "-"
+    # A single character before a known flag is a typo, e.g. "+--stats".
+    # A path such as "/--stats" or "./+--stats" is unambiguous.
+    return not arg.startswith(("/", "\\")) and arg[1:] in _OPTIONS
+
+
+def _argument_error(message):
+    print(f"Error: {message}", file=sys.stderr)
+    raise SystemExit(2)
+
+
 def main():
-    # Parse arguments
-    root = "."
-    mode = "stats"  # Default mode
-    
-    args = sys.argv[1:]
-    
-    if "--help" in args or "-h" in args:
-        help_guide()
-        sys.exit(0);
+    root = None
+    mode = "stats"
+    show_help = False
+    args = iter(sys.argv[1:])
 
-    i = 0
-    while i < len(args):
-        arg = args[i]
-        if arg in ["--raw", "--dev"]:
-            mode = "raw"
-        elif arg in ["--stats", "--nerd"]:
-            mode = "stats"
-        elif arg in ["--max"]:
-            mode = "max"
-        elif arg in ["--tbytes"]:
-            mode = "tbytes"
-        elif arg in ["--sort"]:
-            mode = "sort"
-        elif arg in ["--search", "--lc"]:
-            mode = arg.lstrip("-") #removes '-' from the arg dynamically avoiding confusions in choosing the mode from the list
-
-            if i + 1 < len(args):
-                file_name = args[i + 1]
-                i += 1  # Advance past the filename value
-            else:
-                print(f"Error: {arg} requires a filename argument.")
-                sys.exit(1)
-        elif arg.startswith("-") and arg != "-":
-            print(f"Error: unknown option {arg}", file=sys.stderr)
-            sys.exit(2)
+    for arg in args:
+        option = _OPTIONS.get(arg)
+        if option == "help":
+            show_help = True
+        elif option is not None:
+            mode = option
+            if mode in ("search", "lc"):
+                file_name = next(args, None)
+                if file_name is None or _looks_like_option(file_name):
+                    _argument_error(f"{arg} requires a filename")
+        elif _looks_like_option(arg):
+            _argument_error(f"unknown option {arg!r}")
+        elif root is not None:
+            _argument_error(f"expected one repository path, got {root!r} and {arg!r}")
         else:
             root = arg
-        i += 1    
+
+    if show_help:
+        help_guide()
+        raise SystemExit(0)
+    if root is None:
+        root = "."
 
     files = dir_scanner(root)
     report = structure_analyzer(files)
