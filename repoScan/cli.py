@@ -66,6 +66,9 @@ def main():
             else:
                 print(f"Error: {arg} requires a filename argument.")
                 sys.exit(1)
+        elif arg.startswith("-") and arg != "-":
+            print(f"Error: unknown option {arg}", file=sys.stderr)
+            sys.exit(2)
         else:
             root = arg
         i += 1    
