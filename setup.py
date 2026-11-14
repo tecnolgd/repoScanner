@@ -1,10 +1,11 @@
+import os
+
 from setuptools import setup
 
 ext_modules = []
 cmdclass = {}
 
-try:
-
+if os.environ.get("REPOSCANNER_BUILD_NATIVE") == "1":
     from pybind11.setup_helpers import Pybind11Extension, build_ext
 
     ext_modules = [
@@ -15,12 +16,9 @@ try:
             cxx_std=17,
         ),
     ]
-    cmdclass={"build_ext": build_ext},
-except(ImportError, Exception):
-    # fallback for source installs without a C++ compiler
-    pass
+    cmdclass = {"build_ext": build_ext}
 
 setup(
-    ext_modules = ext_modules,
-    cmdclass = cmdclass
+    ext_modules=ext_modules,
+    cmdclass=cmdclass,
 )
