@@ -67,16 +67,16 @@ If you modify `vendor/bridge.cpp` or want to test the compiled extension:
 ```bash
 # Install build dependencies (Debian/Ubuntu)
 sudo apt-get install -y build-essential g++ python3-dev
-python -m pip install pybind11
+python -m pip install setuptools wheel "setuptools-scm[toml]>=6.2" "pybind11>=2.10.0"
 
-# Compile the bridge into the package
-g++ -O3 -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault$(python3-config --extension-suffix)
+# Build and install with the native extension enabled
+REPOSCANNER_BUILD_NATIVE=1 python -m pip install --no-build-isolation .
 
 # Test the compiled extension
 python -m repoScan.cli <path>
 ```
 
-The compiled `.so` will be included in wheels built by CI on release.
+Normal source installs omit the native extension and need no C++ toolchain. Release wheels opt in to compiling it in CI.
 
 Run the unit test suite (requires `pytest`) to make sure the code changes do not break anything.
 

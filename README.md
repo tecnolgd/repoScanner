@@ -69,6 +69,7 @@ The current development version is **0.3.0b10.dev26**, generated from the reposi
 - The optional native helper is bundled as the `vendor/libcvault` submodule.
 - `repoScan/scanner/libcvault_wrapper.py` loads the helper once per root path and caches the scan result.
 - The native helper is not required for the core scan, summary, raw, or JSON-report commands.
+- Source installs do not compile the native helper by default; they use the Python fallback. Release wheels opt in to building it.
 - Building the helper requires a C++ compiler, Python development headers, and `pybind11`.
 
 ## Benchmarks
@@ -170,18 +171,18 @@ Every normal scan or utility invocation also writes `output/report.json`. The be
 >
 > Build the native extension from `bridge.cpp` and `vendor/libcvault/main.cpp`.
 >
-> - Before building, make sure system dev packages and `pybind11` are available. Debian/Ubuntu example:
+> - Before building, install the system compiler and Python development headers. Debian/Ubuntu example:
 >
 >   ```bash
 >   sudo apt-get update
 >   sudo apt-get install -y build-essential g++ python3-dev
->   python3 -m pip install --user pybind11
 >   ```
 >
-> - Compile using `pybind11` includes for portability:
+> - To build the optional extension as part of the Python package:
 >
 >   ```bash
->   g++ -O3 -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) -I vendor/libcvault vendor/bridge.cpp vendor/libcvault/main.cpp -o repoScan/libcvault$(python3-config --extension-suffix)
+>   python3 -m pip install setuptools wheel "setuptools-scm[toml]>=6.2" "pybind11>=2.10.0"
+>   REPOSCANNER_BUILD_NATIVE=1 python3 -m pip install --no-build-isolation .
 >   ```
 
 

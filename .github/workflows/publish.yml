@@ -34,6 +34,7 @@ jobs:
           PIP_CONSTRAINT: ""
           CIBW_BEFORE_BUILD: 'python -m pip install --upgrade pip "packaging>=24.2" setuptools'
           CIBW_BUILD: cp312-manylinux_x86_64 cp312-win_amd64
+          CIBW_ENVIRONMENT: REPOSCANNER_BUILD_NATIVE=1
           CIBW_SKIP: pp*
 
       - name: Upload wheels as artifacts
