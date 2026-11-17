@@ -16,7 +16,7 @@ def dependency_analyzer(file_paths):
 
         if file_path.endswith(".py"):
             dependencies.extend(extract_python_imports(lines))
-        elif file_path.endswith((".c", ".cpp", ".hpp", ".h", ".cxx", ".cc")):
+        elif file_path.endswith((".c", ".cpp", ".hpp", ".h", ".cxx", ".cc", ".hxx")):
             dependencies.extend(extract_c_includes(lines))
 
         file_dependencies[file_path] = dependencies
