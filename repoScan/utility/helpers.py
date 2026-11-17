@@ -1,4 +1,5 @@
 import os
+import re
 
 from ..scanner import libcvault_wrapper
 from ..scanner.dirScanner import dir_scanner
@@ -36,14 +37,14 @@ def extract_python_imports(lines):
 #check for C/C++ includes
 def extract_c_includes(lines):
     includes = set()
+    header_pattern = re.compile(r'^\s*#\s*include\s*(?:<([^>]+)>|"([^"]+)")')
 
     for line in lines:
-        line = line.strip()
-        if line.startswith("#include"):
-            start = line.find("<")
-            end = line.find(">")
-            if start != -1 and end != -1:
-                includes.add(line[start+1:end])
+        match = header_pattern.search(line)
+        if match:
+            #group(1) captures <...>, group(2) captures "..."
+            header = match.group(1) or match.group(2)
+            includes.add(header.strip())
 
     return list(includes)
 
