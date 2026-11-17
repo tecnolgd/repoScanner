@@ -41,7 +41,7 @@ def test_extract_includes_():
 
     includes = extract_c_includes(lines)
 
-    assert set(includes) == {"iostream", "vector"}
+    assert set(includes) == {"iostream", "config.hpp", "vector"}
 
 
 def test_dependency_analyzer(tmp_path):
@@ -51,13 +51,13 @@ def test_dependency_analyzer(tmp_path):
     )
     c_file = _write_file(
         tmp_path / "native" / "parser.hpp",
-        '#include <vector>\n#include <string>\n#include "config.hpp"\n',
+        '#include <vector>\n#include "config.h"\n#include <string>\n',
     )
 
     report = dependency_analyzer([str(py_file), str(c_file)])
 
     assert set(report[str(py_file)]) == {"os", "pathlib", "app.config"}
-    assert set(report[str(c_file)]) == {"vector", "string"}
+    assert set(report[str(c_file)]) == {"vector", "config.h", "string"}
 
 
 def test_size_analyzer_(tmp_path):
