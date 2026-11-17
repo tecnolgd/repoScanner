@@ -5,17 +5,29 @@ This project includes a pytest suite and a script-based benchmark harness. The b
 ## Running the test suite
 
 ```bash
-pytest
+PYTHONPATH=. pytest
+
+#or
+
+python3 -m pytest
 ```
 
 Run a single test file or test during development:
 
 ```bash
-pytest tests/test_core.py
-pytest tests/test_core.py::test_dir_scanner_list
+PYTHONPATH=. pytest tests/test_core.py
+PYTHONPATH=. pytest tests/test_core.py::test_dir_scanner_list
 ```
 
 The current tests cover Python and C/C++ dependency extraction, size and structure analysis, directory scanning, and metrics aggregation.
+
+> [!TIP]     
+> To avoid typing `PYTHONPATH=. pytest` every time, you can add it permanently to your shell configuration(`~/.bashrc` or `~/.zshrc`):
+> ```bash
+> echo 'export PYTHONPATH="$PWD"' >> ~/.bashrc
+> source ~/.bashrc
+> pytest
+> ```
 
 ## Reproducing benchmarks
 
