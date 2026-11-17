@@ -2,13 +2,13 @@
 
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 def write_json_report(metrics, output_dir="output"):
     os.makedirs(output_dir, exist_ok=True)
 
     report = {
-        "generated_at": datetime.utcnow().isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "metrics": metrics
     }
 
