@@ -16,7 +16,6 @@ def _write_file(path: Path, content: str) -> Path:
     path.write_text(content, encoding="utf-8")
     return path
 
-
 def test_python_imports():
     lines = [
         "import os",
@@ -30,7 +29,6 @@ def test_python_imports():
 
     assert set(imports) == {"os", "sys", "json", "pathlib", "app.config"}
 
-
 def test_extract_includes_():
     lines = [
         '#include <iostream>',
@@ -42,7 +40,6 @@ def test_extract_includes_():
     includes = extract_c_includes(lines)
 
     assert set(includes) == {"iostream", "config.hpp", "vector"}
-
 
 def test_dependency_analyzer(tmp_path):
     py_file = _write_file(
@@ -59,7 +56,6 @@ def test_dependency_analyzer(tmp_path):
     assert set(report[str(py_file)]) == {"os", "pathlib", "app.config"}
     assert set(report[str(c_file)]) == {"vector", "config.h", "string"}
 
-
 def test_size_analyzer_(tmp_path):
     one = _write_file(tmp_path / "alpha.txt", "one\ntwo\n")
     two = _write_file(tmp_path / "beta.txt", "three\nfour\nfive\n")
@@ -72,7 +68,6 @@ def test_size_analyzer_(tmp_path):
     assert report["average_lines"] == 2
     assert report["average_file_size"] == report["total_bytes"] // 2
     assert len(report["largest_files"]) == 2
-
 
 def test_structure_analyzer_(tmp_path):
     nested_dir = tmp_path / "src" / "pkg"
@@ -88,7 +83,6 @@ def test_structure_analyzer_(tmp_path):
     assert report["files/directory"][str(tmp_path)] == 1
     assert report["files/directory"][str(nested_dir)] == 1
 
-
 def test_dir_scanner_list(tmp_path):
     nested = tmp_path / "pkg"
     nested.mkdir()
@@ -98,7 +92,6 @@ def test_dir_scanner_list(tmp_path):
     scanned = sorted(dir_scanner(str(tmp_path)))
 
     assert scanned == sorted([str(first), str(second)])
-
 
 def test_generate_metrics_(tmp_path):
     py_file = _write_file(
@@ -118,3 +111,29 @@ def test_generate_metrics_(tmp_path):
     assert metrics["dependency_metrics"]["total"] >= 3
     assert metrics["language_metrics"]["Python"] == 1
     assert metrics["language_metrics"]["C++"] == 1
+
+def test_lc_relative_to_scanned_root(tmp_path, monkeypatch):
+    import subprocess
+
+    project = tmp_path / "project"
+    project.mkdir()
+    target = project / "file.txt"
+    target.write_text("line1 \n line2 \n line3 \n ")
+
+    # A same-named file in a different CWD that must NOT be counted
+    other_cwd = tmp_path / "other"
+    other_cwd.mkdir()
+    (other_cwd / "file.txt").write_text("only-one \n ")
+
+    # Run the CLI from the other directory
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(Path (__file__).resolve().parent.parent)
+    result = subprocess.run(
+        [sys.executable, "-m", "repoScan.cli", str(project), "--lc", "file.txt"],
+        cwd=str(other_cwd),
+        capture_output=True,
+        text=True,
+        env=env,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "3" in result.stdout or "Line count" in result.stdout

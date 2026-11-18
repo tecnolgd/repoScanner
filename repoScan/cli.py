@@ -125,7 +125,8 @@ def main():
             print("File NOT found")
 
     elif mode == "lc":
-        print(f"Line count of {file_name}: {line_count(file_name)}")
+        target_path = file_name if os.path.isabs(file_name) else os.path.join(root, file_name)
+        print(f"Line count of {file_name}: {line_count(target_path)}")
     elif mode == "tbytes":
         print('Total bytes:', get_total_bytes(root))
     else:
