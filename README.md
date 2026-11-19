@@ -143,7 +143,7 @@ Every normal scan or utility invocation also writes `output/report.json`. The be
 ### 1. Setup
 
 > [!WARNING]      
-> `vendor/libcvault` is currently undergoing active refactoring and API updates. Avoid running git submodule update `--remote` `vendor/libcvault` unless you are testing native changes—stick to the pinned submodule commit tracked by repoScanner, or use the default Python scan mode (`REPOSCANNER_BUILD_NATIVE=1` is optional)
+> `vendor/libcvault` is currently undergoing active refactoring and API updates. Avoid running `git submodule update --remote vendor/libcvault` unless you are testing native changes—stick to the pinned submodule commit tracked by repoScanner, or use the default Python scan mode (`REPOSCANNER_BUILD_NATIVE=1` is optional)
 
 - Clone the repository
 
