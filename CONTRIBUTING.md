@@ -6,7 +6,8 @@ Thank you for your interest in contributing to repoScanner! We aim to build a po
 Whether you're fixing a bug, adding support for a new language, improving reports, or optimizing performance, your help is welcome.
 
 > [!WARNING]    
-> An automated workflow for repoScanner is under implementation. Please make sure to pull changes from the `main` branch of the repo before opening a PR. In case of an already opened PR, please make sure to pull the latest changes and push accordingly.
+> The native C++ helper in `libcvault` is being actively improved, so internal interfaces or behavior may shift before stabilization. Please keep the submodule at the commit referenced by repoScanner rather than pulling `--remote` blindly, and report any build or behavior mismatches against the pinned revision.
+
 ### Development Setup
 
 To set up your local development environment and build the project, please follow the Installation Instructions in the [README.md](README.md#requirements).
