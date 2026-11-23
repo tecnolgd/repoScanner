@@ -13,6 +13,8 @@
 <img src="https://img.shields.io/github/v/release/tecnolgd/repoScanner?include_prereleases&color=1a1a1a&style=flat-square" alt="Version"></a>
 <a href = "#documentation">
 <a href = "https://github.com/tecnolgd/libcvault"><img src = "https://img.shields.io/badge/submodule-libcvault-1a1a1a?style=flat-square" alt = "Submodule: libcvault"></a>
+<a href = "https://github.com/tecnolgd/repoScanner/actions/workflows/reposcanner_ci.yml"><img src = "https://img.shields.io/github/actions/workflow/status/tecnolgd/repoScanner/repoScanner_ci.yml?branch=main&color=1a1a1a&style=flat-square" alt="Build">
+</a>
 
 </div>
 
